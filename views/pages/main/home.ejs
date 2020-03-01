@@ -1,185 +1,114 @@
 <% include ../../partials/head %>
+<% include ../../partials/sidebar %>
 
-<div class="ui left sidebar">
-    <div class="ui big inverted fluid vertical borderless menu dashboard">
-        <div class="header item">
-            <img style="border: solid 10px #2d3d4f" class="ui small centered image profile-picture"
-                src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png">
-            <h1 class="ui centered inverted header">Pape Traore</h1>
-        </div>
-        <div class="ui yellow header item">Main</div>
-        <a class="item">
-            <i class="home icon"></i>
-            Home
-        </a>
-        <a class="item">
-            <i class="envelope outline icon"></i>
-            Messages
-        </a>
-        <a class="item">
-            <i class="calendar outline icon"></i>
-            Appointments
-        </a>
-        <a class="item">
-            <i class="phone icon"></i>
-            Emergency Calls
-        </a>
-        <div class="ui yellow header item">Patient</div>
-        <a class="item">
-            <i class="open folder outline icon"></i>
-            Patient Records
-        </a>
-        <a class="item">
-            <i class="pencil icon"></i>
-            Assessment
-        </a>
-        <a class="item">
-            <i class="stethoscope icon"></i>
-            Test Result
-        </a>
-        <a class="item">
-            <i class="hospital icon"></i>
-            Refer Patient
-        </a>
-    </div>
-</div>
+<div class="pusher">
+    <!-- START OF PUSHER SIDEBAR-->
+    <% include ../../partials/topmenu %>
 
-</div>
-
-<div class="ui grid main-grid">
-    <div class="row">
-        <div class="sixteen wide column ">
-            <div class="pusher">
-                <div class="ui grid home-menu">
-                    <div class="row" style="background: #f0f4f8;height: 10vh;">
-                        <div class=" sixteen wide column" style="padding: 0; margin: 0">
-                            <div class="ui menu settings">
-                                <div class="item">
-                                    <i class="big sidebar icon"></i>
-                                </div>
-                                <div class="item">
-                                    <i class="big envelope icon"></i>
-                                </div>
-                                <div class="item">
-                                    <i class="big bell icon"></i>
-                                </div>
-                                <div class="item">
-                                    <i class="big setting icon"></i>
-                                </div>
-                                <div class="right menu">
-                                    <div class="ui right aligned category search item">
-                                        <div class="ui transparent icon input">
-                                            <input class="prompt" type="text" placeholder="Search patients...">
-                                            <i class="search link icon"></i>
-                                        </div>
-                                        <div class="results"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row long" style="background: #3197e0;">
-                        <div class="ten wide column">
-                            <div id="header">
-                                <h1 class="ui inverted header" id="header-title">Good Morning Pape!</h1>
-                                <div id="header-content">
-                                    <h1><%=date%></h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="six wide column">
-
-                            <h1 class="ui inverted header" style="padding-top: 20px;">
-                                <i class="bell outline icon"></i>
-                                <div class="content">
-                                    2 Notifications
-                                </div>
-                            </h1>
-                            <div id="MyClockDisplay" class="ui huge inverted header clock" onload="showTime()"></div>
-                        </div>
-                    </div>
-                    <div class="three column row long" style="padding: 0;">
-                        <div class=" yellow column center-content">
-                            <h2 class="ui inverted icon header">
-                                <i class="calendar icon"></i>
-                                <div class="content">
-                                    Appointments
-                                </div>
-                            </h2>
-                        </div>
-                        <div class="pink column center-content">
-                            <h2 class="ui inverted icon header pape">
-                                <i class="phone icon"></i>
-                                <div class="content">
-                                    Emergency Calls
-                                </div>
-                            </h2>
-                        </div>
-                        <div class="brown column center-content ">
-                            <h2 class="ui inverted icon header">
-                                <i class="pencil alternate icon"></i>
-                                <div class="content">
-                                    Assessment
-                                </div>
-                            </h2>
-                        </div>
-                    </div>
-
-                    <div class="three column row long" style="padding: 0;">
-                        <div class="grey column center-content">
-                            <h2 class="ui inverted icon header">
-                                <i class="folder open outline icon"></i>
-                                <div class="content">
-                                    Patient Records
-                                </div>
-                            </h2>
-                        </div>
-                        <div class="teal column center-content">
-                            <h2 class="ui inverted icon header pape">
-                                <i class="stethoscope icon"></i>
-                                <div class="content">
-                                    Test Results
-                                </div>
-                            </h2>
-                        </div>
-                        <div class="olive column center-content">
-                            <h2 class="ui inverted icon header">
-                                <i class="hospital icon"></i>
-                                <div class="content">
-                                    Refer Patient
-                                </div>
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="three column row long" style="background: white;">
-                        <div class="column center-content">
-                            <h2 style="margin-bottom: 40px;">Patient Resolutions</h2>
-                            <i class="huge icons">
-                                <i class="user icon"></i>
-                                <span class="stats" style="border-color: #3197c0;">11</span>
-                            </i>
-                        </div>
-                        <div class="column center-content">
-                            <h2 style="margin-bottom: 40px;">Doctor Referrals</h2>
-                            <i class="huge icons">
-                                <i class="user md icon"></i>
-                                <span class="stats" style="border-color: #4eb4ab;">11</span>
-                            </i>
-                        </div>
-                        <div class="column center-content">
-                            <h2 style="margin-bottom: 40px;">Hospitalizations</h2>
-                            <i class="huge icons">
-                                <i class="heartbeat icon"></i>
-                                <span class="stats" style="border-color: #f9c66f;">11</span>
-                            </i>
-                        </div>
+    <div class="ui grid home-menu">
+        <div class="three column row long" style="background: #3197e0;">
+            <div class="column center-content">
+                <div>
+                    <h1 class="ui inverted header" id="header-title">Good Morning Pape!</h1>
+                    <div>
+                        <h1 class="ui inverted centered header"><%=date%></h1>
                     </div>
                 </div>
             </div>
+            <div class="column"></div>
+            <div class="column center-content">
+                <h1 class="ui inverted header">
+                    <i class="bell outline icon"></i>
+                    <div class="content">
+                        2 Notifications
+                    </div>
+                </h1>
+                <h1 class="ui inverted header">
+                    <i class="clock outline icon"></i>
+                    <div class="content">
+                        <div id="MyClockDisplay" class="" onload="showTime()"></div>
+                    </div>
+                </h1>
+            </div>
+        </div>
+        <div class="three column row long">
+            <div class=" yellow column center-content menu-item" onclick="window.location='/'">
+                <h2 class="ui inverted icon header">
+                    <i class="users icon"></i>
+                    <div class="content">
+                        Patients List
+                    </div>
+                </h2>
+            </div>
+            <div class="pink column center-content">
+                <h2 class="ui inverted icon header pape">
+                    <i class="phone icon"></i>
+                    <div class="content">
+                        Emergency Calls
+                    </div>
+                </h2>
+            </div>
+            <div class="brown column center-content ">
+                <h2 class="ui inverted icon header">
+                    <i class="pencil alternate icon"></i>
+                    <div class="content">
+                        Assessment
+                    </div>
+                </h2>
+            </div>
+        </div>
+
+        <div class="three column row long">
+            <div class="grey column center-content">
+                <h2 class="ui inverted icon header">
+                    <i class="folder open outline icon"></i>
+                    <div class="content">
+                        Patient Records
+                    </div>
+                </h2>
+            </div>
+            <div class="teal column center-content">
+                <h2 class="ui inverted icon header pape">
+                    <i class="stethoscope icon"></i>
+                    <div class="content">
+                        Test Results
+                    </div>
+                </h2>
+            </div>
+            <div class="olive column center-content">
+                <h2 class="ui inverted icon header">
+                    <i class="hospital icon"></i>
+                    <div class="content">
+                        Refer Patient
+                    </div>
+                </h2>
+            </div>
+        </div>
+        <div class="three column row long" style="background: white;">
+            <div class="column center-content">
+                <h2 style="margin-bottom: 40px;">Patient Resolutions</h2>
+                <i class="huge icons">
+                    <i class="user icon"></i>
+                    <span class="stats" style="border-color: #3197c0;">11</span>
+                </i>
+            </div>
+            <div class="column center-content">
+                <h2 style="margin-bottom: 40px;">Doctor Referrals</h2>
+                <i class="huge icons">
+                    <i class="user md icon"></i>
+                    <span class="stats" style="border-color: #4eb4ab;">11</span>
+                </i>
+            </div>
+            <div class="column center-content">
+                <h2 style="margin-bottom: 40px;">Hospitalizations</h2>
+                <i class="huge icons">
+                    <i class="heartbeat icon"></i>
+                    <span class="stats" style="border-color: #f9c66f;">11</span>
+                </i>
+            </div>
         </div>
     </div>
+    <!-- END OF PUSHER SIDEBAR-->
 </div>
 
-</div>
-
-<% include ../../partials/footer %>
+    <% include ../../partials/footer %>
