@@ -6,4 +6,14 @@ router.get('/', function(req, res, next) {
   res.render('pages/main/index');
 });
 
+/* GET login page */
+router.get('/login',function(req,res,next){
+  res.render('pages/main/login');
+});
+
+/* GET home page */
+router.get('/home',function(req,res,next){
+  res.render('pages/main/home');
+});
+
 module.exports = router;
