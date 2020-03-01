@@ -1,56 +1,62 @@
 <% include ../../partials/head %>
 
-<body>
-    <div class="ui grid main-grid">
-        <div class="row">
-            <div class="three wide column" style="background: #2d3d4f">
-                <div class="ui  left fixed inverted  vertical big menu dashboard">
-                    <div class="header item">
-                        <img style="border: solid 10px #2d3d4f" class="ui small centered image profile-picture"
-                            src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png">
-                        <h1 class="ui centered inverted header">Pape Traore</h1>
-                    </div>
-                    <div class="header item">Main</div>
-                    <a class="item">
-                        <i class="home icon"></i>
-                        Home
-                    </a>
-                    <a class="item">
-                        <i class="envelope outline icon"></i>
-                        Messages
-                    </a>
-                    <a class="item">
-                        <i class="calendar outline icon"></i>
-                        Appointments
-                    </a>
-                    <a class="item">
-                        <i class="phone icon"></i>
-                        Emergency Calls
-                    </a>
-                    <div class="header item">Patient</div>
-                    <a class="item">
-                        <i class="open folder outline icon"></i>
-                        Patient Records
-                    </a>
-                    <a class="item">
-                        <i class="pencil icon"></i>
-                        Assessment
-                    </a>
-                    <a class="item">
-                        <i class="stethoscope icon"></i>
-                        Test Result
-                    </a>
-                    <a class="item">
-                        <i class="hospital icon"></i>
-                        Refer Patient
-                    </a>
-                </div>
-            </div>
-            <div class="thirteen wide column ">
+<div class="ui left sidebar">
+    <div class="ui big inverted fluid vertical borderless menu dashboard">
+        <div class="header item">
+            <img style="border: solid 10px #2d3d4f" class="ui small centered image profile-picture"
+                src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png">
+            <h1 class="ui centered inverted header">Pape Traore</h1>
+        </div>
+        <div class="ui yellow header item">Main</div>
+        <a class="item">
+            <i class="home icon"></i>
+            Home
+        </a>
+        <a class="item">
+            <i class="envelope outline icon"></i>
+            Messages
+        </a>
+        <a class="item">
+            <i class="calendar outline icon"></i>
+            Appointments
+        </a>
+        <a class="item">
+            <i class="phone icon"></i>
+            Emergency Calls
+        </a>
+        <div class="ui yellow header item">Patient</div>
+        <a class="item">
+            <i class="open folder outline icon"></i>
+            Patient Records
+        </a>
+        <a class="item">
+            <i class="pencil icon"></i>
+            Assessment
+        </a>
+        <a class="item">
+            <i class="stethoscope icon"></i>
+            Test Result
+        </a>
+        <a class="item">
+            <i class="hospital icon"></i>
+            Refer Patient
+        </a>
+    </div>
+</div>
+
+</div>
+
+<div class="ui grid main-grid">
+    <div class="row">
+        <div class="sixteen wide column ">
+            <div class="pusher">
                 <div class="ui grid home-menu">
                     <div class="row" style="background: #f0f4f8;height: 10vh;">
                         <div class=" sixteen wide column" style="padding: 0; margin: 0">
                             <div class="ui menu settings">
+                                <div class="item">
+                                    <i class="big sidebar icon"></i>
+                                </div>
                                 <div class="item">
                                     <i class="big envelope icon"></i>
                                 </div>
@@ -77,7 +83,7 @@
                             <div id="header">
                                 <h1 class="ui inverted header" id="header-title">Good Morning Pape!</h1>
                                 <div id="header-content">
-                                    <h1>Tuesday, November 15</h1>
+                                    <h1><%=date%></h1>
                                 </div>
                             </div>
                         </div>
@@ -89,17 +95,7 @@
                                     2 Notifications
                                 </div>
                             </h1>
-
-                            <div class="ui inverted horizontal statistic" style="padding-left: 20px;">
-                                <div class="value">
-                                    9:05
-                                </div>
-                                <div class="label">
-                                    AM
-                                </div>
-                            </div>
-
-
+                            <div id="MyClockDisplay" class="ui huge inverted header clock" onload="showTime()"></div>
                         </div>
                     </div>
                     <div class="three column row long" style="padding: 0;">
@@ -182,8 +178,8 @@
             </div>
         </div>
     </div>
+</div>
 
-    </div>
-</body>
+</div>
 
-</html>
+<% include ../../partials/footer %>

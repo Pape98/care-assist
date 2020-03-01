@@ -1,7 +1,3 @@
-html, body {
-  height: 100%;
-  margin: auto; }
-
 .center-content {
   display: flex !important;
   flex-direction: column !important;
@@ -10,42 +6,16 @@ html, body {
 
 .dashboard {
   height: 100vh;
-  padding: 0 !important;
-  margin: 0 !important;
   background: #2d3d4f !important; }
 
+html, body {
+  height: 100%;
+  margin: auto; }
+
 /************************************ home.html */
-.main-grid {
-  margin: 0 !important;
-  padding: 0;
-  height: 100vh; }
-  .main-grid > .row {
-    padding: 0 !important; }
-
-.home-menu > .long {
-  height: 22.5vh; }
-
-.three.wide.row, .three.wide.column {
-  padding-left: 0 !important;
-  padding-right: 0 !important; }
-
-.stats {
-  position: relative;
-  left: 25px;
-  bottom: 10px;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  padding: 18px;
-  border: 9px solid;
-  text-align: center;
-  font: 32px Arial, sans-serif; }
-
-.settings {
-  padding: 0 !important;
-  margin: 0 !important;
-  min-height: 10vh !important;
-  background: #f0f4f8; }
+.clock {
+  letter-spacing: 7px;
+  padding-left: 10px !important; }
 
 #header {
   position: relative;
@@ -64,8 +34,40 @@ html, body {
   background: #3fa9e3;
   padding-top: 20px;
   padding-bottom: 20px;
-  padding-left: 90px;
-  padding-right: 90px; }
+  padding-left: 120px;
+  padding-right: 120px; }
+
+.home-menu > .long {
+  height: 22.5vh; }
+
+.main-grid {
+  margin: 0 !important;
+  padding: 0;
+  height: 100vh; }
+  .main-grid > .row {
+    padding: 0 !important; }
+
+.settings {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 10vh !important;
+  background: #f0f4f8; }
+
+.stats {
+  position: relative;
+  left: 25px;
+  bottom: 10px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 18px;
+  border: 9px solid;
+  text-align: center;
+  font: 32px Arial, sans-serif; }
+
+.three.wide.row, .three.wide.column {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
 
 /************************************ landing.html */
 .bg-img {
@@ -83,6 +85,10 @@ html, body {
   color: white; }
 
 /************************************ login.html */
+.bg-img > h1 {
+  font-size: 5vw;
+  color: #edd170; }
+
 #login-right {
   line-height: 1.6; }
   #login-right > form {
@@ -90,9 +96,5 @@ html, body {
 
 #login-grid > .row {
   padding: 0 !important; }
-
-.bg-img > h1 {
-  font-size: 5vw;
-  color: #edd170; }
 
 /*# sourceMappingURL=main.css.map */
