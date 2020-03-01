@@ -1,3 +1,21 @@
+/*  ************* Background Colors ************/
+.bg-ruber {
+  background: #df4775 !important; }
+
+.bg-zomp {
+  background: #47a186 !important; }
+
+.bg-bleu-de-france {
+  background: #3197e0 !important; }
+
+.bg-liberty {
+  background: #52489c !important; }
+
+.bg-saffron {
+  background: #f7b232 !important; }
+
+/*  ************* Font Colors ************/
+/* ********************************************/
 .bg-img {
   text-align: center;
   background-size: cover;
@@ -55,7 +73,7 @@ html, body {
   height: 100vh; }
 
 .pd-0 {
-  padding: 0px !important; }
+  padding: 0 !important; }
 
 .settings {
   padding: 0 !important;
