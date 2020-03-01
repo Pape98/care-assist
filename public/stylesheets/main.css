@@ -1,0 +1,98 @@
+html, body {
+  height: 100%;
+  margin: auto; }
+
+.center-content {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important; }
+
+.dashboard {
+  height: 100vh;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: #2d3d4f !important; }
+
+/************************************ home.html */
+.main-grid {
+  margin: 0 !important;
+  padding: 0;
+  height: 100vh; }
+  .main-grid > .row {
+    padding: 0 !important; }
+
+.home-menu > .long {
+  height: 22.5vh; }
+
+.three.wide.row, .three.wide.column {
+  padding-left: 0 !important;
+  padding-right: 0 !important; }
+
+.stats {
+  position: relative;
+  left: 25px;
+  bottom: 10px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 18px;
+  border: 9px solid;
+  text-align: center;
+  font: 32px Arial, sans-serif; }
+
+.settings {
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 10vh !important;
+  background: #f0f4f8; }
+
+#header {
+  position: relative;
+  min-height: 170px;
+  color: white; }
+
+#header-title {
+  font-size: 40px;
+  margin-left: 30px;
+  margin-top: 8px; }
+
+#header-content {
+  position: absolute;
+  bottom: 25px;
+  left: -1em;
+  background: #3fa9e3;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 90px;
+  padding-right: 90px; }
+
+/************************************ landing.html */
+.bg-img {
+  text-align: center;
+  background-size: cover;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("https://www.drkevin.com/wp-content/uploads/2019/03/healthcare.jpg"); }
+
+.landing h1 {
+  font-size: 7vw;
+  color: #edd170; }
+
+.landing p {
+  font-size: 2.5vw;
+  color: white; }
+
+/************************************ login.html */
+#login-right {
+  line-height: 1.6; }
+  #login-right > form {
+    margin: 2em 0 2em 0; }
+
+#login-grid > .row {
+  padding: 0 !important; }
+
+.bg-img > h1 {
+  font-size: 5vw;
+  color: #edd170; }
+
+/*# sourceMappingURL=main.css.map */
