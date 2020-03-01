@@ -1,9 +1,10 @@
 <% include ../../partials/head %>
 
-    <div class="ui grid main-grid">
-        <div class="row">
-            <div class="three wide column" style="background: #2d3d4f">
-                <div class="ui  left fixed inverted  vertical big menu dashboard">
+<div class="ui grid main-grid">
+    <div class="row">
+        <div class="ui sidebar">
+            <div class="two wide column" style="background: #2d3d4f">
+                <div class="ui visible inverted vertical menu dashboard">
                     <div class="header item">
                         <img style="border: solid 10px #2d3d4f" class="ui small centered image profile-picture"
                             src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png">
@@ -45,11 +46,17 @@
                     </a>
                 </div>
             </div>
-            <div class="thirteen wide column ">
+        </div>
+
+        <div class="sixteen wide column ">
+            <div class="pusher">
                 <div class="ui grid home-menu">
                     <div class="row" style="background: #f0f4f8;height: 10vh;">
                         <div class=" sixteen wide column" style="padding: 0; margin: 0">
                             <div class="ui menu settings">
+                                <div class="item">
+                                    <i class="big sidebar icon"></i>
+                                </div>
                                 <div class="item">
                                     <i class="big envelope icon"></i>
                                 </div>
@@ -76,7 +83,7 @@
                             <div id="header">
                                 <h1 class="ui inverted header" id="header-title">Good Morning Pape!</h1>
                                 <div id="header-content">
-                                    <h1>Tuesday, November 15</h1>
+                                    <h1><%=date%></h1>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +178,8 @@
             </div>
         </div>
     </div>
+</div>
 
-    </div>
+</div>
 
-    <% include ../../partials/footer %>
+<% include ../../partials/footer %>
