@@ -4,18 +4,19 @@ var moment = require('moment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('pages/main/index');
+  res.render('pages/landing/index');
 });
+
 
 /* GET login page */
 router.get('/login',function(req,res,next){
-  res.render('pages/main/login');
+  res.render('pages/landing/login');
 });
 
 /* GET home page */
 router.get('/home',function(req,res,next){
   var date = moment().format('MMMM Do YYYY');
-  res.render('pages/main/home',{date:date});
+  res.render('pages/landing/home',{date:date});
 });
 
 module.exports = router;

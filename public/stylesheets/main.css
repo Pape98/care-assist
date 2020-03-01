@@ -1,51 +1,61 @@
+.bg-img {
+  text-align: center;
+  background-size: cover;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("https://www.drkevin.com/wp-content/uploads/2019/03/healthcare.jpg"); }
+
+.bg-img > h1 {
+  font-size: 5vw;
+  color: #edd170; }
+
 .center-content {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
   align-items: center !important; }
 
-.dashboard {
-  height: 100vh;
-  background: #2d3d4f !important; }
-
-html, body {
-  height: 100%;
-  margin: auto; }
-
-/************************************ home.html */
 .clock {
   letter-spacing: 7px;
   padding-left: 10px !important; }
 
-#header {
-  position: relative;
-  min-height: 170px;
-  color: white; }
+.dashboard {
+  height: 100vh;
+  background: #2d3d4f !important; }
 
 #header-title {
-  font-size: 40px;
-  margin-left: 30px;
-  margin-top: 8px; }
-
-#header-content {
-  position: absolute;
-  bottom: 25px;
-  left: -1em;
-  background: #3fa9e3;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 120px;
-  padding-right: 120px; }
+  font-size: 40px; }
 
 .home-menu > .long {
   height: 22.5vh; }
+
+html, body {
+  height: 100%;
+  margin: auto;
+  background: #f2f5fa; }
+
+.landing h1 {
+  font-size: 7vw;
+  color: #edd170; }
+
+.landing p {
+  font-size: 2.5vw;
+  color: white; }
+
+#login-right {
+  line-height: 1.6; }
+  #login-right > form {
+    margin: 2em 0 2em 0; }
+
+#login-grid > .row {
+  padding: 0 !important; }
 
 .main-grid {
   margin: 0 !important;
   padding: 0;
   height: 100vh; }
-  .main-grid > .row {
-    padding: 0 !important; }
+
+.pd-0 {
+  padding: 0px !important; }
 
 .settings {
   padding: 0 !important;
@@ -68,33 +78,5 @@ html, body {
 .three.wide.row, .three.wide.column {
   padding-left: 0 !important;
   padding-right: 0 !important; }
-
-/************************************ landing.html */
-.bg-img {
-  text-align: center;
-  background-size: cover;
-  height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("https://www.drkevin.com/wp-content/uploads/2019/03/healthcare.jpg"); }
-
-.landing h1 {
-  font-size: 7vw;
-  color: #edd170; }
-
-.landing p {
-  font-size: 2.5vw;
-  color: white; }
-
-/************************************ login.html */
-.bg-img > h1 {
-  font-size: 5vw;
-  color: #edd170; }
-
-#login-right {
-  line-height: 1.6; }
-  #login-right > form {
-    margin: 2em 0 2em 0; }
-
-#login-grid > .row {
-  padding: 0 !important; }
 
 /*# sourceMappingURL=main.css.map */
