@@ -25,16 +25,13 @@
 #header-title {
   font-size: 40px; }
 
-.home-menu {
-  position: relative;
-  top: 50px; }
-
 .home-menu > .long {
   height: 22.5vh; }
 
 html, body {
   height: 100%;
-  margin: auto; }
+  margin: auto;
+  background: #f2f5fa; }
 
 .landing h1 {
   font-size: 7vw;
@@ -56,6 +53,9 @@ html, body {
   margin: 0 !important;
   padding: 0;
   height: 100vh; }
+
+.pd-0 {
+  padding: 0px !important; }
 
 .settings {
   padding: 0 !important;

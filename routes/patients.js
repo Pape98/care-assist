@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET patients listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.render('pages/patient/index');
 });
 
 module.exports = router;
