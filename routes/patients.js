@@ -6,6 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('pages/patient/index');
 });
 
+/* SHOW individual patient */
 router.get('/:id', function(req, res, next) {
   res.render('pages/patient/show');
 });
