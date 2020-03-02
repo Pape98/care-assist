@@ -4,11 +4,20 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
+// -----------------------------------------------
+/* Manual Additions:
+   Use express session for session storing, 
+   Passport.js for authentication,
+   Redis for db
+*/
+var session = require('express-session');
+var passport = require('passport');
+var RedisStore = require('connect-redis')(session)
+// -----------------------------------------------
 
 // routers
 var indexRouter = require('./routes/index');
 var patientsRouter = require('./routes/patients');
-
 var app = express();
 
 // view engine setup
@@ -28,6 +37,21 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+// -----------------------------------------------
+/* Manual Additions:
+   Use redis for DB calls
+*/
+app.use(session({
+  store: new RedisStore({
+    url: config.RedisStore.url
+  }),
+  secret: 'thesecret',
+  resave:false,
+  saveUninitialized:false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+// -----------------------------------------------
 
 app.use('/', indexRouter);
 app.use('/patients', patientsRouter);
