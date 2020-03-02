@@ -1,9 +1,10 @@
 $(document).ready(function () {
     showTime();
     $('.sidebar.icon').click(function () {
-        $('.ui.sidebar')
-            .sidebar('setting', 'transition', 'overlay')
-            .sidebar('toggle')
+        $('.ui.sidebar').sidebar({
+            context: $('.bottom.segment')
+        }).sidebar('setting', 'transition', 'push')
+        .sidebar('toggle');
     });
     ;
 });

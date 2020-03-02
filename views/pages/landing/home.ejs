@@ -1,94 +1,97 @@
 <% include ../../partials/head %>
-<% include ../../partials/sidebar %>
+<% include ../../partials/topmenu %>
 
-<div class="pusher">
+<div class="ui bottom attached segment">
+    <% include ../../partials/sidebar %>
     <!-- START OF PUSHER SIDEBAR-->
-    <% include ../../partials/topmenu %>
-
-    <div class="ui grid home-menu">
-        <div class="three column row long bg-bleu-de-france">
-            <div class="column center-content">
-                <div>
-                    <h1 class="ui inverted header" id="header-title">Good Morning Pape!</h1>
-                    <div>
-                        <h1 class="ui inverted centered header"><%=date%></h1>
+    <div class="pusher">
+        <div class="ui basic segment">
+            <div class="ui grid home-menu">
+                <div class="three column row long bg-bleu-de-france">
+                    <div class="column center-content">
+                        <div>
+                            <h1 class="ui inverted header" id="header-title">Good Morning Pape!</h1>
+                            <div>
+                                <h1 class="ui inverted centered header"><%=date%></h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column"></div>
+                    <div class="column center-content">
+                        <h1 class="ui inverted header">
+                            <i class="bell outline icon"></i>
+                            <div class="content">
+                                2 Notifications
+                            </div>
+                        </h1>
+                        <h1 class="ui inverted header">
+                            <i class="clock outline icon"></i>
+                            <div class="content">
+                                <div id="MyClockDisplay" class="" onload="showTime()"></div>
+                            </div>
+                        </h1>
                     </div>
                 </div>
-            </div>
-            <div class="column"></div>
-            <div class="column center-content">
-                <h1 class="ui inverted header">
-                    <i class="bell outline icon"></i>
-                    <div class="content">
-                        2 Notifications
+                <div class="two column row long pd-0">
+                    <div class="column center-content menu-item bg-ruber" onclick="window.location='/patients'">
+                        <h2 class="ui inverted icon header ">
+                            <i class="users icon "></i>
+                            <div class="content ">
+                                Patients List
+                            </div>
+                        </h2>
                     </div>
-                </h1>
-                <h1 class="ui inverted header">
-                    <i class="clock outline icon"></i>
-                    <div class="content">
-                        <div id="MyClockDisplay" class="" onload="showTime()"></div>
+                    <div class="column center-content bg-zomp ">
+                        <h2 class="ui inverted icon header ">
+                            <i class="phone icon"></i>
+                            <div class="content">
+                                Emergency Calls
+                            </div>
+                        </h2>
                     </div>
-                </h1>
-            </div>
-        </div>
-        <div class="two column row long pd-0">
-            <div class="column center-content menu-item bg-ruber" onclick="window.location='/patients'">
-                <h2 class="ui inverted icon header ">
-                    <i class="users icon "></i>
-                    <div class="content ">
-                        Patients List
+                </div>
+        
+                <div class="two column row long pd-0">
+                    <div class=" column center-content bg-liberty">
+                        <h2 class="ui inverted icon header ">
+                            <i class="folder open outline icon"></i>
+                            <div class="content">
+                                Patient Records
+                            </div>
+                        </h2>
                     </div>
-                </h2>
-            </div>
-            <div class="column center-content bg-zomp ">
-                <h2 class="ui inverted icon header ">
-                    <i class="phone icon"></i>
-                    <div class="content">
-                        Emergency Calls
+                    <div class="column center-content bg-saffron">
+                        <h2 class="ui inverted icon header">
+                            <i class="stethoscope icon"></i>
+                            <div class="content">
+                                Test Results
+                            </div>
+                        </h2>
                     </div>
-                </h2>
-            </div>
-        </div>
-
-        <div class="two column row long pd-0">
-            <div class=" column center-content bg-liberty">
-                <h2 class="ui inverted icon header ">
-                    <i class="folder open outline icon"></i>
-                    <div class="content">
-                        Patient Records
+                </div>
+                <div class="three column row long" style="background: white;">
+                    <div class="column center-content">
+                        <h2 style="margin-bottom: 40px;">Patient Resolutions</h2>
+                        <i class="huge icons">
+                            <i class="user icon"></i>
+                            <span class="stats" style="border-color: #3197c0;">11</span>
+                        </i>
                     </div>
-                </h2>
-            </div>
-            <div class="column center-content bg-saffron">
-                <h2 class="ui inverted icon header">
-                    <i class="stethoscope icon"></i>
-                    <div class="content">
-                        Test Results
+                    <div class="column center-content">
+                        <h2 style="margin-bottom: 40px;">Doctor Referrals</h2>
+                        <i class="huge icons">
+                            <i class="user md icon"></i>
+                            <span class="stats" style="border-color: #4eb4ab;">11</span>
+                        </i>
                     </div>
-                </h2>
-            </div>
-        </div>
-        <div class="three column row long" style="background: white;">
-            <div class="column center-content">
-                <h2 style="margin-bottom: 40px;">Patient Resolutions</h2>
-                <i class="huge icons">
-                    <i class="user icon"></i>
-                    <span class="stats" style="border-color: #3197c0;">11</span>
-                </i>
-            </div>
-            <div class="column center-content">
-                <h2 style="margin-bottom: 40px;">Doctor Referrals</h2>
-                <i class="huge icons">
-                    <i class="user md icon"></i>
-                    <span class="stats" style="border-color: #4eb4ab;">11</span>
-                </i>
-            </div>
-            <div class="column center-content">
-                <h2 style="margin-bottom: 40px;">Hospitalizations</h2>
-                <i class="huge icons">
-                    <i class="heartbeat icon"></i>
-                    <span class="stats" style="border-color: #f9c66f;">11</span>
-                </i>
+                    <div class="column center-content">
+                        <h2 style="margin-bottom: 40px;">Hospitalizations</h2>
+                        <i class="huge icons">
+                            <i class="heartbeat icon"></i>
+                            <span class="stats" style="border-color: #f9c66f;">11</span>
+                        </i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

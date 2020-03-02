@@ -15,7 +15,35 @@
   background: #f7b232 !important; }
 
 /*  ************* Font Colors ************/
+.ft-ruber {
+  color: #df4775 !important; }
+
+.ft-zomp {
+  color: #47a186 !important; }
+
+.ft-bleu-de-france {
+  color: #3197e0 !important; }
+
+.ft-liberty {
+  color: #52489c !important; }
+
+.ft-saffron {
+  color: #f7b232 !important; }
+
+.ft-white {
+  color: white  !important; }
+
 /* ********************************************/
+.basic.segment {
+  padding: 0.1px 0 0 0 !important;
+  margin: 0 !important; }
+
+.bottom.segment {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 100%;
+  background: #f2f5fa; }
+
 .bg-img {
   text-align: center;
   background-size: cover;
@@ -43,17 +71,19 @@
 #header-title {
   font-size: 40px; }
 
+.home-menu {
+  margin: 0 !important; }
+
 .home-menu > .long {
-  height: 22.5vh; }
+  height: 23vh; }
 
 html, body {
   height: 100%;
-  margin: auto;
-  background: #f2f5fa; }
+  margin: auto; }
 
 .landing h1 {
   font-size: 7vw;
-  color: #edd170; }
+  color: #f7b232; }
 
 .landing p {
   font-size: 2.5vw;
