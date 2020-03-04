@@ -10,9 +10,12 @@ var sassMiddleware = require('node-sass-middleware');
    Passport.js for authentication,
    Redis for db
 */
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose')
 var session = require('express-session');
 var passport = require('passport');
-var RedisStore = require('connect-redis')(session)
+mongoose.connect('mongodb://localhost:27017/login')
+// var RedisStore = require('connect-redis')(session)
 // -----------------------------------------------
 
 // routers
@@ -39,13 +42,16 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 // -----------------------------------------------
 /* Manual Additions:
-   Use redis for DB calls
+  Session configuration
+  Use mongo temporarily 
+  Use redis for DB calls
 */
 app.use(session({
-  store: new RedisStore({
-    url: config.RedisStore.url
-  }),
-  secret: config.RedisStore.secret,
+  // store: new RedisStore({
+  //   url: config.RedisStore.url
+  // }),
+  // secret: config.RedisStore.secret,
+  secret: 'sessionSecret',
   resave:false,
   saveUninitialized:false
 }))
