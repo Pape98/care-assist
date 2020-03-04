@@ -6,4 +6,5 @@ router.get('/profile', function(req, res, next) {
   res.render('pages/user/index');
 });
 
+
 module.exports = router;

@@ -4,10 +4,76 @@
 <div class="pusher">
     <!-- START OF PUSHER SIDEBAR-->
     <% include ../../partials/topmenu %>
-    <h1>User Profile Page</h1>
     <!-- END OF PUSHER SIDEBAR-->
 </div>
 
+<!-- <div class="ui grid">
+    <div class="four wide column">
+        <div class="ui secondary vertical pointing menu">
+            <div class="ui  center aligned header "><h2>User Profile</h2></div>
+            <a class="active item">
+                User Info
+            </a>
+            <a class="item">
+                Settings
+            </a>
+        </div>
+    </div>
+    <div class="twelve wide stretched column">
+        <div class="ui segment">
+            <h1>User Profile Page</h1>
+            This is an stretched grid column. This segment will always match the tab height
+        </div>
+    </div>
+</div> -->
+
+<div class="ui internally celled grid">
+    <div class="row">
+        <div class="ui center aligned three wide column" style="height: 92vh;">
+            <div class="ui fluid secondary vertical menu">
+                <br>
+                <h2>User Profile</h1>
+                    <br><br>
+                    <a class="ui active item profile-menu">
+                        <i class="user outline icon"></i>
+                        User Info
+                    </a>
+                    <a class="ui item profile-menu">
+                        <i class="cog icon"></i>
+                        Settings
+                    </a>
+                    <a class="ui item profile-menu">
+                        <i class="bell outline icon"></i>
+                        Notifications
+                    </a>
+            </div>
+        </div>
+        <div class="ten wide column">
+            <img style="margin-left: 200px;" class="ui medium circular image"
+                src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png">
+            <br>
+            <br>
+            <div style="margin-left: 200px;" class="ui input focus">
+                <input type="text" placeholder="First Name">
+            </div>
+            <div class="ui input focus">
+                <input type="text" placeholder="Last Name">
+            </div>
+            <br>
+            <br>
+            <div style="margin-left: 200px;" class="ui input focus">
+                <input type="text" placeholder="Email Address">
+            </div>
+            <div class="ui input focus">
+                <input type="text" placeholder="Phone Number">
+            </div>
+            <br>
+            <br>
+            <button style="margin-left: 200px;"  class="ui orange button">Save Changes</button>
+
+        </div>
+    </div>
+</div>
 <% include ../../partials/footer %>
 
 <!-- TODO: Create functionality to go to this page from sidebar -->
