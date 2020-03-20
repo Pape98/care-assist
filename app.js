@@ -5,9 +5,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
-// var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-// var session = require('express-session');
+const mongoose = require('mongoose');
+const session = require('express-session');
 // var passport = require('passport');
 
 
@@ -16,7 +15,8 @@ const app = express();
 // DB Config
 const db = require('./config/keys').MongoURI;
 
-// Connect to Mongo
+// MongoDB connection 
+// TODO: Replace with Redis connection
 mongoose.connect(db, { useNewUrlParser: true})
   .then(() => console.log('MongoDB successfully connected...'))
   .catch(err => console.log(err));
@@ -24,6 +24,10 @@ mongoose.connect(db, { useNewUrlParser: true})
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
+
+// Bodyparser
+// var bodyParser = require('body-parser');
+app.use(express.urlencoded({ extended: false }))
 
 // Routes
 var indexRouter = require('./routes/index');
