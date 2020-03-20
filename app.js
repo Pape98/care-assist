@@ -7,10 +7,12 @@ var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 const mongoose = require('mongoose');
 const session = require('express-session');
-// var passport = require('passport');
-
+const passport = require('passport');
 
 const app = express();
+
+// Passport Config
+require('./config/passport')(passport);
 
 // DB Config
 const db = require('./config/keys').MongoURI;
@@ -26,8 +28,18 @@ app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
 // Bodyparser
-// var bodyParser = require('body-parser');
 app.use(express.urlencoded({ extended: false }))
+
+// Express Session
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: true
+}));
+
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 var indexRouter = require('./routes/index');

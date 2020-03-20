@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 // User model
 const User = require('../models/User');
@@ -103,6 +104,18 @@ router.post('/register', (req, res) => {
             }
         });
     }
+});
+
+/*
+    Login Handle
+    -- Submit information through POST
+*/
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+        // Redirects on both success and fail
+        successRedirect: '/dashboard',
+        failureRedirect: '/users/login',
+    })(req, res, next);
 });
 
 module.exports = router;
