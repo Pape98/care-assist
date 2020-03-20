@@ -118,4 +118,14 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
+/*
+    Logout Handle
+    -- Submit through GET
+*/
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/users/login');
+});
+
+
 module.exports = router;
