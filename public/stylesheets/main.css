@@ -84,6 +84,9 @@ html, body {
   text-decoration: none; }
 
 .profile-menu {
-  font-size: 1.25rem; }
+  font-size: 1.35rem; }
+
+#orange-save {
+  box-shadow: 0px 2px 5px #773a19; }
 
 /*# sourceMappingURL=main.css.map */
