@@ -1,6 +1,8 @@
 /*
     PASSPORT CONFIG FILE
-    This file deals directly with login authorization
+    This file deals directly with: 
+        - Login Authorization
+        - User Serialization: Establishing a session for authorized user to view privileged info
 */
 
 const localStrategy = require('passport-local').Strategy;
@@ -11,6 +13,7 @@ const bcrypt = require('bcryptjs');
 // User Model
 const User = require('../models/User');
 
+// Login middleware
 module.exports = function(passport) {
     passport.use(
         // Using email as "username"
@@ -30,6 +33,7 @@ module.exports = function(passport) {
                         if (err) throw err;
                         // If matching, return with user param
                         if (isMatch) {
+                            // "user" param grants successful login
                             return done (null, user);
                         }
                         else {

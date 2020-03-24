@@ -1,3 +1,7 @@
+/*
+    ROUTING MODEL for Users (Caretakers)
+*/
+
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
@@ -6,11 +10,14 @@ const passport = require('passport');
 // User model
 const User = require('../models/User');
 
+// TODO: ADMIN ONLY
 // /* GET users listing. */
 // router.get('/', function(req, res, next) {
 //   res.render('pages/user/index');
 // });
 
+
+// TODO: ADMIN ONLY
 // /* SHOW individual user */
 // router.get('/:id', function(req, res, next) {
 //   res.render('pages/user/show');
@@ -65,7 +72,6 @@ router.post('/register', (req, res) => {
         User.findOne({ email: email }).then(user => {
             // Existing user -> re-render
             if (user) {
-                console.log('found existing');
                 errorList.push({ msg: 'Email already taken' });
                 res.render('register', {
                     errorList,
@@ -77,7 +83,6 @@ router.post('/register', (req, res) => {
             }
             // Create new user w/ hashed password
             else {
-                console.log('creating new user');
                 const newUser = new User ({
                     name,
                     email,
@@ -95,7 +100,6 @@ router.post('/register', (req, res) => {
                             .save()
                             .then(user => {
                                 // Redirect to login page
-                                console.log('user successfully registered');
                                 res.redirect('/users/login');
                             })
                             .catch(err => console.log(err));

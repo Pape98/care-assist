@@ -12,11 +12,4 @@ router.get('/dashboard', ensureAuthenticated, (req, res) =>
         name: req.user.name
     }));
 
-
-/* GET home page */
-// router.get('/home',function(req,res,next){
-//   var date = moment().format('MMMM Do YYYY');
-//   res.render('pages/landing/home',{date:date});
-// });
-
 module.exports = router;

@@ -44,11 +44,9 @@ app.use(passport.session());
 // Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-// var authRouter = require('./routes/auth')(passport);
 // Pair Routes with subdirectories
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// app.use('/auth', authRouter)
 
 
 // Define server port
@@ -59,7 +57,6 @@ app.listen(PORT, console.log(`Server started on port ${PORT}`));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -73,17 +70,6 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-// app.use(session({
-//   secret: 'sessionSecret',
-//   resave:false,
-//   saveUninitialized:false
-// }))
-// app.use(passport.initialize())
-// app.use(passport.session())
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

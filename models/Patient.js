@@ -1,5 +1,5 @@
 /*
-    DATABASE SCHEMA for Users (Caretakers)
+    DATABASE SCHEMA for Patients
 */
 
 // TODO: Redis swap
@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 // TODO: Redis swap
 // Define user attributes
-const userSchema = new mongoose.Schema({
+const patientSchema = new mongoose.Schema({
     name:{
         type: String,
         required: true
@@ -17,22 +17,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    password:{
+    dob:{
+        type: Date,
+        required: true,
+        default: Date.now
+    },
+    bloodType:{
         type: String,
         required: true
     }
-    // ,
-    // date:{
-    //     type: Date,
-    //     default: Date.now
-    // },
-    // admin:{
-    //     type: Boolean,
-    //     default: false,
-    // }
 });
 
 // TODO: Redis swap
 // Export module name and schema
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Patient = mongoose.model('Patient', patientSchema);
+module.exports = Patient;
