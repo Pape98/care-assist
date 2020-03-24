@@ -75,11 +75,10 @@
   margin: 0 !important; }
 
 .home-menu > .long {
-  height: 23vh; }
+  height: 23vh !important; }
 
 html, body {
-  height: 100%;
-  margin: auto; }
+  height: 100%; }
 
 .landing h1 {
   font-size: 7vw;
@@ -104,6 +103,9 @@ html, body {
 
 .pd-0 {
   padding: 0 !important; }
+
+.puhser {
+  height: auto !important; }
 
 .settings {
   padding: 0 !important;
