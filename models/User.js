@@ -20,16 +20,15 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         required: true
+    },
+    date:{
+        type: Date,
+        default: Date.now
+    },
+    admin:{
+        type: Boolean,
+        default: false,
     }
-    // ,
-    // date:{
-    //     type: Date,
-    //     default: Date.now
-    // },
-    // admin:{
-    //     type: Boolean,
-    //     default: false,
-    // }
 });
 
 // TODO: Redis swap
