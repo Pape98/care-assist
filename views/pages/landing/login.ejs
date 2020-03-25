@@ -10,20 +10,17 @@
                     Welcome
                 </h1>
 
-                <form class="ui inverted form">
+                <form class="ui inverted form" action="/users/login" method="POST">
                     <div class="field">
-                        <label>First Name</label>
-                        <input type="text" name="first-name" placeholder="First Name">
+                        <label>Email Address</label>
+                        <input type="email" name="email" placeholder="Enter Your Email">
                     </div>
                     <div class="field">
-                        <label>Last Name</label>
-                        <input type="text" name="last-name" placeholder="Last Name">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Last Name">
                     </div>
-
-                </form>
-                <a href="/home">
                     <button style="margin: 0;" class="ui fluid teal button" type="submit">Submit</button>
-                </a>
+                </form>
             </div>
         </div>
     </div>

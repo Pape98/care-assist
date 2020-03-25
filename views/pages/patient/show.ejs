@@ -1,13 +1,71 @@
 <% include ../../partials/head %>
-<% include ../../partials/sidebar %>
+<% include ../../partials/topmenu %>
 
-<div class="pusher">
+<div class="ui bottom attached segment">
+    <% include ../../partials/sidebar %>
     <!-- START OF PUSHER SIDEBAR-->
-    <% include ../../partials/topmenu %>
-    <h1>Show Page</h1>
+    <div class="pusher">
+        <div class="ui basic segment">
+            <div class="ui internally celled grid">
+                <div class="row">
+                    <div class="column pd-0">
+                        <div class="ui secondary menu">
+                            <h3 class="ui item header">
+                                <i class="user big ft-ruber icon"></i>
+                                <div class="content">
+                                    Diane Cooper
+                                </div>
+                            </h3>
+                            <div class="right menu">
+                                <div class="inverted item">
+                                    <div class="ui icon input">
+                                        <input type="text" placeholder="Search...">
+                                        <i class="search link icon"></i>
+                                    </div>
+                                </div>
+                                <a class="ui item">
+                                    <i class="add ft-ruber circular icon"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <div class="ui secondary menu">
+                            <div class="item ">
+                                <div class="ui breadcrumb">
+                                    <a class="section">Patient List</a>
+                                    <i class="right angle icon divider"></i>
+                                    <a class=" active section">Diane Cooper</a>
+                                </div>
+                            </div>
+                            <div class="right menu">
+                                <div class="item">
+                                    <div class="ui icon button">
+                                        <i class="print icon"></i>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <button class="ui button">
+                                        <i class="icon pencil"></i>
+                                        Edit Patient
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <h1>pp</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- END OF PUSHER SIDEBAR-->
 </div>
 
 <% include ../../partials/footer %>
-
-<!-- TODO: Create functionality to go to this page from settings -->
