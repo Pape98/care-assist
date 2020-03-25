@@ -29,6 +29,13 @@ router.get('/login', (req, res) => res.render('Login'));
 // Register Page
 router.get('/register', (req, res) => res.render('register'));
 
+
+/* GET user profile. */
+router.get('/profile', function(req, res, next) {
+    res.render('pages/user/index');
+  });
+  
+
 /* 
     Register Handle
     -- Submit information through POST
