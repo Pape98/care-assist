@@ -6,6 +6,8 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+var moment = require('moment');
+const {  ensureAuthenticated } = require('../config/auth');
 
 // User model
 const User = require('../models/User');
@@ -23,12 +25,23 @@ const User = require('../models/User');
 //   res.render('pages/user/show');
 // });
 
-// Login Page
+// GET Login Page
 router.get('/login', (req, res) => res.render('Login'));
 
-// Register Page
+// GET Register Page
 router.get('/register', (req, res) => res.render('register'));
 
+/* GET home page */
+router.get('/home',ensureAuthenticated,function(req,res,next){
+    var date = moment().format('MMMM Do YYYY');
+    res.render('pages/user/home',{date:date});
+});
+
+/* GET user profile. */
+router.get('/profile', function(req, res, next) {
+    res.render('pages/user/profile');
+});
+  
 /* 
     Register Handle
     -- Submit information through POST
@@ -117,7 +130,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         // Redirects on both success and fail
-        successRedirect: '/home',
+        successRedirect: '/user/home',
         failureRedirect: '/login',
     })(req, res, next);
 });

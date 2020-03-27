@@ -18,7 +18,7 @@ const db = require('./config/keys').MongoURI;
 
 // MongoDB connection 
 // TODO: Replace with Redis connection
-mongoose.connect(db, { useNewUrlParser: true})
+mongoose.connect(db, {useNewUrlParser:true, useUnifiedTopology:true})
   .then(() => console.log('MongoDB successfully connected...'))
   .catch(err => console.log(err));
 
@@ -42,9 +42,12 @@ app.use(passport.session());
 // Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var patientsRouter = require('./routes/patients');
+
 // Pair Routes with subdirectories
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
+app.use('/patients', patientsRouter);
 
 
 // Define server port
@@ -68,6 +71,7 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -9,7 +9,6 @@ $(document).ready(function () {
     ;
 });
 
-
 /**
  * Function used to display real time on main menu
  */
