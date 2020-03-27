@@ -41,11 +41,13 @@ app.use(passport.session());
 
 // Routes
 var indexRouter = require('./routes/index');
-
 var usersRouter = require('./routes/users');
+var patientsRouter = require('./routes/patients');
+
 // Pair Routes with subdirectories
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
+app.use('/patients', patientsRouter);
 
 
 // Define server port
