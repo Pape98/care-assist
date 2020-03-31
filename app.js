@@ -1,14 +1,16 @@
-var createError = require('http-errors');
+const createError = require('http-errors');
 const express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var sassMiddleware = require('node-sass-middleware');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const sassMiddleware = require('node-sass-middleware');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
-
 const app = express();
+const http = require('http').createServer(app);
+const io = require('socket.io').listen(http);
+
 
 // Passport Config
 require('./config/passport')(passport);
@@ -49,11 +51,34 @@ app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/patients', patientsRouter);
 
+/**
+ * Real-time chat sample
+ */
+app.get('/chat',function(req,res){
+  res.render('chat')
+});
+
+io.sockets.on('connection', function(socket) {
+  console.log("someone is connected")
+  socket.on('username', function(username) {
+      socket.username = username;
+      io.emit('is_online', '🔵 <i>' + socket.username + ' join the chat..</i>');
+  });
+
+  socket.on('disconnect', function(username) {
+      io.emit('is_online', '🔴 <i>' + socket.username + ' left the chat..</i>');
+  })
+
+  socket.on('chat_message', function(message) {
+      io.emit('chat_message', '<strong>' + socket.username + '</strong>: ' + message);
+  });
+
+});
 
 // Define server port
 const PORT = process.env.PORT || 5000;
 // USING `
-app.listen(PORT, console.log(`Server started on port ${PORT}`));
+http.listen(PORT, console.log("Server is listening."));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
