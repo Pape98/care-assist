@@ -1,5 +1,15 @@
 $(document).ready(function () {
     showTime();
+/**
+* For tabs
+*/
+    $('.menu .item')
+  .tab()
+;
+
+/**
+* For sidebar menu
+*/
     $('.sidebar.icon').click(function () {
         $('.ui.sidebar').sidebar({
             context: $('.bottom.segment')
