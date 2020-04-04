@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 var moment = require('moment');
 const {  ensureAuthenticated } = require('../config/auth');
+const {  ensureAdmin } = require('../config/admin');
 
 // User model
 const User = require('../models/User');
@@ -29,7 +30,7 @@ const User = require('../models/User');
 router.get('/login', (req, res) => res.render('Login'));
 
 // GET Register Page
-router.get('/register', (req, res) => res.render('register'));
+router.get('/register', ensureAdmin, (req, res) => res.render('register'));
 
 /* GET home page */
 router.get('/home',ensureAuthenticated,function(req,res,next){

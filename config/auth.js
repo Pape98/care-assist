@@ -1,5 +1,6 @@
 /*
-    Middleware file to authenticate if a user is currently logged in
+    Middleware authentication file
+    ensureAuthenticated: verifies if a user is logged in
     Using Passport's "isAuthenticated" to verify current user logged in
 */
 module.exports = {

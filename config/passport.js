@@ -2,7 +2,7 @@
     PASSPORT CONFIG FILE
     This file deals directly with: 
         - Login Authorization
-        - User Serialization: Establishing a session for authorized user to view privileged info
+        - User Serialization
 */
 
 const localStrategy = require('passport-local').Strategy;
@@ -46,7 +46,8 @@ module.exports = function(passport) {
         })
     );
 
-    // Passport Session Establishment Protocols ----
+    // ---------------------------------------------
+    // Passport Session Establishment Protocols
     passport.serializeUser((user, done) => {
         done(null, user.id);
     });
