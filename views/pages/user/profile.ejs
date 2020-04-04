@@ -87,19 +87,71 @@
             </div>
             <div class="row">
                 <div class="five wide column">
-
+                    <h2>Add Coordinator</h2>
+                    <p>Add Users Here</p>
                 </div>
+            
+            
                 <div class="ten wide column">
-                    <h1>Pape</h1>
-                    <h1>Pape</h1>
-                    <h1>Pape</h1>
-                    <h1>Pape</h1>
-                    <h1>Pape</h1>
-                    <h1>Pape</h1>
-
-                    <h1>Pape</h1>
+                    <form action="/addAdmin" method="post" class="ui segment form" id="addAdminForm">
+                        <input type="hidden" name="authenticity_token" id="authenticity_token"
+                            value="Q1wSwGDfIY058eUBJ4CNdXlU3I0FNvFd7cH93hNKUVDu97Ce9KruTQFufVhn0A1zhmjifMUvONEGyXVycSuyWQ==" />
+                        <div class="ui error message"></div>
+                        <div class="field">
+                            <label>Email</label>
+                            <input type="text" name="email" placeholder="Email">
+                        </div>
+                        <div class="field">
+                            <label>First Name</label>
+                            <input type="text" name="first_name" placeholder="First Name">
+                        </div>
+                        <div class="field">
+                            <label>Last Name</label>
+                            <input type="text" name="last_name" placeholder="Last Name">
+                        </div>
+            
+                        <div class="field">
+                            <label>Password</label>
+                            <input type="password" name="password" placeholder="Password" id="password">
+                        </div>
+            
+                        <div class="field">
+                            <label>Confirm Password</label>
+                            <input type="password" name="confirm_password" placeholder="Confirm Password">
+                        </div>
+            
+                        <button class="ui bg-maroon button" type="submit">Submit</button>
+                    </form>
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="five wide column">
+                  <h2>Password</h2>
+                  <p>Change your password here</p>
+                </div>
+                <div class="ten wide column">
+                  <form action="/changePassword" method="post" class="ui segment form">
+                    <input type="hidden" name="authenticity_token" id="authenticity_token" value="pKNUMj6EBMyzFWeC2zb2ZRqqsfKMwpXvc+hRZEHDBAoJCPZsqvHLDIuK/9ubZnZj5ZaPA0zbXGOY4NnII6LnAw==" />
+                    <div class="ui error message"> </div>
+                      <div class="field">
+                        <label>Current Password</label>
+                        <input type="password" name="current_password" placeholder="Current Password">
+                      </div>
+                      <div class="field">
+                        <label>New Password</label>
+                        <input type="password" name="new_password" placeholder="New Password" id="new_password">
+                      </div>
+                    <div class="field">
+                      <label>Confirm New Password</label>
+                      <input type="password" name="confirm_new_password" placeholder="Confirm Password">
+                    </div>
+            
+                      <button class="ui bg-maroon button" type="submit">Submit</button>
+                  </form>
+                </div>
+              </div>
+
             <div class="row">
                 <div class="five wide column">
 
