@@ -162,4 +162,7 @@ html, body {
 #orange-save {
   box-shadow: 0px 2px 5px #773a19; }
 
+.vertical.menu > .center-content {
+  height: 15.6vh !important; }
+
 /*# sourceMappingURL=main.css.map */
