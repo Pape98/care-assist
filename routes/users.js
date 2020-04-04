@@ -38,7 +38,7 @@ router.get('/home',ensureAuthenticated,function(req,res,next){
 });
 
 /* GET user profile. */
-router.get('/profile', function(req, res, next) {
+router.get('/settings', function(req, res, next) {
     res.render('pages/user/profile');
 });
   
