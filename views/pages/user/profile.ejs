@@ -92,33 +92,33 @@
                             <p>Add Users Here</p>
                         </div>
                 
-                
+
                         <div class="ten wide column">
-                            <form action="/addAdmin" method="post" class="ui segment form" id="addAdminForm">
+                            <form action="/users/register" method="POST" class="ui segment form" id="addAdminForm">
                                 <input type="hidden" name="authenticity_token" id="authenticity_token"
                                     value="Q1wSwGDfIY058eUBJ4CNdXlU3I0FNvFd7cH93hNKUVDu97Ce9KruTQFufVhn0A1zhmjifMUvONEGyXVycSuyWQ==" />
                                 <div class="ui error message"></div>
                                 <div class="field">
-                                    <label>Email</label>
-                                    <input type="text" name="email" placeholder="Email">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" placeholder="Email">
                                 </div>
                                 <div class="field">
-                                    <label>First Name</label>
-                                    <input type="text" name="first_name" placeholder="First Name">
+                                    <label for="fName">First Name</label>
+                                    <input type="text" id="fName" name="first_name" placeholder="First Name">
                                 </div>
                                 <div class="field">
-                                    <label>Last Name</label>
-                                    <input type="text" name="last_name" placeholder="Last Name">
-                                </div>
-                
-                                <div class="field">
-                                    <label>Password</label>
-                                    <input type="password" name="password" placeholder="Password" id="password">
+                                    <label for="lName">Last Name</label>
+                                    <input type="text" id="lName" name="last_name" placeholder="Last Name">
                                 </div>
                 
                                 <div class="field">
-                                    <label>Confirm Password</label>
-                                    <input type="password" name="confirm_password" placeholder="Confirm Password">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" name="password" placeholder="Password" id="password">
+                                </div>
+                
+                                <div class="field">
+                                    <label for="password2">Confirm Password</label>
+                                    <input type="password" id="password2" name="confirm_password" placeholder="Confirm Password">
                                 </div>
                 
                                 <button class="ui bg-maroon button" type="submit">Submit</button>

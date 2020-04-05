@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 var moment = require('moment');
 const {  ensureAuthenticated } = require('../config/auth');
-const {  ensureAdmin } = require('../config/admin');
+const ensureAdmin = require('../config/admin');
 
 // User model
 const User = require('../models/User');
@@ -30,16 +30,16 @@ const User = require('../models/User');
 router.get('/login', (req, res) => res.render('Login'));
 
 // GET Register Page
-// router.get('/register', ensureAdmin, (req, res) => res.render('register'));
+router.get('/register', ensureAdmin('/login'), (req, res) => res.render('register'));
 
 /* GET home page */
-router.get('/home',ensureAuthenticated,function(req,res,next){
+router.get('/home', ensureAuthenticated, function(req,res,next){
     var date = moment().format('MMMM Do YYYY');
     res.render('pages/user/home',{date:date});
 });
 
 /* GET user profile. */
-router.get('/settings', ensureAdmin, function(req, res, next) {
+router.get('/settings', function(req, res, next) {
     res.render('pages/user/profile');
 });
   
@@ -72,13 +72,14 @@ router.post('/register', (req, res) => {
 
     // If errors exist -> re-render with errors shown
     if (errorList.length > 0) {
-        res.render('register', {
-            errorList,
-            name,
-            email,
-            password,
-            password2
-        });
+        console.log("Errors exist with register");
+        // res.render('register', {
+        //     errorList,
+        //     name,
+        //     email,
+        //     password,
+        //     password2
+        // });
     }
     // Successful validation
     else {
@@ -87,13 +88,14 @@ router.post('/register', (req, res) => {
             // Existing user -> re-render
             if (user) {
                 errorList.push({ msg: 'Email already taken' });
-                res.render('register', {
-                    errorList,
-                    name,
-                    email,
-                    password,
-                    password2
-                });
+                console.log("Errors exist with register");
+                // res.render('register', {
+                //     errorList,
+                //     name,
+                //     email,
+                //     password,
+                //     password2
+                // });
             }
             // Create new user w/ hashed password
             else {
