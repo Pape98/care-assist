@@ -79,7 +79,7 @@
   margin: 0 !important; }
 
 .home-menu > .long {
-  height: 25vh !important; }
+  height: 23.375vh !important; }
 
 html, body {
   height: 100%;
@@ -107,14 +107,6 @@ html, body {
 #login-grid > .row {
   padding: 0 !important; }
 
-.main-grid {
-  margin: 0 !important;
-  padding: 0;
-  height: 100vh; }
-
-.menu-wrapper {
-  position: relative; }
-
 .pd-0 {
   padding: 0 !important; }
 
@@ -122,13 +114,18 @@ html, body {
   padding: 0 !important; }
 
 #main-segment {
-  height: 100% !important; }
+  height: 100% !important;
+  padding-top: 6.5vh !important; }
 
 #main-grid {
   height: inherit !important; }
 
-.puhser {
-  height: auto !important; }
+.menu-item:hover {
+  background: #A0A0A0 !important;
+  font-color: black !important; }
+
+.selected {
+  background: #f7b232 !important; }
 
 .settings {
   padding: 0 !important;
@@ -161,8 +158,5 @@ html, body {
 
 #orange-save {
   box-shadow: 0px 2px 5px #773a19; }
-
-.vertical.menu > .center-content {
-  height: 15.6vh !important; }
 
 /*# sourceMappingURL=main.css.map */

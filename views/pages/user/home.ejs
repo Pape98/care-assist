@@ -1,7 +1,8 @@
 <% include ../../partials/head %>
+<% include ../../partials/topmenu %>
 
-<div class="ui basic segment height-inherit">
-    <div class="ui grid home-menu">
+<div class="ui basic segment" id="main-segment" >
+    <div class="ui celled grid home-menu">
         <div class="three column row long bg-bleu-de-france pd-0">
             <div class="column center-content">
                 <div>
@@ -28,7 +29,7 @@
             </div>
         </div>
         <div class="two column row long pd-0">
-            <div class="column center-content menu-item bg-ruber" onclick="window.location='/patients'">
+            <div class="column center-content menu-item bg-saffron" onclick="window.location='/patients'">
                 <h2 class="ui inverted icon header ">
                     <i class="users icon "></i>
                     <div class="content ">
@@ -36,7 +37,7 @@
                     </div>
                 </h2>
             </div>
-            <div class="column center-content bg-zomp " onclick="window.location='/user/settings'">
+            <div class="column center-content menu-item bg-saffron " onclick="window.location='/user/settings'">
                 <h2 class="ui inverted icon header ">
                     <i class="wrench icon"></i>
                     <div class="content">
@@ -47,7 +48,7 @@
         </div>
 
         <div class="two column row long pd-0">
-            <div class=" column center-content bg-liberty">
+            <div class=" column center-content menu-item bg-saffron">
                 <h2 class="ui inverted icon header ">
                     <i class="folder open outline icon"></i>
                     <div class="content">
@@ -55,7 +56,7 @@
                     </div>
                 </h2>
             </div>
-            <div class="column center-content bg-saffron">
+            <div class="column center-content menu-item bg-saffron">
                 <h2 class="ui inverted icon header">
                     <i class="stethoscope icon"></i>
                     <div class="content">
