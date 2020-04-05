@@ -52,37 +52,43 @@ router.get('/reminders', function(req, res, next) {
 */
 router.post('/register', (req, res) => {
     // Information access
-    const {name, email, password, password2} = req.body;
+    const {first_name, last_name, email, password, password2} = req.body;
+
     // Validation
     let errorList = [];
 
     // If errors exist -> push message into errorList detailing issue
 
     // Check required fields
-    if (!name || !email || !password || !password2) {
+    if (!first_name || !last_name || !email || !password || !password2) {
         errorList.push({ msg: 'Empty field(s)' });
+        res.send(errorList)
     }
 
     // Check passwords match
     if (password !== password2) {
         errorList.push({ msg: 'Passwords do not match' });
+        res.send(errorList)
     }
 
     // TODO: More strict password requirements
     if (password.length < 6) {
         errorList.push({ msg: 'Password must be at least 6 characters' });
+        res.send(errorList)
     }
 
     // If errors exist -> re-render with errors shown
     if (errorList.length > 0) {
         res.render('register', {
             errorList,
-            name,
+            first_name,
             email,
             password,
             password2
         });
+        res.send(errorList)
     }
+    
     // Successful validation
     else {
         // Verify no existing user with same email
@@ -92,7 +98,7 @@ router.post('/register', (req, res) => {
                 errorList.push({ msg: 'Email already taken' });
                 res.render('register', {
                     errorList,
-                    name,
+                    first_name,
                     email,
                     password,
                     password2
@@ -101,7 +107,7 @@ router.post('/register', (req, res) => {
             // Create new user w/ hashed password
             else {
                 const newUser = new User ({
-                    name,
+                    first_name,
                     email,
                     password
                 });

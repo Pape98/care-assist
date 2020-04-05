@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 // Define user attributes
 const userSchema = new mongoose.Schema({
-    name:{
+    first_name:{
         type: String,
         required: true
     },
