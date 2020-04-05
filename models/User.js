@@ -9,7 +9,11 @@ const mongoose = require('mongoose');
 // TODO: Redis swap
 // Define user attributes
 const userSchema = new mongoose.Schema({
-    name:{
+    fName:{
+        type: String,
+        required: true
+    },
+    lName:{
         type: String,
         required: true
     },

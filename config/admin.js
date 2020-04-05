@@ -6,6 +6,7 @@ module.exports = {
     ensureAdmin: function(req, res, next) {
         if(req.isAuthenticated()) {
             if(req.user.admin == true) {
+                console.log("Is admin");
                 return next();
             }
             console.log("Not admin");

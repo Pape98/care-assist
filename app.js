@@ -34,7 +34,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   // How long a user remains logged in (ms)
-  cookie: { maxAge: 3600000 }
+  cookie: { maxAge: 10000000 }
 }));
 
 // Passport Middleware

@@ -30,7 +30,7 @@ const User = require('../models/User');
 router.get('/login', (req, res) => res.render('Login'));
 
 // GET Register Page
-router.get('/register', ensureAdmin, (req, res) => res.render('register'));
+// router.get('/register', ensureAdmin, (req, res) => res.render('register'));
 
 /* GET home page */
 router.get('/home',ensureAuthenticated,function(req,res,next){
@@ -39,7 +39,7 @@ router.get('/home',ensureAuthenticated,function(req,res,next){
 });
 
 /* GET user profile. */
-router.get('/settings', function(req, res, next) {
+router.get('/settings', ensureAdmin, function(req, res, next) {
     res.render('pages/user/profile');
 });
   
@@ -49,14 +49,14 @@ router.get('/settings', function(req, res, next) {
 */
 router.post('/register', (req, res) => {
     // Information access
-    const {name, email, password, password2} = req.body;
+    const {nameF, nameL, email, password, password2} = req.body;
     // Validation
     let errorList = [];
 
     // If errors exist -> push message into errorList detailing issue
 
     // Check required fields
-    if (!name || !email || !password || !password2) {
+    if (!nameF || !nameL || !email || !password || !password2) {
         errorList.push({ msg: 'Empty field(s)' });
     }
 
@@ -98,7 +98,8 @@ router.post('/register', (req, res) => {
             // Create new user w/ hashed password
             else {
                 const newUser = new User ({
-                    name,
+                    fName,
+                    lName,
                     email,
                     password
                 });
