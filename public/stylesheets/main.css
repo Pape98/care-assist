@@ -17,6 +17,9 @@
 .bg-grey {
   background: #f2f5fa !important; }
 
+.bg-blue {
+  background: #0E6EB8 !important; }
+
 /*  ************* Font Colors ************/
 .ft-ruber {
   color: #df4775 !important; }
@@ -118,7 +121,7 @@ html, body {
   padding-top: 6.5vh !important; }
 
 #main-grid {
-  height: inherit !important; }
+  margin-top: 30px !important; }
 
 .menu-item:hover {
   background: #A0A0A0 !important;
@@ -158,5 +161,8 @@ html, body {
 
 #orange-save {
   box-shadow: 0px 2px 5px #773a19; }
+
+.vertical.menu > .center-content {
+  height: 15.58333vh !important; }
 
 /*# sourceMappingURL=main.css.map */
