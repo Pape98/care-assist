@@ -30,7 +30,7 @@ const User = require('../models/User');
 router.get('/login', (req, res) => res.render('Login'));
 
 // GET Register Page
-router.get('/register', ensureAdmin('/login'), (req, res) => res.render('register'));
+// router.get('/register', ensureAdmin('/login'), (req, res) => res.render('register'));
 
 /* GET home page */
 router.get('/home', ensureAuthenticated, function(req,res,next){
@@ -39,8 +39,10 @@ router.get('/home', ensureAuthenticated, function(req,res,next){
 });
 
 /* GET user profile. */
-router.get('/settings', function(req, res, next) {
-    res.render('pages/user/profile');
+router.get('/settings', ensureAuthenticated, function(req, res, next) {
+    res.render('pages/user/profile', {
+        isAdmin: req.user.admin
+    })
 });
   
 /* 

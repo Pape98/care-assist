@@ -36,6 +36,10 @@
                             </form>
                         </div>
                     </div>
+
+
+                    <!-- Remove user (require admin status) -->
+                    <% if (isAdmin) { %>
                     <div class="row">
                         <div class="five wide column">
                             <h2>Manage Users</h2>
@@ -86,13 +90,17 @@
                 
                         </div>
                     </div>
+                    <% } %>
+
+
+                    <!-- Add new user (require admin status) -->
+                    <% if (isAdmin) { %>
                     <div class="row">
                         <div class="five wide column">
                             <h2>Add Coordinator</h2>
                             <p>Add Users Here</p>
                         </div>
                 
-
                         <div class="ten wide column">
                             <form action="/users/register" method="POST" class="ui segment form" id="addAdminForm">
                                 <input type="hidden" name="authenticity_token" id="authenticity_token"
@@ -125,7 +133,12 @@
                             </form>
                         </div>
                     </div>
+                    <% } %>
                 
+
+
+
+
                     <div class="row">
                         <div class="five wide column">
                             <h2>Password</h2>
