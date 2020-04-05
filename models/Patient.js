@@ -4,19 +4,14 @@
 */
 
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 // Define user attributes
-const patientSchema = new mongoose.Schema({
-    firstName:{
-        type: String,
-        required: true
-    },
-    lastName:{
-        type: String,
-        required: true
-    },
-})
+const patientSchema = new Schema({
+    firstName : {type:String , required:true},
+    lastName: {type:String , required: true}
+});
 
 // Export module name and schema
-const Patient = mongoose.model('Patient',patientSchema);
-mongoose.exports = Patient;
+
+module.exports = mongoose.model('Patient',patientSchema);

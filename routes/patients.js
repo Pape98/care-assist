@@ -14,7 +14,7 @@ router.post('/',function(req,res,next){
     firstName: req.body.firstName,
     lastName: req.body.lastName
   })
-  patient.save(function(err,newPatient){
+  newPatient.save(function(err,newPatient){
     if(err) return console.log(err);
     else res.send("Successfully created  and saveda new patient!")
   })
