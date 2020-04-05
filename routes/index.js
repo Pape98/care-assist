@@ -12,5 +12,10 @@ router.get('/login',function(req,res,next){
   res.render('pages/landing/login');
 });
 
+// /* GET login page */
+// router.get('/loader',function(req,res,next){
+//   res.render('pages/landing/loader');
+// });
+
 
 module.exports = router;
