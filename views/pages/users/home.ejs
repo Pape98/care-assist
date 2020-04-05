@@ -2,8 +2,8 @@
 <% include ../../partials/topmenu %>
 
 <div class="ui basic segment" id="main-segment" >
-    <div class="ui celled grid home-menu">
-        <div class="three column row long bg-blue pd-0">
+    <div class="ui divided grid home-menu">
+        <div class="three column row long pd-0" style="background: #202021">
             <div class="column center-content">
                 <div>
                     <h1 class="ui inverted header" id="header-title">Good Morning Pape!</h1>
@@ -12,15 +12,23 @@
                     </div>
                 </div>
             </div>
-            <div class="column"></div>
             <div class="column center-content">
-                <h1 class="ui inverted header">
+                <div class="ui inverted header">
+                    <i class="huge icons">
+                        <i class="yellow heartbeat icon"></i>
+                        <i class="blue corner wheelchair icon"></i>
+                    </i>
+                   
+                </div>
+            </div>
+            <div class="column center-content">
+                <h1 class="ui inverted  header">
                     <i class="bell outline icon"></i>
                     <div class="content">
                         2 Notifications
                     </div>
                 </h1>
-                <h1 class="ui inverted header">
+                <h1 class="ui  inverted header">
                     <i class="clock outline icon"></i>
                     <div class="content">
                         <div id="MyClockDisplay" class="" onload="showTime()"></div>
@@ -29,38 +37,38 @@
             </div>
         </div>
         <div class="two column row long pd-0">
-            <div class="column center-content menu-item bg-saffron" onclick="window.location='/patients'">
+            <div class="column center-content menu-item bg-blue" onclick="window.location='/patients'">
                 <h2 class="ui inverted icon header ">
-                    <i class="blue users icon "></i>
+                    <i class="yellow users icon "></i>
                     <div class="content ">
                         Patients List
                     </div>
                 </h2>
             </div>
-            <div class="column center-content menu-item bg-saffron " onclick="window.location='/user/settings'">
+            <div class="column center-content menu-item bg-blue " onclick="window.location='/patients/new'">
                 <h2 class="ui inverted icon header ">
-                    <i class="blue wrench icon"></i>
+                    <i class="yellow add icon"></i>
                     <div class="content">
-                       Settings
+                        Add New Pattient
                     </div>
                 </h2>
             </div>
         </div>
 
         <div class="two column row long pd-0">
-            <div class=" column center-content menu-item bg-saffron">
+            <div class="column center-content menu-item bg-blue " onclick="window.location='/users/settings'">
                 <h2 class="ui inverted icon header ">
-                    <i class=" blue folder open outline icon"></i>
+                    <i class="yellow wrench icon"></i>
                     <div class="content">
-                        Patient Records
+                       My Settings
                     </div>
                 </h2>
             </div>
-            <div class="column center-content menu-item bg-saffron">
+            <div class="column center-content menu-item bg-blue">
                 <h2 class="ui inverted icon header">
-                    <i class="blue stethoscope icon"></i>
+                    <i class="yellow bell icon"></i>
                     <div class="content">
-                        Test Results
+                        Send Reminder
                     </div>
                 </h2>
             </div>

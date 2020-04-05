@@ -25,8 +25,6 @@ const User = require('../models/User');
 //   res.render('pages/user/show');
 // });
 
-// GET Login Page
-router.get('/login', (req, res) => res.render('Login'));
 
 // GET Register Page
 router.get('/register', (req, res) => res.render('register'));
@@ -34,12 +32,12 @@ router.get('/register', (req, res) => res.render('register'));
 /* GET home page */
 router.get('/home',ensureAuthenticated,function(req,res,next){
     var date = moment().format('MMMM Do YYYY');
-    res.render('pages/user/home',{date:date});
+    res.render('pages/users/home',{date:date});
 });
 
 /* GET user profile. */
 router.get('/settings', function(req, res, next) {
-    res.render('pages/user/profile');
+    res.render('pages/users/profile');
 });
   
 /* 
@@ -130,8 +128,8 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         // Redirects on both success and fail
-        successRedirect: '/user/home',
-        failureRedirect: '/login',
+        successRedirect: '/users/home',
+        failureRedirect: '/users/login',
     })(req, res, next);
 });
 

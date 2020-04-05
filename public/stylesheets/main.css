@@ -59,7 +59,7 @@
 
 .bg-img > h1 {
   font-size: 5vw;
-  color: #edd170; }
+  color: #FFD700; }
 
 .center-content {
   display: flex !important;
@@ -95,8 +95,7 @@ html, body {
   height: inherit !important; }
 
 .landing h1 {
-  font-size: 7vw;
-  color: #f7b232; }
+  font-size: 7vw; }
 
 .landing p {
   font-size: 2.5vw;
@@ -124,8 +123,7 @@ html, body {
   margin-top: 30px !important; }
 
 .menu-item:hover {
-  background: #A0A0A0 !important;
-  font-color: black !important; }
+  opacity: 0.9 !important; }
 
 .selected {
   background: #f7b232 !important; }
@@ -163,6 +161,6 @@ html, body {
   box-shadow: 0px 2px 5px #773a19; }
 
 .vertical.menu > .center-content {
-  height: 15.58333vh !important; }
+  height: 18.7vh !important; }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,16 +1,22 @@
 <% include ../../partials/head %>
 
 <div class="center-content bg-img">
+    <h1 class="ui centered header">
+        <i class="huge icons">
+            <i class="heartbeat blue icon"></i>
+            <i class="corner wheelchair yellow icon"></i>
+        </i>
+    </h1>
     <h1 class="ui">CareAssist</h1>
     <div class="ui text container ">
-        <div class="ui  grid" id="login-grid">
+        <div class="ui grid" id="login-grid">
 
-            <div class=" column" id="login-right">
+            <div class=" ten wide centered column" id="login-right">
                 <h1 class="ui inverted header" style="margin-top:0px">
                     Welcome
                 </h1>
 
-                <form class="ui inverted form" action="/user/login" method="POST">
+                <form class="ui inverted form" action="/users/login" method="POST">
                     <div class="field">
                         <label>Email Address</label>
                         <input type="email" name="email" placeholder="Enter Your Email">
