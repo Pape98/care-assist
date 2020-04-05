@@ -1,37 +1,33 @@
 <% include ../../partials/head %>
+<% include ../../partials/topmenu %>
 
-<div class="ui basic segment ">
+<div class="ui basic segment" id="main-segment">
     <div class="ui stackable grid ">
         <div class="row">
             <div class="two wide column">
                 <% include ../../partials/sidebar %>
             </div>
             <div class="fourteen wide column pd-0">
-                <div class="ui  internally celled grid">
-                    <div class="row">
-                        <div class="sixteen wide column pd-0">
-                            <div class="ui secondary menu">
-                                <h3 class="ui item header">
-                                    <i class="user big ft-ruber icon"></i>
-                                    <div class="content">
-                                        Patient List
-                                    </div>
-                                </h3>
-                                <div class="item ft-ruber" style="font-weight: bold;">
-                                    List
-                                </div>
-                                <div class="item">
-                                    Thumbnail
-                                </div>
-
-                            </div>
+                <div class="ui container vertically divided grid" id="main-grid">
+                    <div class="one column row">
+                        <div class="column">
+                            <div class="ui big breadcrumb">
+                                <a class="section">Home</a>
+                                <i class="right chevron icon divider"></i>
+                                <div class="active section">Patients List</div>
+                              </div>
                         </div>
-
+                    </div>
+                    <div class= " one column row">
+                        <div class="column">
+                            <p style="font-size: 1.2em;">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                            </p>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="center-content three wide column">
                             <div class="ui mini horizontal statistic">
-                                <div class="value ft-ruber">
+                                <div class="value ft-bleu-de-france">
                                     2,204
                                 </div>
                                 <div class="label">
@@ -76,7 +72,8 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="one column row">
+
                         <div class="ui segment container" style="margin-top:40px">
                             <table class="ui very basic table">
                                 <thead>
@@ -128,6 +125,7 @@
                                     </tr>
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>

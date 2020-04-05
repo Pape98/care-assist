@@ -1,8 +1,9 @@
 <% include ../../partials/head %>
+<% include ../../partials/topmenu %>
 
-<div class="ui basic segment height-inherit">
-    <div class="ui grid home-menu">
-        <div class="three column row long bg-bleu-de-france pd-0">
+<div class="ui basic segment" id="main-segment" >
+    <div class="ui celled grid home-menu">
+        <div class="three column row long bg-blue pd-0">
             <div class="column center-content">
                 <div>
                     <h1 class="ui inverted header" id="header-title">Good Morning Pape!</h1>
@@ -28,17 +29,17 @@
             </div>
         </div>
         <div class="two column row long pd-0">
-            <div class="column center-content menu-item bg-ruber" onclick="window.location='/patients'">
+            <div class="column center-content menu-item bg-saffron" onclick="window.location='/patients'">
                 <h2 class="ui inverted icon header ">
-                    <i class="users icon "></i>
+                    <i class="blue users icon "></i>
                     <div class="content ">
                         Patients List
                     </div>
                 </h2>
             </div>
-            <div class="column center-content bg-zomp " onclick="window.location='/user/settings'">
+            <div class="column center-content menu-item bg-saffron " onclick="window.location='/user/settings'">
                 <h2 class="ui inverted icon header ">
-                    <i class="wrench icon"></i>
+                    <i class="blue wrench icon"></i>
                     <div class="content">
                        Settings
                     </div>
@@ -47,17 +48,17 @@
         </div>
 
         <div class="two column row long pd-0">
-            <div class=" column center-content bg-liberty">
+            <div class=" column center-content menu-item bg-saffron">
                 <h2 class="ui inverted icon header ">
-                    <i class="folder open outline icon"></i>
+                    <i class=" blue folder open outline icon"></i>
                     <div class="content">
                         Patient Records
                     </div>
                 </h2>
             </div>
-            <div class="column center-content bg-saffron">
+            <div class="column center-content menu-item bg-saffron">
                 <h2 class="ui inverted icon header">
-                    <i class="stethoscope icon"></i>
+                    <i class="blue stethoscope icon"></i>
                     <div class="content">
                         Test Results
                     </div>

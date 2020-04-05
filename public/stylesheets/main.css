@@ -17,6 +17,9 @@
 .bg-grey {
   background: #f2f5fa !important; }
 
+.bg-blue {
+  background: #0E6EB8 !important; }
+
 /*  ************* Font Colors ************/
 .ft-ruber {
   color: #df4775 !important; }
@@ -79,7 +82,7 @@
   margin: 0 !important; }
 
 .home-menu > .long {
-  height: 25vh !important; }
+  height: 23.375vh !important; }
 
 html, body {
   height: 100%;
@@ -107,14 +110,6 @@ html, body {
 #login-grid > .row {
   padding: 0 !important; }
 
-.main-grid {
-  margin: 0 !important;
-  padding: 0;
-  height: 100vh; }
-
-.menu-wrapper {
-  position: relative; }
-
 .pd-0 {
   padding: 0 !important; }
 
@@ -122,13 +117,18 @@ html, body {
   padding: 0 !important; }
 
 #main-segment {
-  height: 100% !important; }
+  height: 100% !important;
+  padding-top: 6.5vh !important; }
 
 #main-grid {
-  height: inherit !important; }
+  margin-top: 30px !important; }
 
-.puhser {
-  height: auto !important; }
+.menu-item:hover {
+  background: #A0A0A0 !important;
+  font-color: black !important; }
+
+.selected {
+  background: #f7b232 !important; }
 
 .settings {
   padding: 0 !important;
@@ -163,6 +163,6 @@ html, body {
   box-shadow: 0px 2px 5px #773a19; }
 
 .vertical.menu > .center-content {
-  height: 15.6vh !important; }
+  height: 15.58333vh !important; }
 
 /*# sourceMappingURL=main.css.map */

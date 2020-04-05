@@ -8,6 +8,13 @@ $(document).ready(function () {
 ;
 
 /**
+* For accordion
+*/
+$('.ui.accordion')
+  .accordion()
+;
+
+/**
 * For sidebar menu
 */
     $('.sidebar.icon').click(function () {
