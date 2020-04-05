@@ -35,10 +35,16 @@ router.get('/home',ensureAuthenticated,function(req,res,next){
     res.render('pages/users/home',{date:date});
 });
 
-/* GET user profile. */
+/* GET settings page. */
 router.get('/settings', function(req, res, next) {
     res.render('pages/users/profile');
 });
+
+/* GET reminder page. */
+router.get('/reminders', function(req, res, next) {
+    res.render('pages/users/reminder');
+});
+
   
 /* 
     Register Handle
