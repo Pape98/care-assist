@@ -14,11 +14,11 @@ const app = express();
 require('./config/passport')(passport);
 
 // DB Config
-const db = require('./config/keys').MongoURI;
+// const db = require('./config/keys').MongoURI;
 
 // MongoDB connection 
-// TODO: Replace with Redis connection
-mongoose.connect(db, {useNewUrlParser:true, useUnifiedTopology:true})
+url = 'mongodb://localhost/test';
+mongoose.connect(url, {useNewUrlParser:true, useUnifiedTopology:true})
   .then(() => console.log('MongoDB successfully connected...'))
   .catch(err => console.log(err));
 
@@ -46,7 +46,7 @@ var patientsRouter = require('./routes/patients');
 
 // Pair Routes with subdirectories
 app.use('/', indexRouter);
-app.use('/user', usersRouter);
+app.use('/users', usersRouter);
 app.use('/patients', patientsRouter);
 
 

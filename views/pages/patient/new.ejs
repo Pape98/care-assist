@@ -1,0 +1,16 @@
+
+<% include ../../partials/head %>
+
+<form class="ui container form" action="/patients" method="POST">
+    <div class="field">
+        <label>First Name</label>
+        <input name="firstName" type="text" placeholder="Your First Name ...">
+    </div>
+    <div class="field">
+        <label>Last name</label>
+        <input type="text" name="lastName" placeholder="Your Last Name ...">
+    </div>
+    <button class="ui green sumbit button"> Create</button>
+</form>
+
+<% include ../../partials/footer %>

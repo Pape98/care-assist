@@ -1,6 +1,5 @@
 /*
     URL with login credentials needed to connect to db
-    TODO: Redis swap
 */
 
 module.exports = {
