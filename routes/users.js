@@ -7,9 +7,9 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 var moment = require('moment');
-const {
-    ensureAuthenticated
-} = require('../config/auth');
+const {  ensureAuthenticated } = require('../config/auth');
+const ensureAdmin = require('../config/admin');
+
 
 // User model
 const User = require('../models/User');
@@ -41,7 +41,9 @@ router.get('/home', ensureAuthenticated, function (req, res, next) {
 
 /* GET settings page. */
 router.get('/settings', function (req, res, next) {
-    res.render('pages/users/profile');
+    res.render('pages/users/profile', {
+        isAdmin: req.user.admin
+    })
 });
 
 /* GET reminder page. */
@@ -66,6 +68,7 @@ router.post('/register', (req, res) => {
 
             const newUser = new User({
                 first_name,
+                last_name,
                 email,
                 password
             });
