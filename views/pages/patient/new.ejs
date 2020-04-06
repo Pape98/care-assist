@@ -4,24 +4,36 @@
 <div class="ui basic segment" id="main-segment">
     <div class="ui stackable grid ">
         <div class="row">
+            <div class="sixteen wide column" style="background: #1f1f21!important;padding:0 0 0 15vw;">
+                    <div class="ui  large  breadcrumb" style="margin: 30px 0 ;">
+                        <a href='/users/home' class="ft-white section">Home</a>
+                        <i class="right ft-white chevron icon divider"></i>
+                        <div class="active ft-white section">A New Patient</div>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="two wide column">
                 <% include ../../partials/sidebar %>
             </div>
             <div class="fourteen wide column pd-0">
-                <h1 style="margin-top: 80px;" class="ui centered header">New Patient Form</h1>
-                <form class="ui text container form" action="/patients" method="POST">
-                    <div class="field">
-                        <label>First Name</label>
-                        <input name="firstName" type="text" placeholder="Your First Name ...">
-                    </div>
-                    <div class="field">
-                        <label>Last name</label>
-                        <input type="text" name="lastName" placeholder="Your Last Name ...">
-                    </div>
-                    <button class="ui green sumbit button"> Create</button>
-                </form>
+                <div class="ui container">
+                    <h1 style="margin-top: 80px;" class="ui centered header">New Patient Form</h1>
+                    <form class="ui form" action="/patients" method="POST">
+                        <div class="field">
+                            <label>First Name</label>
+                            <input name="firstName" type="text" placeholder="Your First Name ...">
+                        </div>
+                        <div class="field">
+                            <label>Last name</label>
+                            <input type="text" name="lastName" placeholder="Your Last Name ...">
+                        </div>
+                        <button class="ui green sumbit button"> Create</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <% include ../../partials/footer %>
