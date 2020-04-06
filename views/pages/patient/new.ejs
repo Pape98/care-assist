@@ -18,48 +18,42 @@
             </div>
             <div class="fourteen wide column pd-0">
                 <div class="ui container">
-                    <h1 style="margin-top: 40px;" class="ui  header">New Patient Form</h1>
+                    <h1 style="margin-top: 40px;" class="ui  dividing header">New Patient Form</h1>
                     <p style="font-size: 1.25em;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
-                    <!-- <form class="ui form" action="/patients" method="POST">
-                        <div class="field">
-                            <label>First Name</label>
-                            <input name="firstName" type="text" placeholder="First Name ...">
-                        </div>
-                        <div class="field">
-                            <label>Last name</label>
-                            <input type="text" name="lastName" placeholder="Last Name ...">
-                        </div>
-                        <button class="ui green sumbit button"> Create</button>
-                    </form> -->
                     <div class="ui centered grid">
                         <div class="one column row">
-                            <div class="twelve wide  column">
-                                <form class="ui form" action="/form" method="POST">
+                            <div class="fifteen wide  column">
+                                <form class="ui form" action="/form" method="POST" style="margin-bottom: 25px;">
 
-                                    <div class="ui three top attached steps" style="margin-top: 25px;">
+                                    <div class="ui ordered four top attached steps" style="margin-top: 25px;">
                                         <div class="active step one">
-                                          <i class="user yellow icon"></i>
                                           <div class="content">
-                                            <div class="title">Personal Information</div>
+                                            <div class="title">Patient Information</div>
                                           </div>
                                         </div>
                                         <div class="step two">
-                                          <i class="yellow add cirular icon"></i>
                                           <div class="content">
                                             <div class="title">Emergency Contact</div>
                                           </div>
                                         </div>
                                         <div class="step three">
-                                            <i class="yellow medkit icon"></i>
                                             <div class="content">
-                                              <div class="title">Health Data</div>
+                                              <div class="title">Patient Health Data</div>
+                                            </div>
+                                          </div>
+                                          <div class="step four">
+                                            <div class="content">
+                                              <div class="title" style="color: ;">Review</div>
                                             </div>
                                           </div>
                                       </div>
                                       <div class="ui attached segment">
 
+                                        
                                         <!-- PATIENT INFORMATION -->
+                                        <h4 class="ui dividing header review">Patient Information</h4>
+
                                         <div class="personal">
                                             <div class="three fields">
                                                 <div class="field first_name">
@@ -78,15 +72,11 @@
                                               <div class="two fields">
                                                 <div class="field">
                                                     <label>Gender</label>
-                                                    <div class="ui selection dropdown">
-                                                        <input type="hidden" name="patient[gender]">
-                                                        <i class="dropdown icon"></i>
-                                                        <div class="default text">Gender</div>
-                                                        <div class="menu">
-                                                            <div class="item" data-value="Male">Male</div>
-                                                            <div class="item" data-value="Female">Female</div>
-                                                        </div>
-                                                    </div>
+                                                    <select name="patient[gender]" class="ui dropdown" id="select">
+                                                        <option value="">Gender</option>
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+                                                      </select>
                                                 </div>
                                                 <div class="field ">
                                                     <label>Full name of Primary Care of Physician</label>
@@ -101,10 +91,11 @@
                                               </div>
                                         </div>
 
-                                        <div style="margin-top: 15px;" class="ui button blue" id='contactNext'>NEXT</div>
+                                        <div style="margin-top: 15px;" class="ui button blue" id='emergencytNext'>NEXT</div>
                                           
 
                                           <!-- EMERGENCY INFORMATION -->
+                                          <h4 class="ui dividing header review">Emergency Information</h4>
 
                                           <div class="emergency">
                                             <div class="field">
@@ -115,6 +106,10 @@
                                                 <label>Relationship to Patient</label>
                                                 <input name="patient[emergency[relationship]]"  type="text">
                                               </div>
+                                              <div class="field patient_home_address">
+                                                <label>Home Address (Street Number and Name, City, State, Zipcode)</label>
+                                                <input type="text" name="patient[emergency[home_address]]" placeholder="EX: 3311 Canyon Drive, Arlington, TX, 75026">
+                                            </div>
                                               <div class="two fields">
                                                 <div class="field">
                                                     <label>Phone Number</label>
@@ -130,7 +125,45 @@
 
                                         <div class="ui button blue" id='healthtNext'>NEXT</div>
 
+                                        <!-- Health Data-->
 
+                                        <h4 class="ui dividing header review">Patient Health Data</h4>
+
+                                        <div class="health">
+                                            <div class="three fields">
+                                                <div class="field">
+                                                    <label>Weight in lbs</label>
+                                                    <input type="number" name="patient[weight]" min="0" step=".01">
+                                                </div>
+                                                <div class="field">
+                                                    <label>Height in inches</label>
+                                                    <input type="number" name="patient[height]" min="0" step=".01">
+                                                </div>
+                                                <div class="field">
+                                                    <label>Blood Type</label>
+                                                    <select name="patient[blood_type]" class="ui dropdown">
+                                                        <option value=""></option>
+                                                        <option value="AB">AB-</option>
+                                                        <option value="AB+">AB+</option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="A-">A-</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="B-">B-</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="O-">O-</option>
+                                                      </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="ui button blue" id='reviewNext'>NEXT</div>
+
+                                        <!-- Review-->
+
+                                        <div class="review">
+
+                                        </div>
                                         <button class="ui green sumbit button" id="submitButton"> Submit</button>
                                       </div>
                                     </form>
