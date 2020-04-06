@@ -7,8 +7,15 @@ var sassMiddleware = require('node-sass-middleware');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
+var bodyParser = require('body-parser')
 
 const app = express();
+
+// Support parsing of application/json type post data
+app.use(bodyParser.json());
+
+// Support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Passport Config
 require('./config/passport')(passport);

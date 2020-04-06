@@ -24,7 +24,7 @@
                     <div class="ui centered grid">
                         <div class="one column row">
                             <div class="fifteen wide  column">
-                                <form class="ui form" action="/form" method="POST" style="margin-bottom: 25px;">
+                                <form class="ui form" action="/patients" method="POST" style="margin-bottom: 25px;">
 
                                     <div class="ui ordered four top attached steps" style="margin-top: 25px;">
                                         <div class="active step one">
@@ -44,7 +44,7 @@
                                           </div>
                                           <div class="step four">
                                             <div class="content">
-                                              <div class="title" style="color: ;">Review</div>
+                                              <div class="title">Review</div>
                                             </div>
                                           </div>
                                       </div>
@@ -58,21 +58,21 @@
                                             <div class="three fields">
                                                 <div class="field first_name">
                                                     <label>First Name</label>
-                                                    <input name="patient[first_name]" type="text" >
+                                                    <input name="first_name" type="text" >
                                                 </div>
                                                 <div class="field last_name">
                                                     <label>Last name</label>
-                                                    <input type="text" name="patient[last_name]" >
+                                                    <input type="text" name="last_name" >
                                                 </div>
                                                 <div class="field birthday">
                                                     <label>Date Of Birth</label>
-                                                    <input type="date" name="patient[birthday]">
+                                                    <input type="date" name="birthday">
                                                 </div>
                                               </div>
                                               <div class="two fields">
                                                 <div class="field">
                                                     <label>Gender</label>
-                                                    <select name="patient[gender]" class="ui dropdown" id="select">
+                                                    <select name="gender" class="ui dropdown" id="select">
                                                         <option value="">Gender</option>
                                                         <option value="male">Male</option>
                                                         <option value="female">Female</option>
@@ -80,13 +80,13 @@
                                                 </div>
                                                 <div class="field ">
                                                     <label>Full name of Primary Care of Physician</label>
-                                                    <input type="text" name="patient[physician]">
+                                                    <input type="text" name="physician">
                                                 </div>
                                               </div>
                                               <div class="field">
                                                 <div class="field patient_home_address">
                                                     <label>Home Address (Street Number and Name, City, State, Zipcode)</label>
-                                                    <input type="text" name="patient[home_address]" placeholder="EX: 3311 Canyon Drive, Arlington, TX, 75026">
+                                                    <input type="text" name="home_address" placeholder="EX: 3311 Canyon Drive, Arlington, TX, 75026">
                                                 </div>
                                               </div>
                                         </div>
@@ -100,24 +100,24 @@
                                           <div class="emergency">
                                             <div class="field">
                                                 <label>Full Name</label>
-                                                <input name="patient[emergency[full_name]]" type="text">
+                                                <input name="emergency[full_name]" type="text">
                                               </div>
                                               <div class="field">
                                                 <label>Relationship to Patient</label>
-                                                <input name="patient[emergency[relationship]]"  type="text">
+                                                <input name="emergency[relationship] "  type="text">
                                               </div>
                                               <div class="field patient_home_address">
                                                 <label>Home Address (Street Number and Name, City, State, Zipcode)</label>
-                                                <input type="text" name="patient[emergency[home_address]]" placeholder="EX: 3311 Canyon Drive, Arlington, TX, 75026">
+                                                <input type="text" name="emergency[home_address]" placeholder="EX: 3311 Canyon Drive, Arlington, TX, 75026">
                                             </div>
                                               <div class="two fields">
                                                 <div class="field">
                                                     <label>Phone Number</label>
-                                                    <input name="patient[emergency[phone_number]]"  type="text">
+                                                    <input type="text" name="emergency[phone_number]"  type="text">
                                                 </div>
                                                 <div class="field">
                                                     <label>Email Address</label>
-                                                    <input name="patient[emergency[email]]"  type="text">
+                                                    <input type="text"  name="emergency[email]"  type="text">
                                                   </div>
                                               </div>
                                           </div>
@@ -133,15 +133,15 @@
                                             <div class="three fields">
                                                 <div class="field">
                                                     <label>Weight in lbs</label>
-                                                    <input type="number" name="patient[weight]" min="0" step=".01">
+                                                    <input type="number" name="weight" min="0" step=".01">
                                                 </div>
                                                 <div class="field">
                                                     <label>Height in inches</label>
-                                                    <input type="number" name="patient[height]" min="0" step=".01">
+                                                    <input type="number" name="height" min="0" step=".01">
                                                 </div>
                                                 <div class="field">
                                                     <label>Blood Type</label>
-                                                    <select name="patient[blood_type]" class="ui dropdown">
+                                                    <select name="blood_type" class="ui dropdown">
                                                         <option value=""></option>
                                                         <option value="AB">AB-</option>
                                                         <option value="AB+">AB+</option>
