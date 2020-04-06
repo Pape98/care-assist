@@ -50,6 +50,13 @@ router.get('/', function (req, res, next) {
   });
 });
 
+/** API call to get list of patients to pass to JS file */
+router.get('/api/:id',function(req,res,next){
+  var patients = Patient.findById(req.params.id,'first_name last_name',function(err,patients){
+    res.json(patients);
+  });
+});
+
 /* SHOW individual patient */
 router.get('/:id', function (req, res, next) {
   id = req.params.id;
@@ -57,7 +64,6 @@ router.get('/:id', function (req, res, next) {
     res.render('pages/patient/show',{patient:patient});
   });
 });
-
 
 
 module.exports = router;
