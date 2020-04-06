@@ -7,6 +7,10 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 var moment = require('moment');
+// var flash = require('connect-flash');
+// var app = express();
+// app.use(flash());
+
 const {
     ensureAuthenticated
 } = require('../config/auth');
@@ -98,8 +102,10 @@ router.post('/login', (req, res, next) => {
         // Redirects on both success and fail
         successRedirect: '/login/loader',
         failureRedirect: '/login',
+        failureFlash: true
     })(req, res, next);
 });
+
 
 /*
     Logout Handle

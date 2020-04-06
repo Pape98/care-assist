@@ -39,7 +39,9 @@ router.post('/', function (req, res, next) {
 
   newPatient.save(function (err, newPatient) {
     if (err) return console.log(err);
-    else res.redirect('/patients/'+newPatient._id)
+    else {
+      res.redirect('/patients/'+newPatient._id)
+    }
   })
 });
 
@@ -50,17 +52,11 @@ router.get('/', function (req, res, next) {
   });
 });
 
-/** API call to get list of patients to pass to JS file */
-router.get('/api/:id',function(req,res,next){
-  var patients = Patient.findById(req.params.id,'first_name last_name',function(err,patients){
-    res.json(patients);
-  });
-});
-
 /* SHOW individual patient */
 router.get('/:id', function (req, res, next) {
   id = req.params.id;
   Patient.findById(id,function(err,patient){
+    req.flash("success","Patient has been successfully found!");
     res.render('pages/patient/show',{patient:patient});
   });
 });

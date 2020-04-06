@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var Patient = require('../models/Patient');
 var url = require('url');
+// var flash = require('connect-flash');
+// const app = express();
+// app.use(flash());
 
 /* GET landing page. */
 router.get('/', function (req, res, next) {

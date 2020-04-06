@@ -7,7 +7,8 @@ var sassMiddleware = require('node-sass-middleware');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var flash = require('connect-flash');
 
 const app = express();
 
@@ -24,8 +25,8 @@ require('./config/passport')(passport);
 const db = require('./config/keys').MongoURI;
 
 // MongoDB connection 
-//url = 'mongodb://localhost/test';
-mongoose.connect(db, {useNewUrlParser:true, useUnifiedTopology:true})
+url = 'mongodb://localhost/test';
+mongoose.connect(url, {useNewUrlParser:true, useUnifiedTopology:true})
   .then(() => console.log('MongoDB successfully connected...'))
   .catch(err => console.log(err));
 
@@ -42,6 +43,20 @@ app.use(session({
   saveUninitialized: true
 }));
 
+
+// Support for flash messages
+app.use(flash()); 
+app.use(function(req,res,next){
+
+  res.locals.user = req.user;
+  res.locals.success = req.flash("success")[0];
+  res.locals.check = req.flash("check");
+  res.locals.failure = req.flash("failure");
+  res.locals.error = req.flash("error");
+
+  next(); 
+});
+
 // Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -55,7 +70,6 @@ var patientsRouter = require('./routes/patients');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/patients', patientsRouter);
-
 
 // Define server port
 const PORT = process.env.PORT || 5000;
@@ -71,6 +85,8 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
+
+
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'),
   dest: path.join(__dirname, 'public'),
