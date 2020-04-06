@@ -166,5 +166,52 @@ $(document).ready(function () {
                 .transition('fade');
         });
 
+    /** Login Form Validation */
+        $('#loginForm').form({
+            fields: {
+                email:{
+                    identifier:'email',
+                    rules:[
+                        {
+                            type   : 'empty',
+                            prompt : 'Please enter your email'
+                        }
+                    ]
+                },
+                password:{
+                    identifier:'password',
+                    rules:[
+                        {
+                            type   : 'empty',
+                            prompt : 'Please enter your password'
+                        }
+                    ]
+                }
+            }
+        });
 
+        /** Patient Form Validation */
+
+         $('#newPatientForm').form({
+            fields: {
+                first_name:{
+                    identifier:'first_name',
+                    rules:[
+                        {
+                            type   : 'empty',
+                            prompt : 'First Name field cannot be left empty.'
+                        }
+                    ]
+                },
+                last_name:{
+                    identifier:'last_name',
+                    rules:[
+                        {
+                            type   : 'empty',
+                            prompt : 'Last Name field cannot be left empty.'
+                        }
+                    ]
+                }
+            }
+        });
 });

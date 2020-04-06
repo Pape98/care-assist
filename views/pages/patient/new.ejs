@@ -24,7 +24,7 @@
                     <div class="ui centered grid">
                         <div class="one column row">
                             <div class="fifteen wide  column">
-                                <form class="ui form" action="/patients" method="POST" style="margin-bottom: 25px;">
+                                <form id="newPatientForm" class="ui form" action="/patients" method="POST" style="margin-bottom: 25px;">
 
                                     <div class="ui ordered four top attached steps" style="margin-top: 25px;">
                                         <div class="active step one">
@@ -165,6 +165,7 @@
 
                                         </div>
                                         <button class="ui green sumbit button" id="submitButton"> Submit</button>
+                                        <div class="ui error message"></div>
                                       </div>
                                     </form>
                             </div>
