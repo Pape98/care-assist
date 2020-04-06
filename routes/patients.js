@@ -42,8 +42,6 @@ router.post('/', function (req, res, next) {
     else res.json(newPatient)
   })
 
-  res.json(newPatient)
-
 });
 
 /* GET patients listing. */
