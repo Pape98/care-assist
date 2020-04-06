@@ -39,7 +39,7 @@ router.post('/', function (req, res, next) {
 
   newPatient.save(function (err, newPatient) {
     if (err) return console.log(err);
-    else res.json(newPatient)
+    else res.redirect('/patients/'+newPatient._id)
   })
 });
 

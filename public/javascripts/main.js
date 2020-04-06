@@ -26,12 +26,18 @@ $(document).ready(function () {
             /**
              * Using timeout function to redirect to loader page then home page
              */
-            var redirect_to_home = function () {
+            function redirect_to_user_home() {
                 window.location.href = '/users/home';
             }
+            function redirect_to_landing() {
+                window.location.href = '/';
+            }
 
-            if(url.includes('/loader')){
-                setTimeout(redirect_to_home,2000);
+            if(url.includes('/login/loader')){
+                // setTimeout(function(){console.log('Pape')},10000)
+                setTimeout(redirect_to_user_home,5000);
+            } else if (url.includes('/logout/loader')){
+                setTimeout(redirect_to_landing,5000); 
             }
             
 

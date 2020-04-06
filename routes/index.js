@@ -12,9 +12,16 @@ router.get('/login',function(req,res,next){
   res.render('pages/landing/login');
 });
 
-/* GET login page */
-router.get('/loader',function(req,res,next){
-  res.render('pages/landing/loader');
+/* GET loader page */
+router.get('/:state/loader',function(req,res,next){
+  var state = '';
+  if (req.params.state == 'login'){
+    state = "Setting things up for you!";
+  } else if(req.params.state == 'logout'){
+    state = "Logging you out!"
+  }
+
+  res.render('pages/landing/loader',{state:state});
 });
 
 
