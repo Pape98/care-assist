@@ -39,21 +39,31 @@ router.post('/', function (req, res, next) {
 
   newPatient.save(function (err, newPatient) {
     if (err) return console.log(err);
-    else res.json(newPatient)
+    else res.redirect('/patients/'+newPatient._id)
   })
-
 });
 
 /* GET patients listing. */
 router.get('/', function (req, res, next) {
-  res.render('pages/patient/index');
+  Patient.find({},function(err,patients){
+    res.render('pages/patient/index',{patients:patients});
+  });
+});
+
+/** API call to get list of patients to pass to JS file */
+router.get('/api/:id',function(req,res,next){
+  var patients = Patient.findById(req.params.id,'first_name last_name',function(err,patients){
+    res.json(patients);
+  });
 });
 
 /* SHOW individual patient */
 router.get('/:id', function (req, res, next) {
-  res.render('pages/patient/show');
+  id = req.params.id;
+  Patient.findById(id,function(err,patient){
+    res.render('pages/patient/show',{patient:patient});
+  });
 });
-
 
 
 module.exports = router;

@@ -8,9 +8,9 @@
                     <div class="ui  large  breadcrumb" style="margin: 30px 0 ;">
                         <a href='/users/home' class="ft-white section">Home</a>
                         <i class="right ft-white chevron icon divider"></i>
-                        <a class="ft-white section">Patients List</a>
+                        <a  href='/patients'class="ft-white section">Patients List</a>
                         <i class="right ft-white chevron icon divider"></i>
-                        <a class="active ft-white section">Jesse Wynn</a>
+                        <a class="active ft-white section"><%=patient.first_name%> <%=patient.last_name %></a>
                     </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                                     <div class="row">
                                         <div class=" four wide column">
                                             <div class=" ui center aligned container " style="height: 100%">
-                                                <h2 class="ui blue header"> Jesse Wynn</h2>
+                                                <h2 class="ui blue header"> <%=patient.first_name%> <%=patient.last_name %></h2>
                                                 <img class="ui centered small circular image"
                                                     src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
                                                     alt="">
