@@ -55,60 +55,60 @@ router.get('/reminders', function (req, res, next) {
     -- Submit information through POST
 */
 router.post('/register', (req, res) => {
-            // Information access
-            const {
-                first_name,
-                last_name,
-                email,
-                password,
-                password2
-            } = req.body;
+    // Information access
+    const {
+        first_name,
+        last_name,
+        email,
+        password,
+        password2
+    } = req.body;
 
-            const newUser = new User({
-                first_name,
-                email,
-                password
-            });
-            // Hash user password
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(newUser.password, salt, (err, hash) => {
-                    if (err) throw err;
-                    // Assign user password as hashed password 
-                    newUser.password = hash;
-                    // Insert user into DB
-                    // TODO: Reassign to Redis
-                    newUser
-                        .save()
-                        .then(user => {
-                            // Redirect to login page
-                            res.redirect('/login');
-                        })
-                        .catch(err => console.log(err));
-                });
-            });
+    const newUser = new User({
+        first_name,
+        email,
+        password
+    });
+    // Hash user password
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            // Assign user password as hashed password 
+            newUser.password = hash;
+            // Insert user into DB
+            // TODO: Reassign to Redis
+            newUser
+                .save()
+                .then(user => {
+                    // Redirect to login page
+                    res.redirect('/login');
+                })
+                .catch(err => console.log(err));
         });
+    });
+});
 
 
-        /*
-            Login Handle
-            -- Submit information through POST
-        */
-        router.post('/login', (req, res, next) => {
-            passport.authenticate('local', {
-                // Redirects on both success and fail
-                successRedirect: '/users/home',
-                failureRedirect: '/login',
-            })(req, res, next);
-        });
+/*
+    Login Handle
+    -- Submit information through POST
+*/
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+        // Redirects on both success and fail
+        successRedirect: '/users/home',
+        failureRedirect: '/login',
+    })(req, res, next);
+});
 
-        /*
-            Logout Handle
-            -- Submit through GET
-        */
-        router.get('/logout', (req, res) => {
-            req.logout();
-            res.redirect('/login');
-        });
+/*
+    Logout Handle
+    -- Submit through GET
+*/
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/login');
+});
 
 
-        module.exports = router;
+module.exports = router;
