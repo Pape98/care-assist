@@ -49,7 +49,7 @@ app.use(flash());
 app.use(function(req,res,next){
 
   res.locals.user = req.user;
-  res.locals.success = req.flash("success")[0];
+  res.locals.success = req.flash("success");
   res.locals.check = req.flash("check");
   res.locals.failure = req.flash("failure");
   res.locals.error = req.flash("error");

@@ -20,10 +20,17 @@
             </div>
             <div class="fourteen wide column pd-0">
                 <div class="ui basic segment">
-                    <div class="ui internally celled grid" style="margin-top: 30px;">
+                    <div class="ui internally celled grid">
                         <div class="row">
                             <div class=" centered fourteen wide column">
-
+                                <% if(success){ %>
+                                    <div class="ui success message" style='margin-bottom: 55px !important;'>
+                                        <i class="close icon"></i>
+                                        <div class="header">
+                                          <%=success%>
+                                        </div>
+                                      </div>
+                                <% } %>
                                 <div class="ui stackable grid">
                                     <div class="row">
                                         <div class=" four wide column">
