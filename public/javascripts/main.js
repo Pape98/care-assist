@@ -27,6 +27,67 @@ $('.ui.accordion')
 });
 
 /**
+* For select dropdowns
+*/
+
+$('.ui.dropdown')
+  .dropdown()
+;
+
+/**
+ * For Buttons in New Patient Form
+ */
+var url = window.location.href;
+if(url.includes('/patients/new')){
+    $('.emergency').hide();
+    $('.health').hide();
+    $('.review').hide();
+
+    $('#healthtNext').hide();
+    $('#reviewNext').hide();
+    $('#submitButton').hide();
+    
+    
+}
+
+$('#emergencytNext').click(function(){
+    $(this).hide();
+    $('.personal').hide();
+
+    $('.step.one').removeClass('active').addClass('completed');
+    $('.step.two').addClass('active');
+
+    $('.emergency').show();
+    $('#healthtNext').show();
+
+  
+
+});
+
+$('#healthtNext').click(function(){
+    $(this).hide();
+    $('.emergency').hide();
+
+    $('.step.two').removeClass('active').addClass('completed');
+    $('.step.three').addClass('active');
+
+
+    $('.health').show();
+    $('#reviewNext').show();
+});
+
+$('#reviewNext').click(function () { 
+    $(this).hide();
+    $('.step.three').removeClass('active').addClass('completed');
+    
+    $('.personal').show();
+    $('.emergency').show();
+
+    $('.review').show();
+    $('#submitButton').show();
+});
+
+/**
  * Function used to display real time on main menu
  */
 function showTime() {

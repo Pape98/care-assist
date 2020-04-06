@@ -8,8 +8,25 @@ var Schema = mongoose.Schema;
 
 // Define user attributes
 const patientSchema = new Schema({
-    firstName : {type:String , required:true},
-    lastName: {type:String , required: true}
+
+    first_name : {type:String , required:true},
+    last_name: {type:String , required: true},
+    birthday: Date,
+    gender: String,
+    physician: String,
+    home_address: String,
+
+    weight: String,
+    height:  String,
+    blood_type: String,
+
+    emergency:{
+        full_name:String,
+        relationship:String,
+        home_address:String,
+        phone_number:String,
+        email:String
+    }
 });
 
 // Export module name and schema
