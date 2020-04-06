@@ -23,11 +23,11 @@
                     <div class="ui internally celled grid">
                         <div class="row">
                             <div class=" centered fourteen wide column">
-                                <% if(success){ %>
+                                <% if(success.length != 0){ %>
                                     <div class="ui success message" style='margin-bottom: 55px !important;'>
                                         <i class="close icon"></i>
                                         <div class="header">
-                                          <%=success%>
+                                          <%=success[0]%>
                                         </div>
                                       </div>
                                 <% } %>

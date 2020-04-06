@@ -40,6 +40,7 @@ router.post('/', function (req, res, next) {
   newPatient.save(function (err, newPatient) {
     if (err) return console.log(err);
     else {
+      req.flash("success","Patient has been successfully found!");
       res.redirect('/patients/'+newPatient._id)
     }
   })
@@ -56,8 +57,8 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
   id = req.params.id;
   Patient.findById(id,function(err,patient){
-    req.flash("success","Patient has been successfully found!");
     res.render('pages/patient/show',{patient:patient});
+    // res.json(req.flash("success"))
   });
 });
 

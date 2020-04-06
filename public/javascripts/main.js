@@ -154,8 +154,16 @@ $(document).ready(function () {
             // change search endpoint to a custom endpoint by manipulating apiSettings
             apiSettings: {
                 url: '/search/?q={query}',
-                fullTextSearch:true,
+                fullTextSearch: true,
             }
+        });
+
+    /** Close icon on message */
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
         });
 
 
