@@ -27,6 +27,48 @@ $('.ui.accordion')
 });
 
 /**
+* For select dropdowns
+*/
+
+$('select.dropdown')
+  .dropdown()
+;
+
+/**
+ * Next Buttons in New Patient Form
+ */
+var url = window.location.href;
+if(url.includes('/patients/new')){
+    $('.emergency').hide();
+
+    $('#submitButton').hide();
+    $('#healthtNext').hide();
+    
+}
+
+$('#contactNext').click(function(){
+    $(this).hide();
+    $('.personal').hide();
+
+    $('.step.one').removeClass('active');
+    $('.step.two').addClass('active');
+
+    $('.emergency').show();
+    $('#healthtNext').show();
+
+});
+
+$('#healthtNext').click(function(){
+    $(this).hide();
+    $('.emergency').hide();
+
+    $('.step.two').removeClass('active');
+    $('.step.three').addClass('active');
+
+    $('#submitButton').show();
+});
+
+/**
  * Function used to display real time on main menu
  */
 function showTime() {

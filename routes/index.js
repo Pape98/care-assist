@@ -17,5 +17,9 @@ router.get('/login',function(req,res,next){
 //   res.render('pages/landing/loader');
 // });
 
+router.post('/form',function(req,res,next){
+  res.json(req.body)
+});
+
 
 module.exports = router;
