@@ -16,8 +16,8 @@
             <div class="two wide column">
                 <% include ../../partials/sidebar %>
             </div>
-            <div class="fourteen wide column pd-0">
-                <div class="ui container vertically divided grid" id="main-grid">
+            <div class="fourteen wide column">
+                <div class="ui centered grid" id="main-grid">
 
                     <% if(success.length != 0){ %>
                     <div class="one column row">
@@ -32,62 +32,71 @@
                     </div>
                     <% } %>
 
-                    <div class=" one column row">
+                    <div class="four column row row">
                         <div class="column">
-                            <p style="font-size: 1.2em;">It is a long established fact that a reader will be distracted
-                                by the readable content of a page when looking at its layout. The point of using Lorem
-                                Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
-                                'Content here, content here', making it look like readable English. Many desktop
-                                publishing packages and web page editors now use Lorem Ipsum as their default model
-                                text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
-                                Various versions have evolved over the years, sometimes by accident, sometimes on
-                                purpose (injected humour and the like).
-                            </p>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="center-content three wide column">
-                            <div class="ui mini horizontal statistic">
-                                <div class="value ft-bleu-de-france">
-                                    2,204
+                            <div class="ui segment grid" style="padding: 20px 0;">
+                                <div class="six wide center center-content column">
+                                    <i class="hospital orange huge icon"></i>
                                 </div>
-                                <div class="label">
-                                    Patients
+                                <div class="ten wide column">
+                                    <div class="ui statistic">
+                                        <div class="value">
+                                           <%=patients.length%>
+                                        </div>
+                                        <div class="label">
+                                            Total Patients
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="thirteen wide column">
-                            <div class="ui secondary menu">
-                                <div class="item ">
-                                    <span style="margin-right: 20px; font-size: 15px;">Sort By </span>
-                                    <div class="ui selection dropdown">
-                                        <input type="hidden" name="gender">
-                                        <i class="dropdown icon"></i>
-                                        <div class="default text">Gender</div>
-                                        <div class="menu">
-                                            <div class="item" data-value="1">Male</div>
-                                            <div class="item" data-value="0">Female</div>
+                        <div class="column">
+                            <div class="ui segment grid" style="padding: 20px 0;">
+                                <div class="six wide center center-content column">
+                                    <i class="users brown huge icon"></i>
+                                </div>
+                                <div class="ten wide column">
+                                    <div class="ui statistic">
+                                        <div class="value">
+                                            394
+                                        </div>
+                                        <div class="label">
+                                            Available Staff
                                         </div>
                                     </div>
                                 </div>
-                                <div class="right menu">
-                                    <div class="item">
-                                        <div class="ui icon button">
-                                            <i class="print icon"></i>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui segment grid" style="padding: 20px 0;">
+                                <div class="six wide center center-content column">
+                                    <i class="ambulance  teal huge icon"></i>
+                                </div>
+                                <div class="ten wide column">
+                                    <div class="ui statistic">
+                                        <div class="value">
+                                            28
+                                        </div>
+                                        <div class="label">
+                                            Available Cars
                                         </div>
                                     </div>
-                                    <div class="item">
-                                        <div class="ui button">
-                                            <i class="filter icon"></i>
-                                            Filter
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui segment grid" style="padding: 20px 0;">
+                                <div class="six wide center center-content column">
+                                    <i class="stethoscope  yellow huge icon"></i>
+                                </div>
+                                <div class="ten wide column">
+                                    <div class="ui statistic">
+                                        <div class="value">
+                                            63
                                         </div>
-                                    </div>
-                                    <div class="item">
-                                        <button class="ui button">
-                                            <i class="icon pencil"></i>
-                                            edit column
-                                        </button>
+                                        <div class="label">
+                                            Patients
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -95,42 +104,43 @@
                     </div>
 
                     <div class="one column row">
+                        <div class="centered column">
+                            <div class="ui segment " style="width: 100%;">
+                                <table class="ui very basic striped table">
+                                    <thead>
+                                        <tr>
+                                            <th>Basic Info</th>
+                                            <th>ID Number</th>
+                                            <th>Emergency Contact Name</th>
+                                            <th>Emergency Contact Number</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% patients.forEach(function(patient){ %>
+                                        <tr class="">
+                                            <td>
+                                                <h4 class="ui image header">
+                                                    <img src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
+                                                        class="ui big rounded image">
+                                                    <div class="content">
+                                                        <%=patient.first_name%> <%=patient.last_name%>
 
-                        <div class="ui segment container" style="margin-top:40px">
-                            <table class="ui very basic table">
-                                <thead>
-                                    <tr>
-                                        <th>Basic Info</th>
-                                        <th>ID Number</th>
-                                        <th>Emergency Contact Name</th>
-                                        <th>Emergency Contact Number</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% patients.forEach(function(patient){ %>
-                                    <tr class="">
-                                        <td>
-                                            <h4 class="ui image header">
-                                                <img src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
-                                                    class="ui big rounded image">
-                                                <div class="content">
-                                                    <%=patient.first_name%> <%=patient.last_name%>
+                                                    </div>
+                                                </h4>
+                                            </td>
+                                            <td><%=patient._id%></td>
+                                            <td><%=patient.emergency['full_name']%></td>
+                                            <td><%=patient.emergency['phone_number']%></td>
+                                            <td><a href="/patients/<%=patient._id%>">View</a></td>
+                                        </tr>
+                                        <%})%>
 
-                                                </div>
-                                            </h4>
-                                        </td>
-                                        <td><%=patient._id%></td>
-                                        <td><%=patient.emergency['full_name']%></td>
-                                        <td><%=patient.emergency['phone_number']%></td>
-                                        <td><a href="/patients/<%=patient._id%>">View</a></td>
-                                    </tr>
-                                    <%})%>
-
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>

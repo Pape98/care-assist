@@ -40,7 +40,6 @@ function formatBirthDate() {
 
 
 $(document).ready(function () {
-
     formatBirthDate();
     
     var ctx = $('#myChart');
