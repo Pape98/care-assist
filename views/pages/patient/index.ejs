@@ -16,8 +16,8 @@
             <div class="two wide column">
                 <% include ../../partials/sidebar %>
             </div>
-            <div class="fourteen wide column">
-                <div class="ui centered grid" id="main-grid">
+            <div class="thirteen wide centered column">
+                <div class="ui grid" id="main-grid">
 
                     <% if(success.length != 0){ %>
                     <div class="one column row">
@@ -31,8 +31,11 @@
                         </div>
                     </div>
                     <% } %>
+                    <div class="one row left aligned  column">
+                        <div class="ui large header">Facicility Summary</div>
+                    </div>
 
-                    <div class="four column row row">
+                    <div class="four column row">
                         <div class="column">
                             <div class="ui segment grid" style="padding: 20px 0;">
                                 <div class="six wide center center-content column">
@@ -103,6 +106,24 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="twelve wide column">
+                            <div class="ui segment">
+                                <div class="ui header">Outpatients vs Inpatients Trend</div>
+                                <canvas id="inOutChart" height="120" width="300"></canvas>
+                            </div>
+                        </div>
+                        <div class="four wide column">
+                            <div class="ui segment" style="height: 100%">
+                                <div class="ui header">Patients by gender</div>
+                                <canvas id="genderChart" height="120" width="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="one row left aligned  column">
+                        <div class="ui big header">Patients Summary</div>
+                    </div>
                     <div class="one column row">
                         <div class="centered column">
                             <div class="ui segment " style="width: 100%;">
@@ -142,6 +163,7 @@
                         </div>
 
                     </div>
+                    
                 </div>
             </div>
         </div>
