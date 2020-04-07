@@ -32,7 +32,7 @@ const db = require('./config/keys').MongoURI;
 
 // MongoDB connection 
 url = 'mongodb://localhost/test';
-mongoose.connect(url, {
+mongoose.connect(db, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
