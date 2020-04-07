@@ -3,15 +3,20 @@ var router = express.Router();
 var Patient = require('../models/Patient');
 var url = require('url');
 
+router.get('/trial', function (req, res) {
+  res.render('pages/landing/trial');
+});
+
 /* GET landing page. */
 router.get('/', function (req, res, next) {
   res.render('pages/landing/index');
 });
 
-
 /* GET login page */
 router.get('/login', function (req, res, next) {
-  res.render('pages/landing/login',{message: req.flash('error')});
+  res.render('pages/landing/login', {
+    message: req.flash('error')
+  });
 });
 
 /* GET loader page */
