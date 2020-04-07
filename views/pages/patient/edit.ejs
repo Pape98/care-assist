@@ -1,1 +1,242 @@
-<h1>Edit</h1>
+<% include ../../partials/head %>
+<% include ../../partials/topmenu %>
+
+<div id="overlay">
+    <div class="ui stackable grid">
+        <div class="six wide column">
+            <h1 class="text">Overlay Text</h1>
+        </div>
+    </div>
+</div>
+
+<div class="ui basic segment" id="main-segment">
+    <div class="ui stackable grid ">
+        <div class="row">
+            <div class="sixteen wide column" style="background: #1f1f21!important;padding:0 0 0 15vw;">
+                <div class="ui  large  breadcrumb" style="margin: 30px 0 ;">
+                    <a href='/users/home' class="ft-white section">Home</a>
+                    <i class="right ft-white chevron icon divider"></i>
+                    <a href='/patients' class="ft-white section">Patients List</a>
+                    <i class="right ft-white chevron icon divider"></i>
+                    <a class="active ft-white section"><%=patient.first_name%> <%=patient.last_name %></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="two wide column">
+                <% include ../../partials/sidebar %>
+            </div>
+            <div class="fourteen wide column pd-0">
+                <div class="ui basic segment">
+                    <div class="ui internally celled grid" style="margin-top: 30px;">
+                        <div class="row">
+                            <div class=" centered fourteen wide column">
+
+                                <div class="ui stackable grid">
+                                    <div class="row">
+                                        <div class=" four wide column">
+                                            <div class=" ui center aligned container " style="height: 100%">
+                                                <h2 class="ui blue header"> <%=patient.first_name%>
+                                                    <%=patient.last_name %></h2>
+                                                <img class="ui centered small circular image"
+                                                    src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
+                                                    alt="">
+                                                <a href="/patients/<%=patient._id%>/edit">
+                                                    <div class="ui yellow fluid button" style="margin-top: 17px;">Edit
+                                                        Patient</div>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="twelve wide column">
+                                            <div class="row">
+                                                <div class="ui container " style="height: 100%">
+                                                    <div class="ui grid">
+                                                        <div class="row">
+                                                            <div class="eleven wide column">
+                                                                <h3 class='ui blue header'>PATIENT INFORMATION</h3>
+                                                                <div class="ui fluid form">
+                                                                    <div class="three fields">
+                                                                        <div class="field">
+                                                                            <label>Gender</label>
+                                                                            <input type="text" value="Male" readonly="">
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label>Age</label>
+                                                                            <input type="text" value="32" readonly="">
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label>Marital Status</label>
+                                                                            <input type="text" value="Married"
+                                                                                readonly="">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="three fields">
+                                                                        <div class="field">
+                                                                            <label>Blood Type</label>
+                                                                            <input type="text" value="B+" readonly="">
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label>Room Number</label>
+                                                                            <input type="text" value="32" readonly="">
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label>Date Registered</label>
+                                                                            <input type="text" value="April 2020"
+                                                                                readonly="">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="two fields">
+                                                                        <div class="field">
+                                                                            <label>Emergency Name</label>
+                                                                            <input type="text" value="Pape Traore"
+                                                                                readonly="">
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label>Emergency Contact</label>
+                                                                            <input type="text" value="(322)-349-2394"
+                                                                                readonly="">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="five wide column">
+                                                                <h3 class="ui blue header">SPECIAL NEEDS</h3>
+                                                                <p>Many desktop publishing packages and web page editors
+                                                                    now use
+                                                                    Lorem
+                                                                    Ipsum as their default model text, and a search for
+                                                                    'lorem
+                                                                    ipsum'
+                                                                    will uncover many web sites still in their infancy.
+                                                                </p>
+                                                                <h3 class="ui blue header">NOTES</h3>
+                                                                <p>None</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="one row column ">
+                                        <div class="column">
+                                            <div class="ui secondary pointing menu">
+                                                <a class="active item" data-tab="first">Upcoming Appointments</a>
+                                                <a class="item" data-tab="second">Past Appointments</a>
+                                                <a class="item" data-tab="third">Medical Records</a>
+                                            </div>
+                                            <div class="ui active tab segment" data-tab="first">
+                                                <table class="ui celled padded table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="center aligned single line">Date</th>
+                                                            <th class="center aligned single line">Time</th>
+                                                            <th class="center aligned single line">Reason</th>
+                                                            <th class="center aligned single line">Primary Care
+                                                                Physician</th>
+                                                            <th class="center aligned single line">Edit</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="center aligned single line">
+                                                                4-14-2020
+                                                            </td>
+                                                            <td class="center aligned">10:00AM</td>
+                                                            <td class="center aligned single line">
+                                                                Monthly Check-Up
+                                                            </td>
+                                                            <td class="center aligned single line">
+                                                                Dr. Paul Taele
+                                                            </td>
+                                                            <td class="center aligned single line"><a
+                                                                    href="#">Reschedule</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="ui tab segment" data-tab="second">
+                                                <table class="ui celled padded table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="center aligned single line">Date</th>
+                                                            <th class="center aligned single line">Time</th>
+                                                            <th class="center aligned single line">Reason</th>
+                                                            <th class="center aligned single line">Primary Care
+                                                                Physician</th>
+                                                            <th class="center aligned single line">Comments</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="center aligned single line">
+                                                                4-1-2020
+                                                            </td>
+                                                            <td class="center aligned">10:00AM</td>
+                                                            <td class="center aligned single line">
+                                                                Monthly Check-Up
+                                                            </td>
+                                                            <td class="center aligned single line">
+                                                                Dr. Paul Taele
+                                                            </td>
+                                                            <td>Lorem ipsum dolor sit, amet consectetur adipisicing
+                                                                elit. Optio,
+                                                                neque? Optio explicabo in nobis corporis.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center aligned single line">
+                                                                3-24-2020
+                                                            </td>
+                                                            <td class="center aligned">9:30AM</td>
+                                                            <td class="center aligned single line">
+                                                                Illness
+                                                            </td>
+                                                            <td class="center aligned single line">
+                                                                Dr. Paul Taele
+                                                            </td>
+                                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                                Quo
+                                                                deserunt vero voluptates neque exercitationem assumenda!
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="center aligned single line">
+                                                                3-14-2020
+                                                            </td>
+                                                            <td class="center aligned">10:00AM</td>
+                                                            <td class="center aligned single line">
+                                                                Monthly Check-Up
+                                                            </td>
+                                                            <td class="center aligned single line">
+                                                                Dr. Paul Taele
+                                                            </td>
+                                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                                                Beatae
+                                                                nam culpa ad quia, commodi odit tempore. Rem odio
+                                                                facilis culpa?
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="ui  tab segment" data-tab="third">
+                                                Not really sure what this would look like. Will update later
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include ../../partials/footer %>

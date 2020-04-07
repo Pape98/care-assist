@@ -61,5 +61,13 @@ router.get('/:id', function (req, res, next) {
   });
 });
 
+router.get('/:id/edit', function (req, res, next) {
+  id = req.params.id;
+  Patient.findById(id,function(err,patient){
+    req.flash("success","Patient has been successfully found!");
+    res.render('pages/patient/edit',{patient:patient});
+  });
+});
+
 
 module.exports = router;
