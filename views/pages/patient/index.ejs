@@ -5,11 +5,11 @@
     <div class="ui stackable grid ">
         <div class="row">
             <div class="sixteen wide column" style="background: #1f1f21!important;padding:0 0 0 15vw;">
-                    <div class="ui  large  breadcrumb" style="margin: 30px 0 ;">
-                        <a href='/users/home' class="ft-white section">Home</a>
-                        <i class="right ft-white chevron icon divider"></i>
-                        <a href='/patients' class="active ft-white section">Patients List</a>
-                    </div>
+                <div class="ui  large  breadcrumb" style="margin: 30px 0 ;">
+                    <a href='/users/home' class="ft-white section">Home</a>
+                    <i class="right ft-white chevron icon divider"></i>
+                    <a href='/patients' class="active ft-white section">Patients List</a>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -18,11 +18,32 @@
             </div>
             <div class="fourteen wide column pd-0">
                 <div class="ui container vertically divided grid" id="main-grid">
-                    <div class= " one column row">
+
+                    <% if(success.length != 0){ %>
+                    <div class="one column row">
                         <div class="column">
-                            <p style="font-size: 1.2em;">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                            <div class="ui large success message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=success[0]%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+                    <div class=" one column row">
+                        <div class="column">
+                            <p style="font-size: 1.2em;">It is a long established fact that a reader will be distracted
+                                by the readable content of a page when looking at its layout. The point of using Lorem
+                                Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using
+                                'Content here, content here', making it look like readable English. Many desktop
+                                publishing packages and web page editors now use Lorem Ipsum as their default model
+                                text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+                                Various versions have evolved over the years, sometimes by accident, sometimes on
+                                purpose (injected humour and the like).
                             </p>
-                            
+
                         </div>
                     </div>
                     <div class="row">
@@ -89,24 +110,24 @@
                                 </thead>
                                 <tbody>
                                     <% patients.forEach(function(patient){ %>
-                                        <tr class="">
-                                            <td>
-                                                <h4 class="ui image header">
-                                                    <img src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
-                                                        class="ui big rounded image">
-                                                    <div class="content">
-                                                        <%=patient.first_name%> <%=patient.last_name%> 
-                                                        
-                                                    </div>
-                                                </h4>
-                                            </td>
-                                            <td><%=patient._id%></td>
-                                            <td><%=patient.emergency['full_name']%></td>
-                                            <td><%=patient.emergency['phone_number']%></td>
-                                            <td><a href="/patients/<%=patient._id%>">View</a></td>
-                                        </tr>
+                                    <tr class="">
+                                        <td>
+                                            <h4 class="ui image header">
+                                                <img src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
+                                                    class="ui big rounded image">
+                                                <div class="content">
+                                                    <%=patient.first_name%> <%=patient.last_name%>
+
+                                                </div>
+                                            </h4>
+                                        </td>
+                                        <td><%=patient._id%></td>
+                                        <td><%=patient.emergency['full_name']%></td>
+                                        <td><%=patient.emergency['phone_number']%></td>
+                                        <td><a href="/patients/<%=patient._id%>">View</a></td>
+                                    </tr>
                                     <%})%>
-                                     
+
                                 </tbody>
                             </table>
                         </div>

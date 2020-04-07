@@ -40,29 +40,42 @@ router.post('/', function (req, res, next) {
   newPatient.save(function (err, newPatient) {
     if (err) return console.log(err);
     else {
-      req.flash("success","Patient has been successfully found!");
+      req.flash("success","Patient has been successfully created!");
       res.redirect('/patients/'+newPatient._id)
     }
   })
 });
-
-/* GET patients listing. */
-router.get('/', function (req, res, next) {
-  Patient.find({},function(err,patients){
-    res.render('pages/patient/index',{patients:patients});
+/** DELETE indiviudal patient */
+router.delete('/:id',function(req,res,next){
+  var id = req.params.id;
+  Patient.deleteOne({_id:id},function(err,response){
+    if(err) return console.log(err);
+    else{
+      req.flash('success','Patient has successfully been deleted.')
+      res.redirect('/patients')
+    } 
   });
 });
 
-/* SHOW individual patient */
+/** GET patients listing. */
+router.get('/', function (req, res, next) {
+  Patient.find({},function(err,patients){
+    if(err) console.log(err);
+    else{
+      res.render('pages/patient/index',{patients:patients});
+    } 
+  });
+});
+
+/** SHOW individual patient */
 router.get('/:id', function (req, res, next) {
   id = req.params.id;
   Patient.findById(id,function(err,patient){
-    res.render('pages/patient/show',{patient:patient});
-    // res.json(req.flash("success"))
+    if(err) console.log(err);
+    else {
+      res.render('pages/patient/show',{patient:patient});
+    }
   });
 });
-
-
-
 
 module.exports = router;
