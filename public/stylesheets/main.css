@@ -39,17 +39,13 @@
 .ft-white {
   color: white  !important; }
 
+.ft-black {
+  color: #212121 !important; }
+
 /* ********************************************/
 .basic.segment {
   padding: 0.2px 0 0 0 !important;
   margin: 0 !important; }
-
-.bottom.segment {
-  padding: 0 !important;
-  margin: 0 !important;
-  border: 0 !important;
-  background: #f2f5fa;
-  height: 92vh !important; }
 
 .bg-img {
   text-align: center;
