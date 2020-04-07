@@ -4,24 +4,177 @@
 <div class="ui basic segment" id="main-segment">
     <div class="ui stackable grid ">
         <div class="row">
+            <div class="sixteen wide column" style="background: #1f1f21!important;padding:0 0 0 15vw;">
+                    <div class="ui  large  breadcrumb" style="margin: 30px 0 ;">
+                        <a href='/users/home' class="ft-white section">Home</a>
+                        <i class="right ft-white chevron icon divider"></i>
+                        <div class="active ft-white section">Add New Patient</div>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="two wide column">
                 <% include ../../partials/sidebar %>
             </div>
             <div class="fourteen wide column pd-0">
-                <h1 style="margin-top: 80px;" class="ui centered header">New Patient Form</h1>
-                <form class="ui text container form" action="/patients" method="POST">
-                    <div class="field">
-                        <label>First Name</label>
-                        <input name="firstName" type="text" placeholder="Your First Name ...">
+                <div class="ui container">
+                    <h1 style="margin-top: 40px;" class="ui  dividing header">New Patient Form</h1>
+                    <p style="font-size: 1.25em;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <div class="ui centered grid">
+                        <div class="one column row">
+                            <div class="fifteen wide  column">
+                                <form class="ui form" action="/patients" method="POST" style="margin-bottom: 25px;">
+
+                                    <div class="ui ordered four top attached steps" style="margin-top: 25px;">
+                                        <div class="active step one">
+                                          <div class="content">
+                                            <div class="title">Patient Information</div>
+                                          </div>
+                                        </div>
+                                        <div class="step two">
+                                          <div class="content">
+                                            <div class="title">Emergency Contact</div>
+                                          </div>
+                                        </div>
+                                        <div class="step three">
+                                            <div class="content">
+                                              <div class="title">Patient Health Data</div>
+                                            </div>
+                                          </div>
+                                          <div class="step four">
+                                            <div class="content">
+                                              <div class="title">Review</div>
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <div class="ui attached segment">
+
+                                        
+                                        <!-- PATIENT INFORMATION -->
+                                        <h4 class="ui dividing header review">Patient Information</h4>
+
+                                        <div class="personal">
+                                            <div class="three fields">
+                                                <div class="field first_name">
+                                                    <label>First Name</label>
+                                                    <input name="first_name" type="text" >
+                                                </div>
+                                                <div class="field last_name">
+                                                    <label>Last name</label>
+                                                    <input type="text" name="last_name" >
+                                                </div>
+                                                <div class="field birthday">
+                                                    <label>Date Of Birth</label>
+                                                    <input type="date" name="birthday">
+                                                </div>
+                                              </div>
+                                              <div class="two fields">
+                                                <div class="field">
+                                                    <label>Gender</label>
+                                                    <select name="gender" class="ui dropdown" id="select">
+                                                        <option value=""></option>
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+                                                      </select>
+                                                </div>
+                                                <div class="field ">
+                                                    <label>Full name of Primary Care of Physician</label>
+                                                    <input type="text" name="physician">
+                                                </div>
+                                              </div>
+                                              <div class="field">
+                                                <div class="field patient_home_address">
+                                                    <label>Home Address (Street Number and Name, City, State, Zipcode)</label>
+                                                    <input type="text" name="home_address" placeholder="EX: 3311 Canyon Drive, Arlington, TX, 75026">
+                                                </div>
+                                              </div>
+                                        </div>
+
+                                        <div style="margin-top: 15px;" class="ui button blue" id='emergencytNext'>NEXT</div>
+                                          
+
+                                          <!-- EMERGENCY INFORMATION -->
+                                          <h4 class="ui dividing header review">Emergency Information</h4>
+
+                                          <div class="emergency">
+                                            <div class="field">
+                                                <label>Full Name</label>
+                                                <input name="emergency[full_name]" type="text">
+                                              </div>
+                                              <div class="field">
+                                                <label>Relationship to Patient</label>
+                                                <input name="emergency[relationship] "  type="text">
+                                              </div>
+                                              <div class="field patient_home_address">
+                                                <label>Home Address (Street Number and Name, City, State, Zipcode)</label>
+                                                <input type="text" name="emergency[home_address]" placeholder="EX: 3311 Canyon Drive, Arlington, TX, 75026">
+                                            </div>
+                                              <div class="two fields">
+                                                <div class="field">
+                                                    <label>Phone Number</label>
+                                                    <input type="text" name="emergency[phone_number]"  type="text">
+                                                </div>
+                                                <div class="field">
+                                                    <label>Email Address</label>
+                                                    <input type="text"  name="emergency[email]"  type="text">
+                                                  </div>
+                                              </div>
+                                          </div>
+                                  
+
+                                        <div class="ui button blue" id='healthtNext'>NEXT</div>
+
+                                        <!-- Health Data-->
+
+                                        <h4 class="ui dividing header review">Patient Health Data</h4>
+
+                                        <div class="health">
+                                            <div class="three fields">
+                                                <div class="field">
+                                                    <label>Weight in lbs</label>
+                                                    <input type="number" name="weight" min="0" step=".01">
+                                                </div>
+                                                <div class="field">
+                                                    <label>Height in inches</label>
+                                                    <input type="number" name="height" min="0" step=".01">
+                                                </div>
+                                                <div class="field">
+                                                    <label>Blood Type</label>
+                                                    <select name="blood_type" class="ui dropdown">
+                                                        <option value=""></option>
+                                                        <option value="AB">AB-</option>
+                                                        <option value="AB+">AB+</option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="A-">A-</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="B-">B-</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="O-">O-</option>
+                                                      </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="ui button blue" id='reviewNext'>NEXT</div>
+
+                                        <!-- Review-->
+
+                                        <div class="review">
+
+                                        </div>
+                                        <button class="ui green sumbit button" id="submitButton"> Submit</button>
+                                      </div>
+                                    </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="field">
-                        <label>Last name</label>
-                        <input type="text" name="lastName" placeholder="Your Last Name ...">
-                    </div>
-                    <button class="ui green sumbit button"> Create</button>
-                </form>
+                    
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <% include ../../partials/footer %>
