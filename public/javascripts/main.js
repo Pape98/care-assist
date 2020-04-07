@@ -96,6 +96,76 @@ $(document).ready(function () {
     });
 
     /**
+     * Search Patient Feature
+     */
+    $('.ui.search')
+        .search({
+            // change search endpoint to a custom endpoint by manipulating apiSettings
+            apiSettings: {
+                url: '/search/?q={query}',
+                fullTextSearch: true,
+            }
+        });
+
+    /** Close icon on message */
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+
+    /** Login Form Validation */
+        $('#loginForm').form({
+            fields: {
+                email:{
+                    identifier:'email',
+                    rules:[
+                        {
+                            type   : 'empty',
+                            prompt : 'Please enter your email'
+                        }
+                    ]
+                },
+                password:{
+                    identifier:'password',
+                    rules:[
+                        {
+                            type   : 'empty',
+                            prompt : 'Please enter your password'
+                        }
+                    ]
+                }
+            }
+        });
+
+        /** Patient Form Validation */
+
+         $('#newPatientForm').form({
+            fields: {
+                first_name:{
+                    identifier:'first_name',
+                    rules:[
+                        {
+                            type   : 'empty',
+                            prompt : 'First Name field cannot be left empty.'
+                        }
+                    ]
+                },
+                last_name:{
+                    identifier:'last_name',
+                    rules:[
+                        {
+                            type   : 'empty',
+                            prompt : 'Last Name field cannot be left empty.'
+                        }
+                    ]
+                }
+            }
+        });
+});
+
+    /**
      * Function to change active item in sidebar menu
      */
     function changeSelectedItem(url) {
@@ -145,18 +215,3 @@ $(document).ready(function () {
             setTimeout(showTime, 1000);
         }
     }
-
-    /**
-     * Search Patient Feature
-     */
-    $('.ui.search')
-        .search({
-            // change search endpoint to a custom endpoint by manipulating apiSettings
-            apiSettings: {
-                url: '/search/?q={query}',
-                fullTextSearch:true,
-            }
-        });
-
-
-});
