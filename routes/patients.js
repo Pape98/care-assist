@@ -78,16 +78,4 @@ router.get('/:id', function (req, res, next) {
   });
 });
 
-<<<<<<< HEAD
-router.get('/:id/edit', function (req, res, next) {
-  id = req.params.id;
-  Patient.findById(id,function(err,patient){
-    req.flash("success","Patient has been successfully found!");
-    res.render('pages/patient/edit',{patient:patient});
-  });
-});
-
-
-=======
->>>>>>> 03a902035150f91669fdec9b0f4c57b80a61b344
 module.exports = router;

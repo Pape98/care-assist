@@ -2,9 +2,71 @@
 <% include ../../partials/topmenu %>
 
 <div class="ui basic segment " id="main-segment">
+    <div class="ui small modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Edit Patient
+        </div>
+        <div class="content">
+            <form class="ui form">
+                <h3>Personal Information</h3>
+                <div class="field">
+                    <label>Name</label>
+                    <div class="two fields">
+                        <div class="field">
+                            <input type="text" name="first-name" placeholder="First Name">
+                        </div>
+                        <div class="field">
+                            <input type="text" name="last-name" placeholder="Last Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Gender</label>
+                    <input type="text" name="gender" placeholder="Gender">
+                </div>
+                <div class="field">
+                    <label>Date of Birth</label>
+                    <input type="text" name="dob" placeholder="MM-DD-YYYY">
+                </div>
+                <div class="field">
+                    <label>Home Address</label>
+                    <input type="text" name="home-address" placeholder="1234 Building St. College Station, TX 77840">
+                </div>
+
+                <h3>
+                    Emergency Contact Information
+                </h3>
+                <div class="field">
+                    <label>Full Name</label>
+                    <input type="text" name="full-name" placeholder="Full Name">
+                </div>
+                <div class="field">
+                    <label>Email Address</label>
+                    <input type="text" name="email-address" placeholder="Email Address">
+                </div>
+                <div class="field">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone-number" placeholder="(123) 456-7890">
+                </div>
+                <div class="field">
+                    <label>Home Address</label>
+                    <input type="text" name="home-address" placeholder="1234 Building St. College Station, TX 77840">
+                </div>
+                <div class="field">
+                    <label>Relationship To Patient</label>
+                    <input type="text" name="relationship" placeholder="Daughter, Son, etc...">
+                </div>
+                <button class="ui positive centered icon button" type="submit">Save Changes</button>
+                <button class="ui red deny centered icon button" type="reset"> Reset Fields </button>
+            </form>
+        </div>
+
+    </div>
+
     <div class="ui stackable grid ">
         <div class="row">
-            <div class="fourteen wide column" style="padding:0 0 0 16.5vw;">
+            <div class="twelve wide column" style="padding:0 0 0 16.5vw;">
                 <div class="ui inverted large  breadcrumb" style="margin: 30px 0 ;">
                     <a href='/users/home' class="section">Home</a>
                     <i class="right chevron icon divider"></i>
@@ -14,8 +76,11 @@
                 </div>
             </div>
             <div class="two wide column">
-                <form action="/patients/<%=patient._id%>?_method=DELETE"" method="POST">
-                        <button class="ui red  button" style="margin-top: 2.0vh;">Delete Patient</button>
+                <button class="ui grey button" style="margin-top: 2.0vh;" onclick=edit()>Edit Patient</button>
+            </div>
+            <div class="two wide column">
+                <form action="/patients/<%=patient._id%>?_method=DELETE"" method=" POST">
+                    <button class="ui red  button" style="margin-top: 2.0vh;">Delete Patient</button>
                 </form>
             </div>
         </div>
@@ -171,7 +236,7 @@
                                         <p><%= patient.emergency['full_name']%></p>
                                     </div>
                                     <div class="column">
-                                        <div class="ui small grey header"> Relationshiop To Patient</div>
+                                        <div class="ui small grey header"> Relationship To Patient</div>
                                         <p><%= patient.emergency['relationship']%></p>
                                     </div>
                                 </div>
@@ -198,7 +263,7 @@
                         </div>
                         <div class="ui bottom attached tab segment" data-tab="second">
                             <div class="ui text container">
-                                <canvas id="heartRateChart" ></canvas>
+                                <canvas id="heartRateChart"></canvas>
                             </div>
                         </div>
                         <div class="ui bottom attached tab segment" data-tab="third">

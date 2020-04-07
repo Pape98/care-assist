@@ -215,3 +215,13 @@ $(document).ready(function () {
             setTimeout(showTime, 1000);
         }
     }
+
+    function edit() {
+        $('.ui.small.modal')
+            .modal('show');
+    }
+
+    function deletePatient() {
+        $('.ui.tiny.modal')
+            .modal('show');
+    }
