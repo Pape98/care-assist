@@ -29,23 +29,23 @@
                 </div>
                 <div class="field">
                     <label>Date of Birth</label>
-                    <input type="date" name="birthday" value="<%= patient.birthday%>">
+                    <input type="date" name="birthday" value="2018-07-22">
                 </div>
             </div>
             <div class="three fields">
                 <div class="field">
                     <label>Weight (Lbs.)</label>
-                    <input type="text" name="weight" value="<%= patient.weight%>">
+                    <input type="number" name="weight" value="<%= patient.weight%>">
                 </div>
                 <div class="field">
                     <label>Height (In.)</label>
-                    <input type="text" name="height" value="<%= patient.height%>">
+                    <input type="number" name="height" value="<%= patient.height%>">
                 </div>
                 <div class="field">
                     <label>Blood Type</label>
-                    <select name="blood_type" class="ui dropdown" id="dropdown-bloodType" data-bloodType="<%=patient.blood_type%>">
+                    <select name="blood_type" class="ui dropdown" id="dropdown-bloodType" data-blood="<%=patient.blood_type%>">
                         <option value=""></option>
-                        <option value="AB">AB-</option>
+                        <option value="AB-">AB-</option>
                         <option value="AB+">AB+</option>
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>

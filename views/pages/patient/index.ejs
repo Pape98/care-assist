@@ -16,21 +16,20 @@
             <div class="two wide column">
                 <% include ../../partials/sidebar %>
             </div>
-            <div class="thirteen wide centered column">
+            <div class="fourteen wide centered column">
                 <div class="ui grid" id="main-grid">
-
                     <% if(success.length != 0){ %>
-                    <div class="one column row">
-                        <div class="column">
-                            <div class="ui floating large success message">
-                                <i class="close icon"></i>
-                                <div class="header">
-                                    <%=success[0]%>
+                        <div class="one column row">
+                            <div class="column pd-0">
+                                <div class="ui floating large success message">
+                                    <i class="close icon"></i>
+                                    <div class="header">
+                                        <%=success[0]%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <% } %>
+                        <% } %>
                     <div class="one row left aligned  column">
                         <div class="ui large header">Facicility Summary</div>
                     </div>
@@ -110,13 +109,13 @@
                         <div class="twelve wide column">
                             <div class="ui segment">
                                 <div class="ui header">Outpatients vs Inpatients Trend</div>
-                                <canvas id="inOutChart" height="120" width="300"></canvas>
+                                <canvas id="inOutChart" onload="drawHinOutChart()" height="120" width="300"></canvas>
                             </div>
                         </div>
                         <div class="four wide column">
                             <div class="ui segment" style="height: 100%">
                                 <div class="ui header">Patients by gender</div>
-                                <canvas id="genderChart" height="120" width="100"></canvas>
+                                <canvas id="genderChart" onload="drawGenderChart()" height="120" width="100"></canvas>
                             </div>
                         </div>
                     </div>
