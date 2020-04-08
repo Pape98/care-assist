@@ -16,21 +16,20 @@
             <div class="two wide column">
                 <% include ../../partials/sidebar %>
             </div>
-            <div class="thirteen wide centered column">
+            <div class="fourteen wide centered column">
                 <div class="ui grid" id="main-grid">
-
                     <% if(success.length != 0){ %>
-                    <div class="one column row">
-                        <div class="column">
-                            <div class="ui floating large success message">
-                                <i class="close icon"></i>
-                                <div class="header">
-                                    <%=success[0]%>
+                        <div class="one column row">
+                            <div class="column pd-0">
+                                <div class="ui floating large success message">
+                                    <i class="close icon"></i>
+                                    <div class="header">
+                                        <%=success[0]%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <% } %>
+                        <% } %>
                     <div class="one row left aligned  column">
                         <div class="ui large header">Facicility Summary</div>
                     </div>
