@@ -152,60 +152,86 @@ function loader() {
 }
 
 function newPatientForm() {
-    /**
-     * For Buttons in New Patient Form
-     */
+    
 
     if (url.includes('/patients/new')) {
         $('.emergency').hide();
         $('.health').hide();
         $('.review').hide();
-
+        $('#personalBack').hide();
+        $('#emergencyBack').hide();
         $('#healthtNext').hide();
         $('#reviewNext').hide();
         $('#submitButton').hide();
 
-
     }
+
+    /**
+     * For NEXT Buttons in New Patient Form
+     */
 
     $('#emergencytNext').click(function () {
         $(this).hide();
         $('.personal').hide();
-
         $('.step.one').removeClass('active').addClass('completed');
         $('.step.two').addClass('active');
-
         $('.emergency').show();
+        $('#personalBack').show();
         $('#healthtNext').show();
-
-
 
     });
 
     $('#healthtNext').click(function () {
         $(this).hide();
         $('.emergency').hide();
-
+        $('#personalBack').hide();
         $('.step.two').removeClass('active').addClass('completed');
         $('.step.three').addClass('active');
-
-
         $('.health').show();
         $('#reviewNext').show();
+        $('#emergencyBack').show();
+
     });
 
     $('#reviewNext').click(function () {
         $(this).hide();
         $('.step.three').removeClass('active').addClass('completed');
-
         $('.personal').show();
         $('.emergency').show();
-
         $('.review').show();
         $('#submitButton').show();
+        $('#emergencyBack').hide();
     });
 
-    /** Patient Form Validation */
+    /**
+     * For NEXT Buttons in New Patient Form
+     */
+    $('#personalBack').click(function(){
+        $('.step.one').addClass('active').removeClass('completed');
+        $('.step.two').removeClass('active');
+        $(this).hide();
+        $('#healthtNext').hide();
+        $('.emergency').hide();
+        $('.personal').show();
+        $('#emergencytNext').show();
+    });
+
+    $('#emergencyBack').click(function(){
+        $('.step.two').addClass('active').removeClass('completed');
+        $('.step.three').removeClass('active');
+        $(this).hide();
+       $('#reviewNext').hide();
+       $('.health').hide();
+
+       $('.emergency').show();
+       $('#healthtNext').show();
+       $('#personalBack').show();
+    });
+
+
+    /** 
+     * Patient Form Validation 
+     * */
 
     $('#newPatientForm').form({
         fields: {
