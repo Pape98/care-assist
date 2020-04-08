@@ -2,9 +2,11 @@
 <% include ../../partials/topmenu %>
 
 <div class="ui basic segment " id="main-segment">
+<% include ../../partials/edit_patient.ejs %>
+  
     <div class="ui stackable grid ">
         <div class="row">
-            <div class="fourteen wide column" style="padding:0 0 0 16.5vw;">
+            <div class="twelve wide column" style="padding:0 0 0 16.5vw;">
                 <div class="ui inverted large  breadcrumb" style="margin: 30px 0 ;">
                     <a href='/users/home' class="section">Home</a>
                     <i class="right chevron icon divider"></i>
@@ -14,8 +16,11 @@
                 </div>
             </div>
             <div class="two wide column">
+                <button class="ui grey button" style="margin-top: 2.0vh;" onclick=edit()>Edit Patient</button>
+            </div>
+            <div class="two wide column">
                 <form action="/patients/<%=patient._id%>?_method=DELETE"" method="POST">
-                        <button class="ui red  button" style="margin-top: 2.0vh;">Delete Patient</button>
+                    <button class="ui red  button" style="margin-top: 2.0vh;">Delete Patient</button>
                 </form>
             </div>
         </div>
@@ -171,7 +176,7 @@
                                         <p><%= patient.emergency['full_name']%></p>
                                     </div>
                                     <div class="column">
-                                        <div class="ui small grey header"> Relationshiop To Patient</div>
+                                        <div class="ui small grey header"> Relationship To Patient</div>
                                         <p><%= patient.emergency['relationship']%></p>
                                     </div>
                                 </div>
@@ -198,7 +203,7 @@
                         </div>
                         <div class="ui bottom attached tab segment" data-tab="second">
                             <div class="ui text container">
-                                <canvas id="heartRateChart" ></canvas>
+                                <canvas id="heartRateChart"></canvas>
                             </div>
                         </div>
                         <div class="ui bottom attached tab segment" data-tab="third">
