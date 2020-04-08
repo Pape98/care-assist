@@ -35,13 +35,8 @@ function formatBirthDate() {
     $('#birthdayDisplay').text(dateString);
 }
 
-// Function Calls
 
-
-
-$(document).ready(function () {
-    formatBirthDate();
-    //-----------------------------------------
+function drawHeartRateChart(){
     var ctx = $('#heartRateChart');
 
     var myChart = new Chart(ctx, {
@@ -87,8 +82,9 @@ $(document).ready(function () {
             }
         }
     });
+}
 
-    //-----------------------------------------
+function drawHinOutChart(){
     var ctx1 = $('#inOutChart');
 
     var myChart2 = new Chart(ctx1, {
@@ -135,31 +131,41 @@ $(document).ready(function () {
         }
     });
 
-        //-----------------------------------------
-        var ctx3 = $('#genderChart');
+}
 
-        var myChart2 = new Chart(ctx3, {
-            type: 'doughnut',
-            data: {
-                datasets: [{
-                    label: 'Gender',
-                    backgroundColor: [blue,yellow],
-                    data: generateDataSet(1,40),
-                }],
-                labels: [
-                    'Male',
-                    'Female'
-				]
+function drawGenderChart(){
+    var ctx3 = $('#genderChart');
+
+    var myChart2 = new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                label: 'Gender',
+                backgroundColor: [blue,yellow],
+                data: generateDataSet(1,40),
+            }],
+            labels: [
+                'Male',
+                'Female'
+            ]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
             },
-            options: {
-                responsive: true,
-                legend: {
-					position: 'top',
-				},
-				animation: {
-					animateScale: true,
-					animateRotate: true
-				}
+            animation: {
+                animateScale: true,
+                animateRotate: true
             }
-        });
+        }
+    });
+}
+
+
+$(document).ready(function () {
+    formatBirthDate();
+    drawHeartRateChart();
+    drawHinOutChart();
+    drawGenderChart();
 });
