@@ -6,6 +6,8 @@ $(document).ready(function () {
     // Function Calls
     showTime();
     changeSelectedItem(url);
+    selectGender();
+    selectBloodType();
 
     /**
      * For tabs
@@ -214,4 +216,21 @@ $(document).ready(function () {
 
             setTimeout(showTime, 1000);
         }
+    }
+
+    function edit() {
+        $('.ui.small.modal')
+            .modal('show');
+    }
+
+    function selectGender(){
+        var dropdownGender = $('#dropdown-gender');
+        var gender = dropdownGender.data('gender');
+        dropdownGender.dropdown('set selected',gender);
+    }
+
+    function selectBloodType(){
+        var dropdownBloodType = $('#dropdown-bloodType');
+        var bloodType = dropdownBloodType.data('bloodType');
+        dropdownBloodType.dropdown('set selected',bloodType);
     }
