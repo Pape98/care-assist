@@ -9,14 +9,20 @@ const session = require('express-session');
 const passport = require('passport');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
+const methodOverride = require('method-override');
 
 const app = express();
+
+// To allow put and delete methos
+app.use(methodOverride('_method'));
 
 // Support parsing of application/json type post data
 app.use(bodyParser.json());
 
 // Support parsing of application/x-www-form-urlencoded post data
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // Passport Config
 require('./config/passport')(passport);
@@ -26,7 +32,10 @@ const db = require('./config/keys').MongoURI;
 
 // MongoDB connection 
 url = 'mongodb://localhost/test';
-mongoose.connect(url, {useNewUrlParser:true, useUnifiedTopology:true})
+mongoose.connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   .then(() => console.log('MongoDB successfully connected...'))
   .catch(err => console.log(err));
 
@@ -34,7 +43,9 @@ mongoose.connect(url, {useNewUrlParser:true, useUnifiedTopology:true})
 app.set('view engine', 'ejs');
 
 // Bodyparser
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({
+  extended: false
+}))
 
 // Express Session
 app.use(session({
@@ -45,16 +56,15 @@ app.use(session({
 
 
 // Support for flash messages
-app.use(flash()); 
-app.use(function(req,res,next){
+app.use(flash());
 
+app.use(function (req, res, next) {
   res.locals.user = req.user;
-  res.locals.success = req.flash("success")[0];
+  res.locals.success = req.flash("success");
   res.locals.check = req.flash("check");
   res.locals.failure = req.flash("failure");
   res.locals.error = req.flash("error");
-
-  next(); 
+  next();
 });
 
 // Passport Middleware
@@ -95,7 +105,6 @@ app.use(sassMiddleware({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -111,6 +120,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;

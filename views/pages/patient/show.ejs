@@ -1,224 +1,368 @@
 <% include ../../partials/head %>
 <% include ../../partials/topmenu %>
 
-<div class="ui basic segment" id="main-segment">
+<div class="ui basic segment " id="main-segment">
+    <% include ../../partials/edit_patient.ejs %>
+
     <div class="ui stackable grid ">
         <div class="row">
-            <div class="sixteen wide column" style="background: #1f1f21!important;padding:0 0 0 15vw;">
-                    <div class="ui  large  breadcrumb" style="margin: 30px 0 ;">
-                        <a href='/users/home' class="ft-white section">Home</a>
-                        <i class="right ft-white chevron icon divider"></i>
-                        <a  href='/patients'class="ft-white section">Patients List</a>
-                        <i class="right ft-white chevron icon divider"></i>
-                        <a class="active ft-white section"><%=patient.first_name%> <%=patient.last_name %></a>
-                    </div>
+            <div class="fourteen wide column" style="padding:0 0 0 16.5vw;">
+                <div class="ui inverted large  breadcrumb" style="margin: 30px 0 ;">
+                    <a href='/users/home' class="section">Home</a>
+                    <i class="right chevron icon divider"></i>
+                    <a href='/patients' class=" section">Patients Lists</a>
+                    <i class="right chevron icon divider"></i>
+                    <div class="active section"><%=patient.first_name%> <%=patient.last_name%></div>
+                </div>
+            </div>
+            <div class="two wide left aligned  center-content  column">
+                <form action="/patients/<%=patient._id%>?_method=DELETE" name="_name" method="POST">
+                    <button class="ui red button">Delete Patient</button>
+                </form>
             </div>
         </div>
         <div class="row">
             <div class="two wide column">
                 <% include ../../partials/sidebar %>
             </div>
-            <div class="fourteen wide column pd-0">
-                <div class="ui basic segment">
-                    <div class="ui internally celled grid" style="margin-top: 30px;">
-                        <div class="row">
-                            <div class=" centered fourteen wide column">
+            <div class="fourteen wide column">
+                <div class="ui grid" style="margin:0 3vw">
 
-                                <div class="ui stackable grid">
-                                    <div class="row">
-                                        <div class=" four wide column">
-                                            <div class=" ui center aligned container " style="height: 100%">
-                                                <h2 class="ui blue header"> <%=patient.first_name%> <%=patient.last_name %></h2>
-                                                <img class="ui centered small circular image"
-                                                    src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
-                                                    alt="">
-                                                <div class="ui yellow fluid button" style="margin-top: 17px;">Edit Patient</div>
-                                            </div>
-                                        </div>
+                    <% if(success.length != 0){ %>
+                    <div class="one column row">
+                        <div class="column pd-0">
+                            <div class="ui large success message ">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=success[0]%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
 
-                                        <div class="twelve wide column">
-                                            <div class="row">
-                                                <div class="ui container " style="height: 100%">
-                                                    <div class="ui grid">
-                                                        <div class="row">
-                                                            <div class="eleven wide column">
-                                                                <h3 class='ui blue header'>PATIENT INFORMATION</h3>
-                                                                <div class="ui fluid form">
-                                                                    <div class="three fields">
-                                                                        <div class="field">
-                                                                            <label>Gender</label>
-                                                                            <input type="text" value="Male" readonly="">
-                                                                        </div>
-                                                                        <div class="field">
-                                                                            <label>Age</label>
-                                                                            <input type="text" value="32" readonly="">
-                                                                        </div>
-                                                                        <div class="field">
-                                                                            <label>Blood Type</label>
-                                                                            <input type="text" value="B+" readonly="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="three fields">
-                                                                        <div class="field">
-                                                                            <label>Blood Type</label>
-                                                                            <input type="text" value="B+" readonly="">
-                                                                        </div>
-                                                                        <div class="field">
-                                                                            <label>Room Number</label>
-                                                                            <input type="text" value="32" readonly="">
-                                                                        </div>
-                                                                        <div class="field">
-                                                                            <label>Age</label>
-                                                                            <input type="text" value="32" readonly="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="two fields">
-                                                                        <div class="field">
-                                                                            <label>Emergency Name</label>
-                                                                            <input type="text" value="Pape Traore"
-                                                                                readonly="">
-                                                                        </div>
-                                                                        <div class="field">
-                                                                            <label>Emergency Contact</label>
-                                                                            <input type="text" value="(322)-349-2394"
-                                                                                readonly="">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="five wide column">
-                                                                <h3 class="ui blue header">SPECIAL NEEDS</h3>
-                                                                <p>Many desktop publishing packages and web page editors
-                                                                    now use
-                                                                    Lorem
-                                                                    Ipsum as their default model text, and a search for
-                                                                    'lorem
-                                                                    ipsum'
-                                                                    will uncover many web sites still in their infancy.
-                                                                </p>
-                                                                <h3 class="ui blue header">NOTES</h3>
-                                                                <p>None</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                    <div class="row">
+                        <div class=" three wide column">
+                            <div class="ui center aligned container segment">
+                                <img class="ui centered small circular image"
+                                    src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
+                                    alt="">
+                                <div class="ui header">
+                                    <%= patient.first_name %> <%= patient.last_name %>
+                                </div>
+                                <button style="margin-bottom: 3vh;" class="ui small grey button" onclick=edit()>Edit
+                                    Patient</button>
+                                <div class="ui three column grid">
+                                    <div class="column">
+                                        <div class="ui tiny blue header">Blood</div>
+                                        <div class="ui tiny statistic">
+                                            <div class="value">
+                                                <%= patient.blood_type %>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="one row column ">
+                                    <div class="column">
+                                        <div class="ui tiny blue header">Weight</div>
+                                        <div class="ui tiny statistic">
+                                            <div class="value">
+                                                <%= patient.weight %>
+                                            </div>
+                                            <div class="label">
+                                                cm
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="column">
+                                        <div class="ui tiny blue header">Height</div>
+                                        <div class="ui tiny statistic">
+                                            <div class="value">
+                                                <%= patient.height %>
+                                            </div>
+                                            <div class="label">
+                                                kg
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui dividing header">Quick Summary</div>
+                            <div class="ui segment fluid form">
+                                <div class="field">
+                                    <label>Bed</label>
+                                    <div class="ui selection dropdown">
+                                        <input type="hidden" name="gender">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">No Bed</div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label>Case Manager</label>
+                                    <div class="ui selection dropdown">
+                                        <input type="hidden" name="gender">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">No Case Manager</div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label>Levels of Care</label>
+                                    <div class="ui selection dropdown">
+                                        <input type="hidden" name="gender">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">Detox</div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label>Primary Counselor</label>
+                                    <div class="ui selection dropdown">
+                                        <input type="hidden" name="gender">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">No Counselor</div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label>Primary </label>
+                                    <div class="ui selection dropdown">
+                                        <input type="hidden" name="gender">
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">No Counselor</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class=" ten wide column">
+                            <div class="ui top attached tabular menu">
+                                <a class="item active" data-tab="first">General</a>
+                                <a class="item" data-tab="second">Second</a>
+                                <a class="item" data-tab="third">Third</a>
+                            </div>
+                            <div class="ui bottom attached tab segment active" data-tab="first">
+                                <div class="ui blue small header"> Personal Information</div>
+
+                                <div class="ui stackable grid">
+                                    <div class="three column row">
                                         <div class="column">
-                                            <div class="ui secondary pointing menu">
-                                                <a class="active item" data-tab="first">Upcoming Appointments</a>
-                                                <a class="item" data-tab="second">Past Appointments</a>
-                                                <a class="item" data-tab="third">Medical Records</a>
+                                            <div class="ui small grey header"> First Name</div>
+                                            <p><%= patient.first_name %></p>
+                                        </div>
+                                        <div class="column">
+                                            <div class="ui small grey header"> Last Name</div>
+                                            <p><%= patient.last_name %></p>
+                                        </div>
+                                        <div class="column">
+                                            <div class="ui small grey header"> ID Number</div>
+                                            <p><%= patient._id %></p>
+                                        </div>
+                                    </div>
+                                    <div class="three column row">
+                                        <div class="column">
+                                            <div class="ui small grey pp header"> Gender</div>
+                                            <p><%= patient.gender %></p>
+                                        </div>
+                                        <div class="column">
+                                            <div class="ui small grey header"> Date of Birth</div>
+                                            <p id="birthdayDisplay"><%= patient.birthday %></p>
+                                        </div>
+                                        <div class="column">
+                                            <div class="ui small grey header">Primary Care Physician</div>
+                                            <p><%= patient.physician %></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="sixteen wide column">
+                                            <div class="ui small grey header"> Home Address</div>
+                                            <p><%= patient.home_address %></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="ui blue small header"> Emergency Contact</div>
+
+                                <div class="ui stackable grid">
+                                    <div class="two column row">
+                                        <div class="column">
+                                            <div class="ui small grey header"> Full Name</div>
+                                            <p><%= patient.emergency['full_name']%></p>
+                                        </div>
+                                        <div class="column">
+                                            <div class="ui small grey header"> Relationship To Patient</div>
+                                            <p><%= patient.emergency['relationship']%></p>
+                                        </div>
+                                    </div>
+                                    <div class="two column row">
+                                        <div class="column">
+                                            <div class="ui small grey header"> Email Address</div>
+                                            <p><%= patient.emergency['email']%></p>
+                                        </div>
+                                        <div class="column">
+                                            <div class="ui small grey header"> Phone Number</div>
+                                            <p><%= patient.emergency['phone_number']%></p>
+                                        </div>
+                                    </div>
+                                    <div class="one column row">
+                                        <div class="column">
+                                            <div class="ui small grey header">Home Address</div>
+                                            <p><%= patient.emergency['home_address']%></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="ui bottom attached tab segment" data-tab="second">
+                                <div class="ui text container">
+                                    <canvas id="heartRateChart" onload="drawHeartRateChart()"></canvas>
+                                </div>
+                            </div>
+                            <div class="ui bottom attached tab segment" data-tab="third">
+                                Third
+                            </div>
+                        </div>
+
+                        <div class="three wide column">
+                            <div class="ui segment" style="height: 10vw;">
+                                <div class="ui grid">
+                                    <div class="two column row">
+                                        <div class=" column">
+                                            <div class="ui tiny header">Blood Pressure
+                                                <div class="sub header">At risk</div>
                                             </div>
-                                            <div class="ui active tab segment" data-tab="first">
-                                                <table class="ui celled padded table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="center aligned single line">Date</th>
-                                                            <th class="center aligned single line">Time</th>
-                                                            <th class="center aligned single line">Reason</th>
-                                                            <th class="center aligned single line">Primary Care
-                                                                Physician</th>
-                                                            <th class="center aligned single line">Edit</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="center aligned single line">
-                                                                4-14-2020
-                                                            </td>
-                                                            <td class="center aligned">10:00AM</td>
-                                                            <td class="center aligned single line">
-                                                                Monthly Check-Up
-                                                            </td>
-                                                            <td class="center aligned single line">
-                                                                Dr. Paul Taele
-                                                            </td>
-                                                            <td class="center aligned single line"><a
-                                                                    href="#">Reschedule</a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="ui tab segment" data-tab="second">
-                                                <table class="ui celled padded table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="center aligned single line">Date</th>
-                                                            <th class="center aligned single line">Time</th>
-                                                            <th class="center aligned single line">Reason</th>
-                                                            <th class="center aligned single line">Primary Care
-                                                                Physician</th>
-                                                            <th class="center aligned single line">Comments</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="center aligned single line">
-                                                                4-1-2020
-                                                            </td>
-                                                            <td class="center aligned">10:00AM</td>
-                                                            <td class="center aligned single line">
-                                                                Monthly Check-Up
-                                                            </td>
-                                                            <td class="center aligned single line">
-                                                                Dr. Paul Taele
-                                                            </td>
-                                                            <td>Lorem ipsum dolor sit, amet consectetur adipisicing
-                                                                elit. Optio,
-                                                                neque? Optio explicabo in nobis corporis.</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="center aligned single line">
-                                                                3-24-2020
-                                                            </td>
-                                                            <td class="center aligned">9:30AM</td>
-                                                            <td class="center aligned single line">
-                                                                Illness
-                                                            </td>
-                                                            <td class="center aligned single line">
-                                                                Dr. Paul Taele
-                                                            </td>
-                                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                                Quo
-                                                                deserunt vero voluptates neque exercitationem assumenda!
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="center aligned single line">
-                                                                3-14-2020
-                                                            </td>
-                                                            <td class="center aligned">10:00AM</td>
-                                                            <td class="center aligned single line">
-                                                                Monthly Check-Up
-                                                            </td>
-                                                            <td class="center aligned single line">
-                                                                Dr. Paul Taele
-                                                            </td>
-                                                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                                Beatae
-                                                                nam culpa ad quia, commodi odit tempore. Rem odio
-                                                                facilis culpa?
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="ui  tab segment" data-tab="third">
-                                                Not really sure what this would look like. Will update later
+                                        </div>
+                                        <div class="right aligned column">
+                                            <i class="heartbeat large icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="one column row">
+                                        <div class="ui center aligned column">
+                                            <div class="ui yellow big horizontal statistic">
+                                                <div class="value">
+                                                    122
+                                                </div>
+                                                <div class="label">
+                                                    mm/Hg
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="ui segment" style="height: 10vw;">
+                                <div class="ui grid">
+                                    <div class="two column row">
+                                        <div class=" column">
+                                            <div class="ui tiny header">Cholesterol
+                                                <div class="sub header">Above the norm</div>
+                                            </div>
+                                        </div>
+                                        <div class="right aligned column">
+                                            <i class="heartbeat large  icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="one column row">
+                                        <div class="ui center aligned column">
+                                            <div class="ui red big horizontal statistic">
+                                                <div class="value">
+                                                    97
+                                                </div>
+                                                <div class="label">
+                                                    mg/dl
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui segment" style="height: 10vw;">
+                                <div class="ui grid">
+                                    <div class="two column row">
+                                        <div class=" column">
+                                            <div class="ui tiny header">
+                                                Heart Rate
+                                                <div class="sub header">In the norm</div>
+                                            </div>
+                                        </div>
+                                        <div class="right aligned column">
+                                            <i class="heartbeat large icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="one column row">
+                                        <div class="ui center aligned column">
+                                            <div class="ui big green horizontal statistic">
+                                                <div class="value">
+                                                    122
+                                                </div>
+                                                <div class="label">
+                                                    BPM
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui segment" style="height: 10vw;">
+                                <div class="ui grid">
+                                    <div class="two column row">
+                                        <div class=" column">
+                                            <div class="ui small header">Pulse
+                                                <div class="sub header">Above the norm</div>
+                                            </div>
+                                        </div>
+                                        <div class="right aligned column">
+                                            <i class="heartbeat large icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="one column row">
+                                        <div class="ui center aligned column">
+                                            <div class="ui red big horizontal statistic">
+                                                <div class="value">
+                                                    56
+                                                </div>
+                                                <div class="label">
+                                                    BPM
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui segment" style="height: 10vw;">
+                                <div class="ui grid">
+                                    <div class="two column row">
+                                        <div class=" column">
+                                            <div class="ui small header">Glucose
+                                                <div class="sub header">In the norm</div>
+                                            </div>
+                                        </div>
+                                        <div class="right aligned column">
+                                            <i class="heartbeat large icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="one column row">
+                                        <div class="ui center aligned column">
+                                            <div class="ui green  big horizontal statistic">
+                                                <div class="value">
+                                                    90
+                                                </div>
+                                                <div class="label">
+                                                    mg/dl
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-
                     </div>
+
                 </div>
+
             </div>
         </div>
     </div>

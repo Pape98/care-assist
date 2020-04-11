@@ -7,60 +7,34 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 var moment = require('moment');
-const { ensureAuthenticated } = require('../config/auth');
-const ensureAdmin = require('../config/admin');
-
-// var flash = require('connect-flash');
-// var app = express();
-// app.use(flash());
 
 // User model
 const User = require('../models/User');
 
-// TODO: ADMIN ONLY
-// /* GET users listing. */
-// router.get('/', function(req, res, next) {
-//   res.render('pages/user/index');
-// });
-
-
-// TODO: ADMIN ONLY
-// /* SHOW individual user */
-// router.get('/:id', function(req, res, next) {
-//   res.render('pages/user/show');
-// });
-
-
 // GET Register Page
 router.get('/register', (req, res) => res.render('register'));
 
-/* GET home page */
+// GET home page 
 router.get('/home', ensureAuthenticated, function (req, res, next) {
     var date = moment().format('MMMM Do YYYY');
     res.render('pages/users/home', {
         date: date
     });
 });
-
-/* GET settings page. */
+// GET settings page. 
 router.get('/settings', function (req, res, next) {
     res.render('pages/users/profile', {
         isAdmin: req.user.admin
     })
 });
 
-/* GET reminder page. */
+// GET reminder page. 
 router.get('/reminders', function (req, res, next) {
     res.render('pages/users/reminder');
 });
 
+// Register Handl -- Submit information through POST
 
-
-
-/* 
-    Register Handle
-    -- Submit information through POST
-*/
 router.post('/register', (req, res) => {
     // Information access
     const {
@@ -97,10 +71,7 @@ router.post('/register', (req, res) => {
 });
 
 
-/*
-    Login Handle
-    -- Submit information through POST
-*/
+// Login Handle -- Submit information through POST
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         // Redirects on both success and fail
@@ -111,10 +82,8 @@ router.post('/login', (req, res, next) => {
 });
 
 
-/*
-    Logout Handle
-    -- Submit through GET
-*/
+// Logout Handle -- Submit through GET
+
 router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/logout/loader');

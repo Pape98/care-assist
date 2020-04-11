@@ -10,22 +10,37 @@
     <h1 class="ui">CareAssist</h1>
     <div class="ui text container ">
         <div class="ui grid" id="login-grid">
-
-            <div class=" ten wide centered column" id="login-right">
-                <h1 class="ui inverted header" style="margin-top:0px">
-                    Welcome
-                </h1>
-                <form class="ui inverted form" action="/users/login" method="POST">
-                    <div class="field">
-                        <label>Email Address</label>
-                        <input type="email" name="email" placeholder="Enter Your Email">
-                    </div>
-                    <div class="field">
-                        <label>Password</label>
-                        <input type="password" name="password" placeholder="Last Name">
-                    </div>
-                    <button style="margin: 0;" class="ui fluid blue button" type="submit">Submit</button>
-                </form>
+            <div class="row">
+                <div class=" twelve wide centered column" id="login-right">
+                    <h1 class="ui inverted header" style="margin-top:0px">
+                        Welcome
+                    </h1>
+                    <% if(error.length !=0){ %>
+                        <div class="ui small red message">
+                            <i class="close icon"></i>
+                            <div class="header">
+                              Login Error
+                            </div>
+                            <ul class="list">
+                              <li>You must include both a upper and lower case letters in your password.</li>
+                              <li>You need to select your home country.</li>
+                            </ul>
+                          </div>
+                    <% } %>
+                    <form class="ui large inverted form" id="loginForm" action="/users/login" method="POST">
+                        <div class="field">
+                            <label>Email Address</label>
+                            <input type="email" name="email" placeholder="Enter Your Email">
+                        </div>
+                        <div class="field">
+                            <label>Password</label>
+                            <input type="password" name="password" placeholder="Enter Your Password">
+                        </div>
+                        <button style="margin: 0;" class="ui big fluid blue button" type="submit">Submit</button>
+                        <div class="ui small error message"></div>
+                 
+                    </form>
+                </div>
             </div>
         </div>
     </div>
