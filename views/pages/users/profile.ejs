@@ -37,6 +37,10 @@
                         </div>
                         <div class="row">
                             <div class="ui fluid styled accordion" style="margin: 40px 0">
+                                
+                                
+                                
+                                
                                 <div class="title">
                                     <h2 class="ui header">
                                         <i class="edit icon"></i>
@@ -46,20 +50,21 @@
                                     </h2>
                                 </div>
                                 <div class="content">
-                                    <form action="" class="ui form">
+                                    <form action="/users/changeInfo" method="post" class="ui form">
                                         <div class="field">
                                             <label> First Name</label>
-                                            <input type="text" type="text">
+                                            <input type="text" name="first_name" placeholder="First Name">
                                         </div>
                                         <div class="field">
                                             <label> Last Name</label>
-                                            <input type="text" type="text">
+                                            <input type="text" name="last_name" placeholder="Last Name">
                                         </div>
                                         <div class="field">
                                             <label> Email</label>
-                                            <input type="text" type="text">
+                                            <input type="email" name="new_email" placeholder="Email">
                                         </div>
-                                        <div class="ui yellow submit button">Save</div>
+
+                                        <button class="ui yellow button" type="submit">Save</button>
                                     </form>
                                 </div>
 
