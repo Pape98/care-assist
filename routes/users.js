@@ -98,37 +98,38 @@ router.get('/logout', (req, res) => {
 // Change Password
 router.post('/changePassword', ensureAuthenticated, (req, res) => {
     // Get params
-    const {
+    var {
         current_password,
         new_password,
         confirm_new_password
     } = req.body;
     // Compare new passwords 
     if (new_password == confirm_new_password) {
-        // Hash current password and compared to stored, hashed user password
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(current_password, salt, (err, hash) => {
-                if (err) throw err;
-                // Compare current hash with stored user hash
-                console.log(req.user.email);
-                console.log(req.user.password);
-                console.log(hash);
-                console.log(current_password);
-                if (req.user.password == hash) {
-                    // Modify password if user successfully authenticates
+        // Verify user
+        bcrypt.compare(current_password, req.user.password, function(err, isMatch) {
+            if (isMatch) {
+                // Modify password if user successfully authenticates
+                bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.genSalt(10, (err, salt) => {
-                        bcrypt.hash(new_password, salt, (err, hash2) => {
+                        bcrypt.hash(new_password, salt, (err, hash) => {
                             if (err) throw err; 
                             // Reassign user password
+                            User.findOneAndUpdate(
+                                {"email": req.user.email}, 
+                                {$set: {"password": hash}},
+                                function(err) {
+                                    if (err) console.log(err);
+                                    req.flash('success', 'Password successfully updated.')
+                                }
+                            );
                             console.log("Password successfully changed");
-                            req.user.password = hash2;
                         });
                     });
-                }
-                else {
-                    console.log("Password incorrect");
-                }
-            });
+                }); 
+            }
+            else {
+                console.log("Password incorrect");
+            }
         });
     }
     else {
