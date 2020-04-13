@@ -5,6 +5,7 @@
 const mongoose = require('mongoose');
 
 // Define user attributes
+// TODO: Add token generation structure
 const userSchema = new mongoose.Schema({
     first_name:{
         type: String,

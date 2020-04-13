@@ -105,22 +105,20 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
             if (isMatch) {
                 // Hash password and update
                 bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.genSalt(10, (err, salt) => {
-                        bcrypt.hash(new_password, salt, (err, hash) => {
-                            if (err) throw err; 
-                            // Reassign user password
-                            User.findOneAndUpdate(
-                                {"email": req.user.email}, 
-                                {$set: {"password": hash}},
-                                function(err) {
-                                    if (err) console.log(err);
-                                    req.flash('success', 'Password successfully updated.')
-                                }
-                            );
-                            console.log("Password successfully changed");
-                        });
+                    bcrypt.hash(new_password, salt, (err, hash) => {
+                        if (err) throw err; 
+                        // Reassign user password
+                        User.findOneAndUpdate(
+                            {"email": req.user.email}, 
+                            {$set: {"password": hash}},
+                            function(err) {
+                                if (err) console.log(err);
+                                req.flash('success', 'Password successfully updated.')
+                            }
+                        );
+                        console.log("Password successfully changed");
                     });
-                }); 
+                });
             }
             else {
                 console.log("Password incorrect");
@@ -134,10 +132,86 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
 });
 
 
-// Reset Password Handle
+/* 
+    Get reset password page
+*/
+router.get('/resetRequest', ensureReset, function (req, res, next) {
+    res.render('pages/landing/resetRequest');
+});
+
+/* 
+    Reset Password Handle
+    TODO
+*/
+router.post('/resetRequest', (req, res) => {
+    // Get post params
+    const {
+        email,
+    } = req.body;
+    // Attempt to locate user
+    User.findOne({ email: email })
+                .then(user => {
+                    // If no match, return with no user param
+                    if (!user) {
+                        // TODO: Flash message with user notification
+                        req.flash('failure', 'No user associated with email');
+                    }
+                    // Send email with reset instructions & notify user
+                    else {
+                        // TODO: Flash message with user notification
+                        req.flash('success', 'An email with instructions has been sent to the associated address');
+                        // TODO: Send email
+
+                    }
+                })
+                .catch(err => console.log(err));
+    return res.redirect('pages/landing/resetRequest');
+});
 
 
-// Get reset password page
+
+/* 
+    Get reset password page
+    Using ensureReset middleware to verify token access to route/page
+*/
+router.get('/reset', ensureReset, function (req, res, next) {
+    return res.render('pages/landing/reset');
+});
+
+
+/* 
+    Reset Password Handle
+*/
+router.post('/reset', (req, res) => {
+    // TODO: Pass in user email
+    
+    // TODO: Ensure user has token permission to access route
+    // Get post params
+    const {
+        new_password,
+        confirm_new_password
+    } = req.body;
+
+    if (new_password == confirm_new_password) {
+        // Hash password and update
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(new_password, salt, (err, hash) => {
+                if (err) throw err; 
+                // Reassign user password
+                User.findOneAndUpdate(
+                    {"email": /*EMAIL*/}, 
+                    {$set: {"password": hash}},
+                    function(err) {
+                        if (err) console.log(err);
+                        req.flash('success', 'Password successfully updated.')
+                    }
+                );
+                console.log("Password successfully changed");
+            });
+        });
+    }
+    return res.redirect('/users/reset');
+});
 
 
 // Change Information Handle
@@ -150,6 +224,7 @@ router.post('/changeInfo', ensureAuthenticated, (req, res) => {
     } = req.body;
     // Update email
     if ((new_email != req.user.email) && (new_email.length > 0)) {
+        // TODO
         console.log(new_email);
         req.flash('success', 'Confirmation email sent to: ', new_email);
     }
@@ -175,6 +250,8 @@ router.post('/changeInfo', ensureAuthenticated, (req, res) => {
     );
     return res.redirect('/users/settings');
 });
+
+
 
 
 module.exports = router;
