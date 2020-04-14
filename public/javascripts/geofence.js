@@ -25,6 +25,7 @@ class HereMap {
             mapElement,
             defaultLayers.vector.normal.map, {
                 zoom: 16,
+                pixelRatio: window.devicePixelRatio || 1,
                 center: {
                     lat: zachry.lat,
                     lng: zachry.long
@@ -39,7 +40,7 @@ class HereMap {
         var ui = H.ui.UI.createDefault(this.map, defaultLayers);
 
         // add a resize listener to make sure that the map occupies the whole container
-        window.addEventListener('resize', () => map.getViewPort().resize());
+        window.addEventListener('resize', () => this.map.getViewPort().resize());
         this.geofencing = this.platform.getGeofencingService();
         this.currentPosition = new H.map.Marker({
             lat: zachry.lat,
@@ -55,7 +56,15 @@ class HereMap {
             this.map.addObject(this.currentPosition);
             this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
                 if (result.geometries.length > 0) {
-                    alert("You are within a geofence!")
+                    // var bubble = new H.ui.InfoBubble({
+                    //     lng: zachry.long,
+                    //     lat: zachry.lat
+                    // }, {
+                    //     content: '<b>Pape is within Fence!</b>'
+                    // });
+                    // // Add info bubble to the UI:
+                    // ui.addBubble(bubble);
+                    alert(" Within a geofence!");
                 } else {
                     alert("Not within a geofence!");
                 }
