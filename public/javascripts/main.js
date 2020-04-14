@@ -14,6 +14,7 @@ $(document).ready(function () {
     loginForm()
 });
 
+
 function loginForm() {
     $('#loginForm').form({
         fields: {
@@ -60,7 +61,12 @@ function makeInteractive() {
                 .closest('.message')
                 .transition('fade');
         });
+    $('#mapModalButton').click(function () {
+        $('.ui.modal')
+            .modal('show');
+    })
 }
+
 
 
 /**
@@ -152,7 +158,7 @@ function loader() {
 }
 
 function newPatientForm() {
-    
+
 
     if (url.includes('/patients/new')) {
         $('.emergency').hide();
@@ -206,7 +212,7 @@ function newPatientForm() {
     /**
      * For NEXT Buttons in New Patient Form
      */
-    $('#personalBack').click(function(){
+    $('#personalBack').click(function () {
         $('.step.one').addClass('active').removeClass('completed');
         $('.step.two').removeClass('active');
         $(this).hide();
@@ -216,16 +222,16 @@ function newPatientForm() {
         $('#emergencytNext').show();
     });
 
-    $('#emergencyBack').click(function(){
+    $('#emergencyBack').click(function () {
         $('.step.two').addClass('active').removeClass('completed');
         $('.step.three').removeClass('active');
         $(this).hide();
-       $('#reviewNext').hide();
-       $('.health').hide();
+        $('#reviewNext').hide();
+        $('.health').hide();
 
-       $('.emergency').show();
-       $('#healthtNext').show();
-       $('#personalBack').show();
+        $('.emergency').show();
+        $('#healthtNext').show();
+        $('#personalBack').show();
     });
 
 
