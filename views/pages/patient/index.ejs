@@ -19,17 +19,17 @@
             <div class="fourteen wide centered column">
                 <div class="ui grid" id="main-grid">
                     <% if(success.length != 0){ %>
-                        <div class="one column row">
-                            <div class="column pd-0">
-                                <div class="ui floating large success message">
-                                    <i class="close icon"></i>
-                                    <div class="header">
-                                        <%=success[0]%>
-                                    </div>
+                    <div class="one column row">
+                        <div class="column pd-0">
+                            <div class="ui floating large success message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=success[0]%>
                                 </div>
                             </div>
                         </div>
-                        <% } %>
+                    </div>
+                    <% } %>
                     <div class="one row left aligned  column">
                         <div class="ui large header">Facicility Summary</div>
                     </div>
@@ -43,7 +43,7 @@
                                 <div class="ten wide column">
                                     <div class="ui statistic">
                                         <div class="value">
-                                           <%=patients.length%>
+                                            <%=patients.length%>
                                         </div>
                                         <div class="label">
                                             Total Patients
@@ -162,7 +162,7 @@
                         </div>
 
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -170,5 +170,6 @@
 </div>
 
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="/javascripts/graph.js"></script>
 <% include ../../partials/footer %>

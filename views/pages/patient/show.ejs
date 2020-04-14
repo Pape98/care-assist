@@ -44,9 +44,7 @@
                     <div class="row">
                         <div class=" three wide column">
                             <div class="ui center aligned container segment">
-                                <img class="ui centered small circular image"
-                                    src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
-                                    alt="">
+                                <img class="ui centered small image" src="/images/pic1.jpeg" alt="">
                                 <div class="ui header">
                                     <%= patient.first_name %> <%= patient.last_name %>
                                 </div>
@@ -131,17 +129,15 @@
                                 </div>
 
                             </div>
-
-
                         </div>
 
                         <div class=" ten wide column">
                             <div class="ui top attached tabular menu">
-                                <a class="item active" data-tab="first">General</a>
-                                <a class="item" data-tab="second">Second</a>
-                                <a class="item" data-tab="third">Third</a>
+                                <a class="item" data-tab="first">General</a>
+                                <a class="item" data-tab="second">Health Graphs</a>
+                                <a class="item active" data-tab="third">Location</a>
                             </div>
-                            <div class="ui bottom attached tab segment active" data-tab="first">
+                            <div class="ui bottom attached tab segment" data-tab="first">
                                 <div class="ui blue small header"> Personal Information</div>
 
                                 <div class="ui stackable grid">
@@ -220,8 +216,34 @@
                                     <canvas id="heartRateChart" onload="drawHeartRateChart()"></canvas>
                                 </div>
                             </div>
-                            <div class="ui bottom attached tab segment" data-tab="third">
-                                Third
+                            <div class="ui bottom attached tab segment active" data-tab="third">
+                                <div class="ui container grid">
+                                    <div class="one column row">
+                                        <div class="ui tiny blue header">Current Location</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="three wide column">
+                                            <div class="ui small grey header">Latitude</div>
+                                            <p>30.621356</p>
+                                        </div>
+                                        <div class="three wide column">
+                                            <div class="ui small grey header">Longitude</div>
+                                            <p>-96.340493</p>
+                                        </div>
+                                        <div class="four wide center aligned  column">
+                                            <div class="ui small grey header geofenceLabel">Is Inside Geofence?</div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="sixteen wide column" style=" padding-left: 0;">
+                                            <div class="ui small grey header" id="addressHeader">Address Approximation
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui small blue header">Location of Pape on map</div>
+                                <div id="map" style="height: 50vh; width: inherit"></div>
                             </div>
                         </div>
 
@@ -367,6 +389,22 @@
         </div>
     </div>
 </div>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="/javascripts/graph.js"></script>
+<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://stuk.github.io/jszip/dist/jszip.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/geofence.js"></script>
+<script>
+    start(30.621356, -96.340493)
+</script>
 
 
 <% include ../../partials/footer %>
