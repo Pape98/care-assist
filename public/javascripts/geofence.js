@@ -52,27 +52,30 @@ class HereMap {
         this.getAddress();
         this.isWithinFence();
 
-        // this.map.addEventListener("tap", (ev) => {
-        //     var target = ev.target;
-        //     this.map.removeObject(this.currentPosition);
-        //     this.currentPosition = new H.map.Marker(this.map.screenToGeo(ev.currentPointer.viewportX, ev.currentPointer.viewportY));
-        //     this.map.addObject(this.currentPosition);
-        //     this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
-        //         if (result.geometries.length > 0) {
-        //             // var bubble = new H.ui.InfoBubble({
-        //             //     lng: zachry.long,
-        //             //     lat: zachry.lat
-        //             // }, {
-        //             //     content: '<b>Pape is within Fence!</b>'
-        //             // });
-        //             // // Add info bubble to the UI:
-        //             // ui.addBubble(bubble);
-        //             alert(" Within a geofence!");
-        //         } else {
-        //             alert("Not within a geofence!");
-        //         }
-        //     });
-        // }, false);
+        this.map.addEventListener("tap", (ev) => {
+            var target = ev.target;
+            this.map.removeObject(this.currentPosition);
+            this.currentPosition = new H.map.Marker(this.map.screenToGeo(ev.currentPointer.viewportX, ev.currentPointer.viewportY));
+            this.map.addObject(this.currentPosition);
+            this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
+                if (result.geometries.length > 0) {
+                    // * In case I want to add a label
+                    // var bubble = new H.ui.InfoBubble({
+                    //     lng: zachry.long,
+                    //     lat: zachry.lat
+                    // }, {
+                    //     content: '<b>Pape is within Fence!</b>'
+                    // });
+                    // // Add info bubble to the UI:
+                    // ui.addBubble(bubble);
+                    this.getAddress();
+                    this.isWithinFence()
+                } else {
+                    this.getAddress();
+                    this.isWithinFence()
+                }
+            });
+        }, false);
     }
     draw(mapObject) {
         this.map.addObject(mapObject);
@@ -129,6 +132,7 @@ class HereMap {
             })
             .then(function (jsonResponse) {
                 var address = jsonResponse.Response.View[0].Result[0].Location.Address.Label;
+                $('#addressHeader + p').empty();
                 $('#addressHeader').after("<p>" + address + "</p>");
             });
     }
@@ -136,17 +140,11 @@ class HereMap {
     isWithinFence() {
         this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
             if (result.geometries.length > 0) {
-                // var bubble = new H.ui.InfoBubble({
-                //     lng: zachry.long,
-                //     lat: zachry.lat
-                // }, {
-                //     content: '<b>Pape is within Fence!</b>'
-                // });
-                // // Add info bubble to the UI:
-                // ui.addBubble(bubble);
-                alert(" Within a geofence!");
+                $('.geofenceLabel + div').remove();
+                $('.geofenceLabel').after('<div class="ui green label">YES</div>')
             } else {
-                alert("Not within a geofence!");
+                $('.geofenceLabel + div').remove();
+                $('.geofenceLabel').after('<div class="ui red label">NO</div>')
             }
         });
     }
@@ -178,36 +176,36 @@ const start = async (lat, long) => {
     const geofenceResponseEvans = await map.uploadGeofence("zachry",
         "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao", map.polygonToWKT(
             zachry))
+    // TODO: Figure out why I can't have two layers
+    // const lineStringBlocker = new H.geo.LineString();
+    // lineStringBlocker.pushPoint({
+    //     lat: 30.619740,
+    //     lng: -96.342871
+    // });
+    // lineStringBlocker.pushPoint({
+    //     lat: 30.618971,
+    //     lng: -96.342085
+    // });
+    // lineStringBlocker.pushPoint({
+    //     lat: 30.619428,
+    //     lng: -96.341384
+    // });
+    // lineStringBlocker.pushPoint({
+    //     lat: 30.619834,
+    //     lng: -96.341888
+    // });
+    // lineStringBlocker.pushPoint({
+    //     lat: 30.619740,
+    //     lng: -96.342871
+    // });
+    // const blocker = new H.map.Polygon(lineStringBlocker);
+    // // var zachry = new H.map.Circle({
+    // //     lat: 30.621356,
+    // //     lng: -96.340493
+    // // }, 200);
 
-    const lineStringBlocker = new H.geo.LineString();
-    lineStringBlocker.pushPoint({
-        lat: 30.619740,
-        lng: -96.342871
-    });
-    lineStringBlocker.pushPoint({
-        lat: 30.618971,
-        lng: -96.342085
-    });
-    lineStringBlocker.pushPoint({
-        lat: 30.619428,
-        lng: -96.341384
-    });
-    lineStringBlocker.pushPoint({
-        lat: 30.619834,
-        lng: -96.341888
-    });
-    lineStringBlocker.pushPoint({
-        lat: 30.619740,
-        lng: -96.342871
-    });
-    const blocker = new H.map.Polygon(lineStringBlocker);
-    // var zachry = new H.map.Circle({
-    //     lat: 30.621356,
-    //     lng: -96.340493
-    // }, 200);
-
-    map.draw(blocker);
-    const geofenceResponseBlocker = await map.uploadGeofence("blocker",
-        "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao", map.polygonToWKT(
-            blocker))
+    // map.draw(blocker);
+    // const geofenceResponseBlocker = await map.uploadGeofence("blocker",
+    //     "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao", map.polygonToWKT(
+    //         blocker))
 };
