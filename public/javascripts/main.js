@@ -71,7 +71,9 @@ function makeInteractive() {
 function changeSelectedItem(url) {
     if (url.includes('/patients/new')) {
         $('.add-patient-item').addClass('selected');
-    } else if (url.includes('/patients/')) {
+    } else if (url.includes('/patients/map')) {
+        $('.map-item').addClass('selected');
+    }else if (url.includes('/patients/')) {
         // Do nothing
     } else if (url.includes('/patients')) {
         $('.patient-list-item').addClass('selected');
@@ -79,7 +81,7 @@ function changeSelectedItem(url) {
         $('.reminder-item').addClass('selected');
     } else if (url.includes('/users/settings')) {
         $('.settings-item').addClass('selected');
-    }
+    } 
 }
 /**
  * Function used to display real time on main menu
