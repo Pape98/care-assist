@@ -1,5 +1,5 @@
 // * Source: https://developer.here.com/blog/geofencing-regions-with-javascript-and-here
-/*global H*/
+
 class Location {
     constructor(lat, long) {
         this.lat = lat;
@@ -8,9 +8,10 @@ class Location {
 }
 
 const zachry = new Location(30.621356, -96.340493)
+const centerMap = new Location(30.620635, -96.341027)
 
 class HereMap {
-    constructor(appId, apiKey, mapElement) {
+    constructor(appId, apiKey, mapElement, PatientLocation) {
         this.appId = appId;
         this.apiKey = apiKey,
             this.platform = new H.service.Platform({
@@ -24,11 +25,11 @@ class HereMap {
         this.map = new H.Map(
             mapElement,
             defaultLayers.vector.normal.map, {
-                zoom: 16,
+                zoom: 16.5,
                 pixelRatio: window.devicePixelRatio || 1,
                 center: {
-                    lat: zachry.lat,
-                    lng: zachry.long
+                    lat: centerMap.lat,
+                    lng: centerMap.long
                 }
             }
         );
@@ -43,33 +44,35 @@ class HereMap {
         window.addEventListener('resize', () => this.map.getViewPort().resize());
         this.geofencing = this.platform.getGeofencingService();
         this.currentPosition = new H.map.Marker({
-            lat: zachry.lat,
-            lng: zachry.long
+            lat: PatientLocation.lat,
+            lng: PatientLocation.long
         });
         this.map.addObject(this.currentPosition);
         // console.log("Current Position:" + this.currentPosition.getGeometry())
+        this.getAddress();
+        this.isWithinFence();
 
-        this.map.addEventListener("tap", (ev) => {
-            var target = ev.target;
-            this.map.removeObject(this.currentPosition);
-            this.currentPosition = new H.map.Marker(this.map.screenToGeo(ev.currentPointer.viewportX, ev.currentPointer.viewportY));
-            this.map.addObject(this.currentPosition);
-            this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
-                if (result.geometries.length > 0) {
-                    // var bubble = new H.ui.InfoBubble({
-                    //     lng: zachry.long,
-                    //     lat: zachry.lat
-                    // }, {
-                    //     content: '<b>Pape is within Fence!</b>'
-                    // });
-                    // // Add info bubble to the UI:
-                    // ui.addBubble(bubble);
-                    alert(" Within a geofence!");
-                } else {
-                    alert("Not within a geofence!");
-                }
-            });
-        }, false);
+        // this.map.addEventListener("tap", (ev) => {
+        //     var target = ev.target;
+        //     this.map.removeObject(this.currentPosition);
+        //     this.currentPosition = new H.map.Marker(this.map.screenToGeo(ev.currentPointer.viewportX, ev.currentPointer.viewportY));
+        //     this.map.addObject(this.currentPosition);
+        //     this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
+        //         if (result.geometries.length > 0) {
+        //             // var bubble = new H.ui.InfoBubble({
+        //             //     lng: zachry.long,
+        //             //     lat: zachry.lat
+        //             // }, {
+        //             //     content: '<b>Pape is within Fence!</b>'
+        //             // });
+        //             // // Add info bubble to the UI:
+        //             // ui.addBubble(bubble);
+        //             alert(" Within a geofence!");
+        //         } else {
+        //             alert("Not within a geofence!");
+        //         }
+        //     });
+        // }, false);
     }
     draw(mapObject) {
         this.map.addObject(mapObject);
@@ -113,11 +116,46 @@ class HereMap {
             );
         });
     }
-}
 
-const start = async () => {
+    getAddress() {
+        var lat = this.currentPosition.getGeometry().lat;
+        var lng = this.currentPosition.getGeometry().lng;
+        var url = "https://reverse.geocoder.ls.hereapi.com/6.2/reversegeocode.json?apiKey=oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao&mode=retrieveAddresses";
+        var params = "&prox=" + lat + "," + lng;
+
+        fetch(url + params)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (jsonResponse) {
+                var address = jsonResponse.Response.View[0].Result[0].Location.Address.Label;
+                $('#addressHeader').after("<p>" + address + "</p>");
+            });
+    }
+
+    isWithinFence() {
+        this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
+            if (result.geometries.length > 0) {
+                // var bubble = new H.ui.InfoBubble({
+                //     lng: zachry.long,
+                //     lat: zachry.lat
+                // }, {
+                //     content: '<b>Pape is within Fence!</b>'
+                // });
+                // // Add info bubble to the UI:
+                // ui.addBubble(bubble);
+                alert(" Within a geofence!");
+            } else {
+                alert("Not within a geofence!");
+            }
+        });
+    }
+}
+const start = async (lat, long) => {
+    var PatientLocation = new Location(lat, long);
+
     var map = new HereMap("xqbdoZAQ7svDzIG0eLzH", "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao",
-        document.getElementById('map'));
+        document.getElementById('map'), PatientLocation);
     const lineStringZachry = new H.geo.LineString();
     lineStringZachry.pushPoint({
         lat: 30.621550,
@@ -173,4 +211,3 @@ const start = async () => {
         "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao", map.polygonToWKT(
             blocker))
 };
-start();

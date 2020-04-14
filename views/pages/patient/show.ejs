@@ -217,7 +217,7 @@
                                 </div>
                             </div>
                             <div class="ui bottom attached tab segment active" data-tab="third">
-                                <div class="ui container grid" style="margin-bottom: 3vh;">
+                                <div class="ui container grid" style="margin-bottom: 2vh;">
                                     <div class="one column row">
                                         <div class="ui tiny blue header">Current Location</div>
                                     </div>
@@ -233,6 +233,12 @@
                                         <div class="four wide center aligned  column">
                                             <div class="ui small grey header">Is Inside Geofence?</div>
                                             <div class="ui green label">YES</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="sixteen wide column" style=" padding-left: 0;">
+                                            <div class="ui small grey header" id="addressHeader">Address Approximation
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -396,5 +402,9 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://stuk.github.io/jszip/dist/jszip.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/geofence.js"></script>
+<script>
+    start(30.621356, -96.340493)
+</script>
+
 
 <% include ../../partials/footer %>
