@@ -1,0 +1,137 @@
+<% include ../../partials/head %>
+<% include ../../partials/topmenu %>
+
+<div class="ui basic segment" id="main-segment">
+    <div class="ui stackable grid ">
+        <div class="row">
+            <div class="sixteen wide column" style="background: #1f1f21!important;padding:0 0 0 15vw;">
+                <div class="ui  large  breadcrumb" style="margin: 30px 0 ;">
+                    <a href='/users/home' class="ft-white section">Home</a>
+                    <i class="right ft-white chevron icon divider"></i>
+                    <a href='/patients' class="ft-white section">Patients List</a>
+                    <i class="right ft-white chevron icon divider"></i>
+                    <a class="active ft-white section"><%=patient.first_name%> <%=patient.last_name %></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="two wide column">
+                <% include ../../partials/sidebar %>
+            </div>
+            <div class="fourteen wide column pd-0">
+                <div class="ui basic segment">
+                    <div class="ui internally celled grid" style="margin-top: 30px;">
+                        <div class="row">
+                            <div class=" centered fourteen wide column">
+
+                                <div class="ui stackable grid">
+                                    <div class="row">
+                                        <div class=" four wide column">
+                                            <div class=" ui center aligned container " style="height: 100%">
+                                                <h2 class="ui blue header"> <%=patient.first_name%>
+                                                    <%=patient.last_name %></h2>
+                                                <img class="ui centered small circular image"
+                                                    src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
+                                                    alt="">
+                                                <a href="#">
+                                                    <div class="ui blue fluid button" style="margin-top: 17px;">Change
+                                                        Profile Picture</div>
+                                                </a>
+                                                <a href="/patients/<%=patient._id%>">
+                                                    <div class="ui green fluid button" style="margin-top: 17px;">Save
+                                                        Changes</div>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="twelve wide column">
+                                            <div class="row">
+                                                <div class="ui container " style="height: 100%">
+                                                    <div class="ui grid">
+                                                        <div class="row">
+                                                            <div class="eleven wide column">
+                                                                <h3 class='ui blue header'>PATIENT INFORMATION</h3>
+                                                                <div class="ui fluid form">
+                                                                    <div class="three fields">
+                                                                        <div class="field">
+                                                                            <label>Gender</label>
+                                                                            <input type="text" value="Male">
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label>Age</label>
+                                                                            <input type="text" value="32">
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label>Marital Status</label>
+                                                                            <input type="text" value="Married">
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                    <div class="three fields">
+                                                                        <div class="field">
+                                                                            <label>Blood Type</label>
+                                                                            <select name="blood_type"
+                                                                                class="ui dropdown">
+                                                                                <option value=""></option>
+                                                                                <option value="AB">AB-</option>
+                                                                                <option value="AB+">AB+</option>
+                                                                                <option value="A+">A+</option>
+                                                                                <option value="A-">A-</option>
+                                                                                <option value="B+">B+</option>
+                                                                                <option value="B-">B-</option>
+                                                                                <option value="O+">O+</option>
+                                                                                <option value="O-">O-</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label>Room Number</label>
+                                                                            <input type="text" value="32">
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label>Date Registered</label>
+                                                                            <input type="text" value="April 2020" readonly="">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="two fields">
+                                                                        <div class="field">
+                                                                            <label>Emergency Name</label>
+                                                                            <input type="text" value="Pape Traore">
+                                                                        </div>
+                                                                        <div class="field">
+                                                                            <label>Emergency Contact</label>
+                                                                            <input type="text" value="(322)-349-2394">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="five wide column">
+                                                                <h3 class="ui blue header">SPECIAL NEEDS</h3>
+                                                                <p>Many desktop publishing packages and web page editors
+                                                                    now use
+                                                                    Lorem
+                                                                    Ipsum as their default model text, and a search for
+                                                                    'lorem
+                                                                    ipsum'
+                                                                    will uncover many web sites still in their infancy.
+                                                                </p>
+                                                                <h3 class="ui blue header">NOTES</h3>
+                                                                <p>None</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include ../../partials/footer %>

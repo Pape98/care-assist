@@ -2,14 +2,11 @@
     DATABASE SCHEMA for Users (Caretakers)
 */
 
-// TODO: Redis swap
-// TESTING: Using mongoose db platform
 const mongoose = require('mongoose');
 
-// TODO: Redis swap
 // Define user attributes
 const userSchema = new mongoose.Schema({
-    name:{
+    first_name:{
         type: String,
         required: true
     },
@@ -31,7 +28,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-// TODO: Redis swap
 // Export module name and schema
 const User = mongoose.model('User', userSchema);
 module.exports = User;

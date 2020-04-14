@@ -1,146 +1,175 @@
 <% include ../../partials/head %>
 <% include ../../partials/topmenu %>
 
-<div class="ui bottom attached segment">
-    <% include ../../partials/sidebar %>
-    <!-- START OF PUSHER SIDEBAR-->
-    <div class="pusher">
-        <div class="ui basic segment">
-            <div class="ui  internally celled grid">
-                <div class="row">
-                    <div class="sixteen wide column pd-0">
-                        <div class="ui secondary menu">
-                            <h3 class="ui item header">
-                                <i class="user big ft-ruber icon"></i>
-                                <div class="content">
-                                    Patient List
-                                </div>
-                            </h3>
-                            <div class="item ft-ruber" style="font-weight: bold;">
-                                List
-                            </div>
-                            <div class="item">
-                                Thumbnail
-                            </div>
-                            <div class="right menu">
-                                <div class="inverted item">
-                                    <div class="ui icon input">
-                                        <input type="text" placeholder="Search...">
-                                        <i class="search link icon"></i>
-                                    </div>
-                                </div>
-                                <a class="ui item">
-                                    <i class="add ft-ruber circular icon"></i>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-
+<div class="ui basic segment" id="main-segment">
+    <div class="ui stackable grid ">
+        <div class="row">
+            <div class="sixteen wide column" style="padding:0 0 0 15vw;">
+                <div class="ui  inverted large  breadcrumb" style="margin: 30px 0 ;">
+                    <a href='/users/home' class="section">Home</a>
+                    <i class="right  chevron icon divider"></i>
+                    <div href='/patients' class="active section">Patients List</div>
                 </div>
-                <div class="row pd-0">
-                    <div class="center-content three wide column">
-                        <div class="ui mini horizontal statistic">
-                            <div class="value ft-ruber">
-                                2,204
-                            </div>
-                            <div class="label">
-                                Patients
-                            </div>
-                        </div>
-                    </div>
-                    <div class="thirteen wide column">
-                        <div class="ui secondary menu">
-                            <div class="item ">
-                                <span style="margin-right: 20px; font-size: 15px;">Sort By </span>
-                                <div class="ui selection dropdown">
-                                    <input type="hidden" name="gender">
-                                    <i class="dropdown icon"></i>
-                                    <div class="default text">Gender</div>
-                                    <div class="menu">
-                                        <div class="item" data-value="1">Male</div>
-                                        <div class="item" data-value="0">Female</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="right menu">
-                                <div class="item">
-                                    <div class="ui icon button">
-                                        <i class="print icon"></i>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="ui button">
-                                        <i class="filter icon"></i>
-                                        Filter
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <button class="ui button">
-                                        <i class="icon pencil"></i>
-                                        edit column
-                                    </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="two wide column">
+                <% include ../../partials/sidebar %>
+            </div>
+            <div class="fourteen wide centered column">
+                <div class="ui grid" id="main-grid">
+                    <% if(success.length != 0){ %>
+                    <div class="one column row">
+                        <div class="column pd-0">
+                            <div class="ui floating large success message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=success[0]%>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <% } %>
+                    <div class="one row left aligned  column">
+                        <div class="ui large header">Facicility Summary</div>
+                    </div>
 
-                <div class="ui row">
-                    <div class="ui segment container"style="margin-top:40px" >
-                        <table class="ui very basic table">
-                            <thead>
-                                <tr>
-                                    <th>Basic Info</th>
-                                    <th>Phone Number </th>
-                                    <th>City</th>
-                                    <th>Age</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td>
-                                        <h4 class="ui image header">
-                                            <img src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
-                                                class="ui big rounded image">
-                                            <div class="content">
-                                                Lena Diane
-                                                <div class="sub header">diane@example.com</div>
-                                            </div>
-                                        </h4>
-                                    </td>
-                                    <td>202-555-0120</td>
-                                    <td>College Station</td>
-                                    <td>23</td>
-                                    <td>sss</td>
-                                </tr>
-                                <tr class="">
-                                    <td>
-                                        <h4 class="ui image header">
-                                            <img src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
-                                                class="ui big rounded image">
-                                            <div class="content">
-                                                Joseph Martin
-                                                <div class="sub header">diane@example.com
-                                                </div>
-                                            </div>
-                                        </h4>
-                                    </td>
-                                    <td>202-342-0120</td>
-                                    <td>Arlington Station</td>
-                                    <td>56</td>
-                                    <td>sss</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="four column row">
+                        <div class="column">
+                            <div class="ui segment grid" style="padding: 20px 0;">
+                                <div class="six wide center center-content column">
+                                    <i class="hospital orange huge icon"></i>
+                                </div>
+                                <div class="ten wide column">
+                                    <div class="ui statistic">
+                                        <div class="value">
+                                            <%=patients.length%>
+                                        </div>
+                                        <div class="label">
+                                            Total Patients
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui segment grid" style="padding: 20px 0;">
+                                <div class="six wide center center-content column">
+                                    <i class="users brown huge icon"></i>
+                                </div>
+                                <div class="ten wide column">
+                                    <div class="ui statistic">
+                                        <div class="value">
+                                            394
+                                        </div>
+                                        <div class="label">
+                                            Available Staff
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui segment grid" style="padding: 20px 0;">
+                                <div class="six wide center center-content column">
+                                    <i class="ambulance  teal huge icon"></i>
+                                </div>
+                                <div class="ten wide column">
+                                    <div class="ui statistic">
+                                        <div class="value">
+                                            28
+                                        </div>
+                                        <div class="label">
+                                            Available Cars
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="ui segment grid" style="padding: 20px 0;">
+                                <div class="six wide center center-content column">
+                                    <i class="stethoscope  yellow huge icon"></i>
+                                </div>
+                                <div class="ten wide column">
+                                    <div class="ui statistic">
+                                        <div class="value">
+                                            63
+                                        </div>
+                                        <div class="label">
+                                            Patients
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="row">
+                        <div class="twelve wide column">
+                            <div class="ui segment">
+                                <div class="ui header">Outpatients vs Inpatients Trend</div>
+                                <canvas id="inOutChart" onload="drawHinOutChart()" height="120" width="300"></canvas>
+                            </div>
+                        </div>
+                        <div class="four wide column">
+                            <div class="ui segment" style="height: 100%">
+                                <div class="ui header">Patients by gender</div>
+                                <canvas id="genderChart" onload="drawGenderChart()" height="120" width="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="one row left aligned  column">
+                        <div class="ui big header">Patients Summary</div>
+                    </div>
+                    <div class="one column row">
+                        <div class="centered column">
+                            <div class="ui segment " style="width: 100%;">
+                                <table class="ui very basic striped table">
+                                    <thead>
+                                        <tr>
+                                            <th>Basic Info</th>
+                                            <th>ID Number</th>
+                                            <th>Emergency Contact Name</th>
+                                            <th>Emergency Contact Number</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% patients.forEach(function(patient){ %>
+                                        <tr class="">
+                                            <td>
+                                                <h4 class="ui image header">
+                                                    <img src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
+                                                        class="ui big rounded image">
+                                                    <div class="content">
+                                                        <%=patient.first_name%> <%=patient.last_name%>
+
+                                                    </div>
+                                                </h4>
+                                            </td>
+                                            <td><%=patient._id%></td>
+                                            <td><%=patient.emergency['full_name']%></td>
+                                            <td><%=patient.emergency['phone_number']%></td>
+                                            <td><a href="/patients/<%=patient._id%>">View</a></td>
+                                        </tr>
+                                        <%})%>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- END OF PUSHER SIDEBAR-->
 </div>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="/javascripts/graph.js"></script>
 <% include ../../partials/footer %>

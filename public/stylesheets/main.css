@@ -14,6 +14,12 @@
 .bg-saffron {
   background: #f7b232 !important; }
 
+.bg-grey {
+  background: #f2f5fa !important; }
+
+.bg-blue {
+  background: #0E6EB8 !important; }
+
 /*  ************* Font Colors ************/
 .ft-ruber {
   color: #df4775 !important; }
@@ -33,16 +39,13 @@
 .ft-white {
   color: white  !important; }
 
+.ft-black {
+  color: #212121 !important; }
+
 /* ********************************************/
 .basic.segment {
   padding: 0.2px 0 0 0 !important;
   margin: 0 !important; }
-
-.bottom.segment {
-  padding: 0 !important;
-  margin: 0 !important;
-  height: 100%;
-  background: #f2f5fa; }
 
 .bg-img {
   text-align: center;
@@ -52,7 +55,7 @@
 
 .bg-img > h1 {
   font-size: 5vw;
-  color: #edd170; }
+  color: #FFD700; }
 
 .center-content {
   display: flex !important;
@@ -75,14 +78,24 @@
   margin: 0 !important; }
 
 .home-menu > .long {
-  height: 23vh !important; }
+  height: 31.166666vh !important; }
 
 html, body {
-  height: 100%; }
+  height: 100%;
+  background: #f2f5fa;
+  font-family: Verdana, Geneva, sans-serif !important; }
+
+.height-100 {
+  height: 100% !important; }
+
+.height-inherit {
+  height: inherit !important; }
+
+.item {
+  font-family: Verdana, Geneva, sans-serif !important; }
 
 .landing h1 {
-  font-size: 7vw;
-  color: #f7b232; }
+  font-size: 7vw; }
 
 .landing p {
   font-size: 2.5vw;
@@ -96,16 +109,24 @@ html, body {
 #login-grid > .row {
   padding: 0 !important; }
 
-.main-grid {
-  margin: 0 !important;
-  padding: 0;
-  height: 100vh; }
+.mg-0 {
+  padding: 0 !important; }
+
+#main-segment {
+  height: 100% !important;
+  padding-top: 7.8vh !important; }
+
+#main-grid {
+  margin: 0 3vw  !important; }
+
+.menu-item:hover {
+  opacity: 0.9 !important; }
 
 .pd-0 {
   padding: 0 !important; }
 
-.puhser {
-  height: auto !important; }
+.selected {
+  background: #1f1f21 !important; }
 
 .settings {
   padding: 0 !important;
@@ -134,9 +155,36 @@ html, body {
   text-decoration: none; }
 
 .profile-menu {
-  font-size: 1.35rem; }
+  ont-size: 1.35rem; }
 
 #orange-save {
   box-shadow: 0px 2px 5px #773a19; }
+
+.ui.header {
+  font-family: Verdana, Geneva, sans-serif !important; }
+
+.vertical.menu > .center-content {
+  height: 18.7vh !important; }
+
+#overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(110, 118, 125, 0.4);
+  z-index: 2;
+  cursor: pointer; }
+
+#text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%); }
 
 /*# sourceMappingURL=main.css.map */

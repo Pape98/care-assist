@@ -1,4 +1,6 @@
-$red            : #B03060;
+$font: Verdana,Geneva,sans-serif 
+
+$red          : #B03060;
 $orange         : #FE9A76;
 $yellow         : #FFD700;
 $olive          : #32CD32;
@@ -35,6 +37,11 @@ $saffron: #f7b232;
 .bg-saffron   
   background: $saffron  !important
 
+.bg-grey
+  background: #f2f5fa !important
+
+.bg-blue
+  background:  #0E6EB8 !important
 
 /*  ************* Font Colors ************/
 
@@ -56,17 +63,14 @@ $saffron: #f7b232;
 .ft-white   
   color: white  !important
 
+.ft-black   
+  color:   #212121 !important
+
 /* ********************************************/
 
 .basic.segment
   padding: 0.2px 0 0 0!important
   margin: 0 !important
-
-.bottom.segment
-  padding: 0 !important
-  margin: 0 !important
-  height: 100%
-  background: #f2f5fa
 
 .bg-img
   text-align: center
@@ -76,7 +80,7 @@ $saffron: #f7b232;
 
 .bg-img > h1
   font-size: 5vw
-  color: #edd170
+  color: $yellow
 
 .center-content
   display: flex !important
@@ -99,15 +103,27 @@ $saffron: #f7b232;
   margin: 0 !important
   
 .home-menu > .long
-  height: 23vh !important
+  //height: 23.375vh !important
+  height: 31.166666vh !important
 
 html, body
   height: 100%
+  background: #f2f5fa;
+  font-family: $font !important
+
+
+.height-100
+  height: 100% !important
+
+.height-inherit
+  height: inherit !important
+
+.item
+  font-family: $font !important
 
 .landing
   h1
     font-size: 7vw
-    color: $saffron
 
   p
     font-size: 2.5vw
@@ -122,18 +138,26 @@ html, body
 #login-grid > .row
   padding: 0 !important
 
-.main-grid
-  margin: 0 !important
-  padding: 0
-  height: 100vh
-  
+
+.mg-0
+  padding: 0 !important
+
+#main-segment
+  height: 100% !important
+  padding-top: 7.8vh !important
+
+#main-grid
+  margin:  0 3vw  !important
+
+.menu-item:hover
+  opacity: 0.9 !important 
+
 .pd-0
   padding: 0 !important
 
-.puhser
-  height: auto !important
-  
-  
+.selected
+  background: #1f1f21 !important
+
 .settings
   padding: 0 !important
   margin: 0 !important
@@ -158,12 +182,39 @@ html, body
     padding-right: 0 !important
 
 #profile-link
-    color: #b7b7b7
-    text-decoration: none
+  color: #b7b7b7
+  text-decoration: none
 
 .profile-menu
-    font-size: 1.35rem
+    ont-size: 1.35rem
 
 #orange-save
-    box-shadow: 0px 2px 5px #773a19;
+  box-shadow: 0px 2px 5px #773a19;
 
+.ui.header
+  font-family: $font !important
+
+.vertical.menu > .center-content
+  height: 18.7vh !important
+
+#overlay 
+  position: fixed
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background-color: rgba(110, 118, 125, 0.4)
+  z-index: 2
+  cursor: pointer
+
+
+#text
+  position: absolute
+  top: 50%
+  left: 50%
+  font-size: 50px
+  color: white
+  transform: translate(-50%,-50%)
+  -ms-transform: translate(-50%,-50%)

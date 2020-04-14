@@ -1,0 +1,193 @@
+<% include ../../partials/head %>
+<% include ../../partials/topmenu %>
+
+<div class="ui basic segment" id="main-segment">
+    <div class="ui stackable grid height-inherit">
+        <div class="row">
+            <div class="sixteen wide column" style="padding:0 0 0 15vw;">
+                    <div class="ui large  breadcrumb" style="margin: 30px 0 ;">
+                        <a href='/users/home' class=" section">Home</a>
+                        <i class="right chevron icon divider"></i>
+                        <div class="active section">Profile</div>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="two wide column">
+                <% include ../../partials/sidebar %>
+            </div>
+            <div class="fourteen wide column">
+                <div class="ui centered container" id="">
+
+                    <div class="ui stackable grid">
+                        <div class="centered row">
+                            <div class=" four wide column">
+                                <img class="ui medium rounded image"
+                                    src="https://files.brightside.me/files/news/part_65/658960/8141310-image-crop-1517x1585-1544022651-728-1680c03dbb-1544090549.jpg">
+                            </div>
+                            <div class="seven wide column">
+                                <div class="ui flud segment">
+                                    <div class="ui small grey header">Name</div>
+                                        <p>Pape</p>
+                  
+                                        <div class="ui small grey header"> Email Address</div>
+                                        <p>papisline2222@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="ui fluid styled accordion" style="margin: 40px 0">
+                                <div class="title">
+                                    <h2 class="ui header">
+                                        <i class="edit icon"></i>
+                                        <div class="content">
+                                            Edit Personal Information
+                                        </div>
+                                    </h2>
+                                </div>
+                                <div class="content">
+                                    <form action="" class="ui form">
+                                        <div class="field">
+                                            <label> First Name</label>
+                                            <input type="text" type="text">
+                                        </div>
+                                        <div class="field">
+                                            <label> Last Name</label>
+                                            <input type="text" type="text">
+                                        </div>
+                                        <div class="field">
+                                            <label> Email</label>
+                                            <input type="text" type="text">
+                                        </div>
+                                        <div class="ui yellow submit button">Save</div>
+                                    </form>
+                                </div>
+                                <div class="title">
+                                    <h2 class="ui header">
+                                        <i class="edit icon"></i>
+                                        <div class="content">
+                                            Manage Users
+                                        </div>
+                                    </h2>
+
+                                </div>
+                                <div class="content">
+                                    <table class="ui selectable very basic  striped table ">
+                                        <thead>
+                                            <tr>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Joe</td>
+                                                <td>Smith</td>
+                                                <td>test@peerteach.edu</td>
+                                                <td>
+                                                    <button type="submit" class="ui basic red button">Delete</button>
+                                                </td>
+
+                                            <tr>
+                                                <td>Pape</td>
+                                                <td>Traore</td>
+                                                <td>papisline2222@gmail.com</td>
+                                                <td>
+                                                    <button type="submit" class="ui basic red button">Delete</button>
+                                                </td>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="title">
+                                    <h2 class="ui header">
+                                        <i class="edit icon"></i>
+                                        <div class="content">
+                                            Add a User
+                                        </div>
+                                    </h2>
+                                </div>
+                                <div class="content">
+                                    <form action="/users/register" method="post" class="ui  form">
+                                        <div class="ui error message"></div>
+                                        <div class="field">
+                                            <label>Email</label>
+                                            <input type="text" name="email" placeholder="Email">
+                                        </div>
+                                        <div class="field">
+                                            <label>First Name</label>
+                                            <input type="text" name="first_name" placeholder="First Name">
+                                        </div>
+                                        <div class="field">
+                                            <label>Last Name</label>
+                                            <input type="text" name="last_name" placeholder="Last Name">
+                                        </div>
+
+                                        <div class="field">
+                                            <label>Password</label>
+                                            <input type="password" name="password" placeholder="Confirm Password">
+                                        </div>
+                                        <div class="field">
+                                            <label>Confirm Password</label>
+                                            <input type="password" name="password2" placeholder="Confirm Password">
+                                        </div>
+
+                                        <button class="ui yellow button" type="submit">Save</button>
+                                    </form>
+                                </div>
+                                <div class="title">
+                                    <h2 class="ui header">
+                                        <i class="edit icon"></i>
+                                        <div class="content">
+                                            Edit Password
+                                        </div>
+                                    </h2>
+                                </div>
+                                <div class="content">
+                                    <form action="/changePassword" method="post" class="ui form">
+                                        <div class="ui error message"> </div>
+                                        <div class="field">
+                                            <label>Current Password</label>
+                                            <input type="password" name="current_password"
+                                                placeholder="Current Password">
+                                        </div>
+                                        <div class="field">
+                                            <label>New Password</label>
+                                            <input type="password" name="new_password" placeholder="New Password"
+                                                id="new_password">
+                                        </div>
+                                        <div class="field">
+                                            <label>Confirm New Password</label>
+                                            <input type="password" name="confirm_new_password"
+                                                placeholder="Confirm Password">
+                                        </div>
+
+                                        <button class="ui yellow button" type="submit">Save</button>
+                                    </form>
+                                </div>
+                                <!-- <div class="title">
+        
+                                </div>
+                                <div class="content">
+                
+                                </div>
+                                <div class="title">
+        
+                                </div>
+                                <div class="content">
+                
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include ../../partials/footer %>
