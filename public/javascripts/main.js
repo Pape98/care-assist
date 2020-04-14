@@ -61,10 +61,6 @@ function makeInteractive() {
                 .closest('.message')
                 .transition('fade');
         });
-    $('#mapModalButton').click(function () {
-        $('.ui.modal')
-            .modal('show');
-    })
 }
 
 
@@ -121,8 +117,9 @@ function showTime() {
 }
 
 function edit() {
-    $('.ui.small.modal')
-        .modal('show');
+    $('.ui.small.modal').modal({
+        blurring: true
+    }).modal('show');
 }
 
 function selectGender() {

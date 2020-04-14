@@ -8,6 +8,10 @@ router.get('/new', function (req, res, next) {
   res.render('pages/patient/new')
 });
 
+router.get('/map', function (req, res, next) {
+  res.render('pages/patient/map')
+});
+
 /** POST new patient form */
 router.post('/', function (req, res, next) {
 
