@@ -6,6 +6,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const password = require('../config/password');
 var moment = require('moment');
 const { ensureAuthenticated } = require('../config/auth');
 
@@ -101,7 +102,7 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
     // Compare new passwords 
     if (new_password == confirm_new_password) {
         // Verify user
-        bcrypt.compare(current_password, req.user.password, function(err, isMatch) {
+        bcrypt.compare(current_password, req.user.password, (err, isMatch) => {
             if (isMatch) {
                 // Hash password and update
                 bcrypt.genSalt(10, (err, salt) => {
@@ -139,6 +140,7 @@ router.get('/resetRequest', ensureReset, function (req, res, next) {
     res.render('pages/landing/resetRequest');
 });
 
+
 /* 
     Reset Password Handle
     TODO
@@ -160,13 +162,14 @@ router.post('/resetRequest', (req, res) => {
                     else {
                         // TODO: Flash message with user notification
                         req.flash('success', 'An email with instructions has been sent to the associated address');
-                        // TODO: Send email
+                        password.recover();
 
                     }
                 })
                 .catch(err => console.log(err));
     return res.redirect('pages/landing/resetRequest');
 });
+
 
 
 
@@ -184,7 +187,7 @@ router.get('/reset', ensureReset, function (req, res, next) {
 */
 router.post('/reset', (req, res) => {
     // TODO: Pass in user email
-    
+
     // TODO: Ensure user has token permission to access route
     // Get post params
     const {
