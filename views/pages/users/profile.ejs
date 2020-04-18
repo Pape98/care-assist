@@ -2,192 +2,191 @@
 <% include ../../partials/topmenu %>
 
 <div class="ui basic segment" id="main-segment">
-    <div class="ui stackable grid height-inherit">
+    <div class="ui stackable grid">
         <div class="row">
-            <div class="sixteen wide column" style="padding:0 0 0 15vw;">
-                    <div class="ui large  breadcrumb" style="margin: 30px 0 ;">
-                        <a href='/users/home' class=" section">Home</a>
-                        <i class="right chevron icon divider"></i>
-                        <div class="active section">Profile</div>
-                    </div>
+            <div class="sixteen wide column" style="padding-left: 16.5vw;">
+                <div class="ui large  breadcrumb" style="margin-top: 30px;">
+                    <a href='/users/home' class=" section">Home</a>
+                    <i class="right chevron icon divider"></i>
+                    <div class="active section">My Settings</div>
+                </div>
             </div>
         </div>
-        <div class="row">
+        <div class="centered row">
             <div class="two wide column">
                 <% include ../../partials/sidebar %>
             </div>
-            <div class="fourteen wide column">
-                <div class="ui centered container" id="">
+            <div class="eleven wide column">
+                <div class="ui top attached tabular menu">
+                    <a class="active item" data-tab="first">Personal Information</a>
+                    <a class="item" data-tab="second">Manage Users</a>
+                </div>
 
+                <div class="ui bottom attached tab segment active" data-tab="first">
+                    <div class="ui blue small header">Edit Personal Information</div>
                     <div class="ui stackable grid">
-                        <div class="centered row">
-                            <div class=" four wide column">
-                                <img class="ui medium rounded image"
-                                    src="https://files.brightside.me/files/news/part_65/658960/8141310-image-crop-1517x1585-1544022651-728-1680c03dbb-1544090549.jpg">
-                            </div>
-                            <div class="seven wide column">
-                                <div class="ui flud segment">
-                                    <div class="ui small grey header">Name</div>
-                                        <p>Pape</p>
-                  
-                                        <div class="ui small grey header"> Email Address</div>
-                                        <p>papisline2222@gmail.com</p>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
-                            <div class="ui fluid styled accordion" style="margin: 40px 0">
-                                <div class="title">
-                                    <h2 class="ui header">
-                                        <i class="edit icon"></i>
-                                        <div class="content">
-                                            Edit Personal Information
-                                        </div>
-                                    </h2>
-                                </div>
-                                <div class="content">
-                                    <form action="" class="ui form">
-                                        <div class="field">
-                                            <label> First Name</label>
-                                            <input type="text" type="text">
-                                        </div>
-                                        <div class="field">
-                                            <label> Last Name</label>
-                                            <input type="text" type="text">
-                                        </div>
-                                        <div class="field">
-                                            <label> Email</label>
-                                            <input type="text" type="text">
-                                        </div>
-                                        <div class="ui yellow submit button">Save</div>
-                                    </form>
-                                </div>
-                                <div class="title">
-                                    <h2 class="ui header">
-                                        <i class="edit icon"></i>
-                                        <div class="content">
-                                            Manage Users
-                                        </div>
-                                    </h2>
-
-                                </div>
-                                <div class="content">
-                                    <table class="ui selectable very basic  striped table ">
-                                        <thead>
-                                            <tr>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
-                                                <th>Email</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Joe</td>
-                                                <td>Smith</td>
-                                                <td>test@peerteach.edu</td>
-                                                <td>
-                                                    <button type="submit" class="ui basic red button">Delete</button>
-                                                </td>
-
-                                            <tr>
-                                                <td>Pape</td>
-                                                <td>Traore</td>
-                                                <td>papisline2222@gmail.com</td>
-                                                <td>
-                                                    <button type="submit" class="ui basic red button">Delete</button>
-                                                </td>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="title">
-                                    <h2 class="ui header">
-                                        <i class="edit icon"></i>
-                                        <div class="content">
-                                            Add a User
-                                        </div>
-                                    </h2>
-                                </div>
-                                <div class="content">
-                                    <form action="/users/register" method="post" class="ui  form">
-                                        <div class="ui error message"></div>
-                                        <div class="field">
-                                            <label>Email</label>
-                                            <input type="text" name="email" placeholder="Email">
-                                        </div>
-                                        <div class="field">
-                                            <label>First Name</label>
-                                            <input type="text" name="first_name" placeholder="First Name">
-                                        </div>
-                                        <div class="field">
-                                            <label>Last Name</label>
-                                            <input type="text" name="last_name" placeholder="Last Name">
-                                        </div>
-
-                                        <div class="field">
-                                            <label>Password</label>
-                                            <input type="password" name="password" placeholder="Confirm Password">
-                                        </div>
-                                        <div class="field">
-                                            <label>Confirm Password</label>
-                                            <input type="password" name="password2" placeholder="Confirm Password">
-                                        </div>
-
-                                        <button class="ui yellow button" type="submit">Save</button>
-                                    </form>
-                                </div>
-                                <div class="title">
-                                    <h2 class="ui header">
-                                        <i class="edit icon"></i>
-                                        <div class="content">
-                                            Edit Password
-                                        </div>
-                                    </h2>
-                                </div>
-                                <div class="content">
-                                    <form action="/changePassword" method="post" class="ui form">
-                                        <div class="ui error message"> </div>
-                                        <div class="field">
-                                            <label>Current Password</label>
-                                            <input type="password" name="current_password"
-                                                placeholder="Current Password">
-                                        </div>
-                                        <div class="field">
-                                            <label>New Password</label>
-                                            <input type="password" name="new_password" placeholder="New Password"
-                                                id="new_password">
-                                        </div>
-                                        <div class="field">
-                                            <label>Confirm New Password</label>
-                                            <input type="password" name="confirm_new_password"
-                                                placeholder="Confirm Password">
-                                        </div>
-
-                                        <button class="ui yellow button" type="submit">Save</button>
-                                    </form>
-                                </div>
-                                <!-- <div class="title">
-        
-                                </div>
-                                <div class="content">
-                
-                                </div>
-                                <div class="title">
-        
-                                </div>
-                                <div class="content">
-                
-                                </div> -->
+                            <div class="three wide column" style="margin-left: 1.5vh;">
+                                <img class="ui small rounded image" src="/images/pic1.jpeg">
+                            </div>
+                            <div class="three wide column">
+                                <br>
+                                <div class="ui header">Pape Traore</div>
+                                <div class="ui small grey header" style="margin: 0px;">papisline2222@gmail.com</div>
                             </div>
                         </div>
                     </div>
-
-
+                    <br>
+                    <div class="content">
+                        <form action="" method="post" class="ui form">
+                            <div class="two fields">
+                                <div class="five wide field">
+                                    <label>First Name</label>
+                                    <input type="text" name="current_password" placeholder="First Name">
+                                </div>
+                                <div class="five wide field">
+                                    <label>Last Name</label>
+                                    <input type="text" name="new_password" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="two fields">
+                                <div class="four wide field">
+                                    <label>Email Address</label>
+                                    <input type="email" name="email_address" placeholder="Email">
+                                </div>
+                                <div class="four wide field">
+                                    <label>Confirm Email Address</label>
+                                    <input type="email" name="confirm_email_address" placeholder="Confirm Email">
+                                </div>
+                            </div>
+                            <button class="ui green button" type="submit">Save Changes</button>
+                            <button class="ui red deny centered icon button" type="reset"> Reset Fields </button>
+                        </form>
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui blue small header">Edit Password</div>
+                    <div class="content">
+                        <form action="/changePassword" method="post" class="ui form">
+                            <div class="ui error message"> </div>
+                            <div class="five wide field">
+                                <label>Current Password</label>
+                                <input type="password" name="current_password" placeholder="Current Password">
+                            </div>
+                            <div class="five wide field">
+                                <label>New Password</label>
+                                <input type="password" name="new_password" placeholder="New Password" id="new_password">
+                            </div>
+                            <div class="five wide field">
+                                <label>Confirm New Password</label>
+                                <input type="password" name="confirm_new_password" placeholder="Confirm Password">
+                            </div>
+                            <button class="ui green button" type="submit">Save Changes</button>
+                            <button class="ui red deny centered icon button" type="reset"> Reset Fields </button>
+                        </form>
+                    </div>
                 </div>
+
+                <div class="ui bottom attached tab segment" data-tab="second">
+                    <div class="ui blue small header">Delete Caretakers</div>
+                    <div class="ui cards">
+                        <div class="red card">
+                            <div class="image">
+                                <img src="/images/pic1.jpeg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Matt Giampietro</div>
+                                <div class="meta">
+                                    <a>test@test.com</a>
+                                </div>
+                                <div class="description">
+                                    Matthew is an interior designer living in New York.
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui bottom attached basic red button">Delete User</div>
+                            </div>
+                        </div>
+                        <div class="green card">
+                            <div class="image">
+                                <img src="/images/pic2.jpg">
+                            </div>
+                            <div class="content">
+                                <div class="header">Molly</div>
+                                <div class="meta">
+                                    <span class="date">Coworker</span>
+                                </div>
+                                <div class="description">
+                                    Molly is a personal assistant living in Paris.
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui bottom attached basic red button">Delete User</div>
+                            </div>
+                        </div>
+                        <div class="blue card">
+                            <div class="image">
+                                <img src="/images/pic3.png">
+                            </div>
+                            <div class="content">
+                                <div class="header">Elyse</div>
+                                <div class="meta">
+                                    <a>Coworker</a>
+                                </div>
+                                <div class="description">
+                                    Elyse is a copywriter working in New York.
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <div class="ui bottom attached basic red button">Delete User</div>
+                            </div>
+                        </div>
+                        <!-- <i class="massive inverted grey arrow alternate circle right icon" style="padding-top:15vh; padding-left:5vh;"></i> -->
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui blue small header">Add New Caretaker</div>
+                    <div class="content">
+                        <form action="/changePassword" method="post" class="ui form">
+                            <div class="ui error message"> </div>
+                            <div class="two fields">
+                                <div class="five wide field">
+                                    <label>First Name</label>
+                                    <input type="text" name="current_password" placeholder="First Name">
+                                </div>
+                                <div class="five wide field">
+                                    <label>Last Name</label>
+                                    <input type="text" name="new_password" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="two fields">
+                                <div class="four wide field">
+                                    <label>Email Address</label>
+                                    <input type="email" name="email_address" placeholder="Email">
+                                </div>
+                                <div class="four wide field">
+                                    <label>Confirm Email Address</label>
+                                    <input type="email" name="confirm_email_address" placeholder="Confirm Email">
+                                </div>
+                            </div>
+                            <div class="two fields">
+                                <div class="four wide field">
+                                    <label>New Password</label>
+                                    <input type="password" name="new_password" placeholder="New Password"
+                                        id="new_password">
+                                </div>
+                                <div class="four wide field">
+                                    <label>Confirm New Password</label>
+                                    <input type="password" name="confirm_new_password" placeholder="Confirm Password">
+                                </div>
+                            </div>
+                            <button class="ui green button" type="submit">Save Changes</button>
+                            <button class="ui red deny centered icon button" type="reset"> Reset Fields </button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
-
 
 <% include ../../partials/footer %>
