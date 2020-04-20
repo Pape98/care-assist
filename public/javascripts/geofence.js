@@ -209,3 +209,42 @@ const start = async (lat, long) => {
     //     "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao", map.polygonToWKT(
     //         blocker))
 };
+
+class PatientsMap {
+    constructor(appId, apiKey, mapElement) {
+        this.appId = appId;
+        this.apiKey = apiKey,
+            this.platform = new H.service.Platform({
+                'apikey': apiKey
+            });
+
+        var defaultLayers = this.platform.createDefaultLayers();
+
+        this.map = new H.Map(
+            mapElement,
+            defaultLayers.vector.normal.map, {
+                zoom: 15,
+                center: {
+                    lat: centerMap.lat,
+                    lng: centerMap.long
+                }
+            }
+        );
+        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
+
+        var ui = H.ui.UI.createDefault(this.map, defaultLayers);
+
+        window.addEventListener('resize', () => this.map.getViewPort().resize());
+        this.geofencing = this.platform.getGeofencingService();
+        this.currentPosition = new H.map.Marker({
+            lat: centerMap.lat,
+            lng: centerMap.long
+        });
+        this.map.addObject(this.currentPosition);
+    }
+}
+
+const drawPatientsMap = () => {
+    var map = new PatientsMap("xqbdoZAQ7svDzIG0eLzH", "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao",
+        document.getElementById('allPatientsMap'));
+}

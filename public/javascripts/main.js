@@ -69,7 +69,9 @@ function makeInteractive() {
 function changeSelectedItem(url) {
     if (url.includes('/patients/new')) {
         $('.add-patient-item').addClass('selected');
-    } else if (url.includes('/patients/')) {
+    } else if (url.includes('/patients/map')) {
+        $('.map-item').addClass('selected');
+    }else if (url.includes('/patients/')) {
         // Do nothing
     } else if (url.includes('/patients')) {
         $('.patient-list-item').addClass('selected');
@@ -77,7 +79,7 @@ function changeSelectedItem(url) {
         $('.reminder-item').addClass('selected');
     } else if (url.includes('/users/settings')) {
         $('.settings-item').addClass('selected');
-    }
+    } 
 }
 /**
  * Function used to display real time on main menu
@@ -115,8 +117,9 @@ function showTime() {
 }
 
 function edit() {
-    $('.ui.small.modal')
-        .modal('show');
+    $('.ui.small.modal').modal({
+        blurring: true
+    }).modal('show');
 }
 
 function selectGender() {
@@ -152,7 +155,6 @@ function loader() {
 }
 
 function newPatientForm() {
-    
 
     if (url.includes('/patients/new')) {
         $('.emergency').hide();
@@ -206,7 +208,7 @@ function newPatientForm() {
     /**
      * For NEXT Buttons in New Patient Form
      */
-    $('#personalBack').click(function(){
+    $('#personalBack').click(function () {
         $('.step.one').addClass('active').removeClass('completed');
         $('.step.two').removeClass('active');
         $(this).hide();
@@ -216,16 +218,16 @@ function newPatientForm() {
         $('#emergencytNext').show();
     });
 
-    $('#emergencyBack').click(function(){
+    $('#emergencyBack').click(function () {
         $('.step.two').addClass('active').removeClass('completed');
         $('.step.three').removeClass('active');
         $(this).hide();
-       $('#reviewNext').hide();
-       $('.health').hide();
+        $('#reviewNext').hide();
+        $('.health').hide();
 
-       $('.emergency').show();
-       $('#healthtNext').show();
-       $('#personalBack').show();
+        $('.emergency').show();
+        $('#healthtNext').show();
+        $('#personalBack').show();
     });
 
 

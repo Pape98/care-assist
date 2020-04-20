@@ -33,7 +33,7 @@ const User = require('../models/User');
 router.get('/register', (req, res) => res.render('register'));
 
 // GET home page 
-router.get('/home', ensureAuthenticated, function (req, res, next) {
+router.get('/home', function (req, res, next) {
     var date = moment().format('MMMM Do YYYY');
     res.render('pages/users/home', {
         date: date

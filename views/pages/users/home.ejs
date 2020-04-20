@@ -1,7 +1,7 @@
 <% include ../../partials/head %>
 <% include ../../partials/topmenu %>
 
-<div class="ui basic segment" id="main-segment" >
+<div class="ui basic segment" id="main-segment">
     <div class="ui divided stackable grid home-menu">
         <div class="three column row long pd-0" style="background: #202021">
             <div class="column center-content">
@@ -13,7 +13,6 @@
                 </div>
             </div>
             <div class="column center-content">
-             
             </div>
             <div class="column center-content">
                 <h1 class="ui inverted  header">
@@ -30,7 +29,7 @@
                 </h1>
             </div>
         </div>
-        <div class="four column row long pd-0">
+        <div class="five column row long pd-0">
             <div class="column center-content menu-item bg-blue" onclick="window.location='/patients'">
                 <h2 class="ui inverted icon header ">
                     <i class="yellow users icon "></i>
@@ -55,11 +54,19 @@
                     </div>
                 </h2>
             </div>
+            <div class="column center-content menu-item bg-blue" onclick="window.location='/patients/map'">
+                <h2 class="ui inverted icon header">
+                    <i class="yellow map icon"></i>
+                    <div class="content">
+                        Patients Map
+                    </div>
+                </h2>
+            </div>
             <div class="column center-content menu-item bg-blue " onclick="window.location='/users/settings'">
                 <h2 class="ui inverted icon header ">
                     <i class="yellow wrench icon"></i>
                     <div class="content">
-                       My Settings
+                        My Settings
                     </div>
                 </h2>
             </div>
@@ -81,7 +88,7 @@
                 </i>
             </div>
             <div class="column center-content">
-                <div class="ui large header"style="margin-bottom: 40px;">Hospitalizations</div>
+                <div class="ui large header" style="margin-bottom: 40px;">Hospitalizations</div>
                 <i class="huge icons">
                     <i class="heartbeat icon"></i>
                     <span class="stats" style="border-color: #f9c66f;">11</span>
