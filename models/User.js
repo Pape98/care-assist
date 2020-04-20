@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
 
 // Generate random token & set validity time-frame
 // Valid for 2 hours (7200000ms)
-UserSchema.methods.generatePasswordReset = function() {
+userSchema.methods.generatePasswordReset = function() {
     this.resetPasswordToken = crypto.randomBytes(20).toString('hex');
     this.resetPasswordExpires = Date.now() + 7200000;
 };

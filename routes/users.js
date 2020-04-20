@@ -6,9 +6,13 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const password = require('../config/password');
+//const password = require('../controllers/password');
 var moment = require('moment');
 const { ensureAuthenticated } = require('../config/auth');
+
+// Mailer
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
 
 // User model
 const User = require('../models/User');
@@ -136,7 +140,7 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
 /* 
     Get reset password page
 */
-router.get('/resetRequest', ensureReset, function (req, res, next) {
+router.get('/resetRequest' /* , ensureReset */, function (req, res, next) {
     res.render('pages/landing/resetRequest');
 });
 
@@ -148,7 +152,7 @@ router.get('/resetRequest', ensureReset, function (req, res, next) {
 router.post('/resetRequest', (req, res) => {
     // Get post params
     const {
-        email,
+        email
     } = req.body;
     // Attempt to locate user
     User.findOne({ email: email })
@@ -156,18 +160,44 @@ router.post('/resetRequest', (req, res) => {
                     // If no match, return with no user param
                     if (!user) {
                         // TODO: Flash message with user notification
+                        console.log('No user associated with email');
                         req.flash('failure', 'No user associated with email');
                     }
                     // Send email with reset instructions & notify user
                     else {
                         // TODO: Flash message with user notification
                         req.flash('success', 'An email with instructions has been sent to the associated address');
-                        password.recover();
+                        console.log('User matched; recovering');
+                        
+                        user.generatePasswordReset();
+                        console.log('Generated Password Token');
+                        // Save the updated user object
+                        user.save()
+                            .then(user => {
+                                // send email
+                                let link = "http://" + req.headers.host + "/users/reset/" + user.resetPasswordToken;
+                                const mailOptions = {
+                                    to: user.email,
+                                    from: {"email" : "CareAssistHelp@gmail.com"},
+                                    subject: "CareAssist password reset",
+                                    text: `Hi ${user.username} \n 
+                                Please click on the following link ${link} to reset your password. \n\n`,
+                                };
 
+                                sgMail.send(mailOptions, (error, result) => {
+                                    if (error) {
+                                        console.log(error);
+                                        console.log(error.response.body);
+                                    } 
+                                    //res.status(200).json({message: 'A reset email has been sent to ' + user.email + '.'});
+                                    console.log('Success. Email sent.');
+                                });
+                            })
+                            .catch(err => console.log(err));
                     }
                 })
                 .catch(err => console.log(err));
-    return res.redirect('pages/landing/resetRequest');
+    return res.render('pages/landing/resetRequest');
 });
 
 
@@ -177,7 +207,7 @@ router.post('/resetRequest', (req, res) => {
     Get reset password page
     Using ensureReset middleware to verify token access to route/page
 */
-router.get('/reset', ensureReset, function (req, res, next) {
+router.get('/reset' /* , ensureReset */ , function (req, res, next) {
     return res.render('pages/landing/reset');
 });
 
@@ -185,36 +215,36 @@ router.get('/reset', ensureReset, function (req, res, next) {
 /* 
     Reset Password Handle
 */
-router.post('/reset', (req, res) => {
-    // TODO: Pass in user email
+// router.post('/reset', (req, res) => {
+//     // TODO: Pass in user email
 
-    // TODO: Ensure user has token permission to access route
-    // Get post params
-    const {
-        new_password,
-        confirm_new_password
-    } = req.body;
+//     // TODO: Ensure user has token permission to access route
+//     // Get post params
+//     const {
+//         new_password,
+//         confirm_new_password
+//     } = req.body;
 
-    if (new_password == confirm_new_password) {
-        // Hash password and update
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(new_password, salt, (err, hash) => {
-                if (err) throw err; 
-                // Reassign user password
-                User.findOneAndUpdate(
-                    {"email": /*EMAIL*/}, 
-                    {$set: {"password": hash}},
-                    function(err) {
-                        if (err) console.log(err);
-                        req.flash('success', 'Password successfully updated.')
-                    }
-                );
-                console.log("Password successfully changed");
-            });
-        });
-    }
-    return res.redirect('/users/reset');
-});
+//     if (new_password == confirm_new_password) {
+//         // Hash password and update
+//         bcrypt.genSalt(10, (err, salt) => {
+//             bcrypt.hash(new_password, salt, (err, hash) => {
+//                 if (err) throw err; 
+//                 // Reassign user password
+//                 User.findOneAndUpdate(
+//                     {"email": /*EMAIL*/}, 
+//                     {$set: {"password": hash}},
+//                     function(err) {
+//                         if (err) console.log(err);
+//                         req.flash('success', 'Password successfully updated.')
+//                     }
+//                 );
+//                 console.log("Password successfully changed");
+//             });
+//         });
+//     }
+//     return res.redirect('/users/reset');
+// });
 
 
 // Change Information Handle

@@ -10,6 +10,7 @@ const passport = require('passport');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 const methodOverride = require('method-override');
+const sgMail = require('@sendgrid/mail');
 
 const app = express();
 
