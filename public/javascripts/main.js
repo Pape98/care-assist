@@ -14,7 +14,6 @@ $(document).ready(function () {
     loginForm()
 });
 
-
 function loginForm() {
     $('#loginForm').form({
         fields: {
@@ -62,7 +61,6 @@ function makeInteractive() {
                 .transition('fade');
         });
 }
-
 
 
 /**
@@ -157,7 +155,6 @@ function loader() {
 }
 
 function newPatientForm() {
-
 
     if (url.includes('/patients/new')) {
         $('.emergency').hide();

@@ -149,7 +149,6 @@ class HereMap {
         });
     }
 }
-
 const start = async (lat, long) => {
     var PatientLocation = new Location(lat, long);
 

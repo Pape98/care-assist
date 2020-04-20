@@ -3,6 +3,7 @@
 
 <div class="ui basic segment " id="main-segment">
     <% include ../../partials/edit_patient.ejs %>
+<<<<<<< HEAD
 
     <div class="ui stackable grid ">
         <div class="row">
@@ -28,6 +29,33 @@
             <div class="fourteen wide column">
                 <div class="ui grid" style="margin:0 3vw">
 
+=======
+
+    <div class="ui stackable grid ">
+        <div class="row">
+            <div class="fourteen wide column" style="padding:0 0 0 16.5vw;">
+                <div class="ui inverted large  breadcrumb" style="margin: 30px 0 ;">
+                    <a href='/users/home' class="section">Home</a>
+                    <i class="right chevron icon divider"></i>
+                    <a href='/patients' class=" section">Patients Lists</a>
+                    <i class="right chevron icon divider"></i>
+                    <div class="active section"><%=patient.first_name%> <%=patient.last_name%></div>
+                </div>
+            </div>
+            <div class="two wide left aligned  center-content  column">
+                <form action="/patients/<%=patient._id%>?_method=DELETE" name="_name" method="POST">
+                    <button class="ui red button">Delete Patient</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="two wide column">
+                <% include ../../partials/sidebar %>
+            </div>
+            <div class="fourteen wide column">
+                <div class="ui grid" style="margin:0 3vw">
+
+>>>>>>> 0e0bfd2c735075fc2ccc7cc5da9ef3271768cb6a
                     <% if(success.length != 0){ %>
                     <div class="one column row">
                         <div class="column pd-0">
@@ -391,7 +419,26 @@
 </div>
 
 
+<<<<<<< HEAD
 <script>
     start(30.621356, -96.340493)
 </script>
+=======
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="/javascripts/graph.js"></script>
+<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://stuk.github.io/jszip/dist/jszip.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/geofence.js"></script>
+<script>
+    start(30.621356, -96.340493)
+</script>
+
+
+>>>>>>> 0e0bfd2c735075fc2ccc7cc5da9ef3271768cb6a
 <% include ../../partials/footer %>
