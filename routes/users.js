@@ -16,6 +16,7 @@ sgMail.setApiKey('SG.cpg8jTCCQ9il-qdew6Idog.WNBfnelObbp1ahCPilkQt9kqjrwG7xkCKWjx
 // User model
 const User = require('../models/User');
 
+
 // GET home page
 router.get('/home', ensureAuthenticated, function (req, res, next) {
     var date = moment().format('MMMM Do YYYY');
@@ -23,6 +24,8 @@ router.get('/home', ensureAuthenticated, function (req, res, next) {
         date: date
     });
 });
+
+
 // GET settings page
 router.get('/settings', function (req, res, next) {
     res.render('pages/users/profile', {
@@ -30,10 +33,12 @@ router.get('/settings', function (req, res, next) {
     })
 });
 
+
 // GET reminder page
 router.get('/reminders', function (req, res, next) {
     res.render('pages/users/reminder');
 });
+
 
 // Register Handle
 router.post('/register', (req, res) => {
@@ -199,8 +204,6 @@ router.post('/resetRequest', (req, res) => {
 });
 
 
-
-
 /* 
     Get reset password page
     Using ensureReset middleware to verify token access to route/page
@@ -217,6 +220,7 @@ router.get('/reset/:token' /* , ensureReset */ , function (req, res, next) {
         })
         .catch(err => res.status(500).json({message: err.message}));
 });
+
 
 /* 
     Reset Password Handle
@@ -360,9 +364,5 @@ router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next)
         })
         .catch(err => res.status(500).json({message: err.message}));
 });
-
-
-
-
 
 module.exports = router;
