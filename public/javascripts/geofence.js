@@ -52,30 +52,16 @@ class HereMap {
         this.getAddress();
         this.isWithinFence();
 
-        this.map.addEventListener("tap", (ev) => {
-            var target = ev.target;
-            this.map.removeObject(this.currentPosition);
-            this.currentPosition = new H.map.Marker(this.map.screenToGeo(ev.currentPointer.viewportX, ev.currentPointer.viewportY));
-            this.map.addObject(this.currentPosition);
-            this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
-                if (result.geometries.length > 0) {
-                    // * In case I want to add a label
-                    // var bubble = new H.ui.InfoBubble({
-                    //     lng: zachry.long,
-                    //     lat: zachry.lat
-                    // }, {
-                    //     content: '<b>Pape is within Fence!</b>'
-                    // });
-                    // // Add info bubble to the UI:
-                    // ui.addBubble(bubble);
-                    this.getAddress();
-                    this.isWithinFence()
-                } else {
-                    this.getAddress();
-                    this.isWithinFence()
-                }
-            });
-        }, false);
+        // this.map.addEventListener("tap", (ev) => {
+        //     var target = ev.target;
+        //     this.map.removeObject(this.currentPosition);
+        //     this.currentPosition = new H.map.Marker(this.map.screenToGeo(ev.currentPointer.viewportX, ev.currentPointer.viewportY));
+        //     this.map.addObject(this.currentPosition);
+        //     this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
+        //             this.getAddress();
+        //             this.isWithinFence()
+        //     });
+        // }, false);
     }
     draw(mapObject) {
         this.map.addObject(mapObject);
@@ -179,6 +165,9 @@ const start = async (lat, long) => {
             zachry))
 };
 
+// ********************************************************************************************************************* */
+
+
 class PatientsMap {
     constructor(appId, apiKey, mapElement, patients) {
         this.appId = appId;
@@ -201,24 +190,22 @@ class PatientsMap {
             }
         );
         var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
-
         var ui = H.ui.UI.createDefault(this.map, defaultLayers);
 
         window.addEventListener('resize', () => this.map.getViewPort().resize());
         this.geofencing = this.platform.getGeofencingService();
-
-
         this.addMarkers(this.map)
     }
 
+
+
     addMarkers(map) {
+        var defaultLayers = this.platform.createDefaultLayers();
+        var ui = H.ui.UI.createDefault(this.map, defaultLayers);
         this.patients.forEach(function (patient) {
-            var currentPosition = new H.map.Marker({
-                lat: patient.latitude,
-                lng: patient.longitude
-            });
-            map.addObject(currentPosition);
+            addMarker(map, patient.latitude,patient.longitude,ui,patient.first_name,patient.last_name,patient._id);
         })
+
     }
 
     polygonToWKT(polygon) {
@@ -249,6 +236,25 @@ class PatientsMap {
     }
 }
 
+function addMarker(map, latitude,longitude,ui,first_name,last_name,ID){
+    var currentPosition = new H.map.Marker({
+        lat: latitude,
+        lng: longitude
+    });
+    
+    map.addObject(currentPosition);
+    var content = '<h4><a href="/patients/'+ID+'">'+ first_name + " " + last_name+'</a></h4>'
+    console.log(content);
+    currentPosition.addEventListener('tap', function (evt) {
+        var bubble =  new H.ui.InfoBubble({
+            lng: longitude,
+            lat: latitude}, {
+          content: content
+        });
+        ui.addBubble(bubble);
+      }, false);
+    
+}
 
 const getAllPatients = async () => {
 
