@@ -8,7 +8,6 @@ var url = require('url');
 router.get('/patients/search', function (req, res, next) {
     const queryObject = url.parse(req.url, true).query;
     var name = queryObject['q'];
-    console.log(queryObject)
     Patient.find({
         first_name: name
     }, 'first_name last_name', function (err, patients) {
@@ -43,8 +42,8 @@ router.get('/patients/fence', function(req,res,next){
     var fence = queryObject['result'];
 
     Patient.findOneAndUpdate({_id: id},{isWithinFence:fence},function(err,patient){
-        console.log(patient)
-        patient.save()
+        console.log(patient);
+        patient.save();
     })
     res.json("Updated fence status for " + id)
 })
