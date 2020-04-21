@@ -129,7 +129,8 @@
                                 <table class="ui very basic striped table">
                                     <thead>
                                         <tr>
-                                            <th>Basic Info</th>
+                                            <th>Last Name</th>
+                                            <th>First Name</th>
                                             <th>ID Number</th>
                                             <th>Emergency Contact Name</th>
                                             <th>Emergency Contact Number</th>
@@ -144,11 +145,12 @@
                                                     <img src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
                                                         class="ui big rounded image">
                                                     <div class="content">
-                                                        <%=patient.first_name%> <%=patient.last_name%>
+                                                        <%=patient.last_name%>
 
                                                     </div>
                                                 </h4>
                                             </td>
+                                            <td><%=patient.first_name%></td>
                                             <td><%=patient._id%></td>
                                             <td><%=patient.emergency['full_name']%></td>
                                             <td><%=patient.emergency['phone_number']%></td>

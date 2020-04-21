@@ -41,9 +41,8 @@ function searchPatient() {
         .search({
             // change search endpoint to a custom endpoint by manipulating apiSettings
             apiSettings: {
-                url: '/search/?q={query}',
-                fullTextSearch: true,
-            }
+                url: '/api/patients/search/?q={query}',
+            },
         });
 
 }
@@ -71,7 +70,7 @@ function changeSelectedItem(url) {
         $('.add-patient-item').addClass('selected');
     } else if (url.includes('/patients/map')) {
         $('.map-item').addClass('selected');
-    }else if (url.includes('/patients/')) {
+    } else if (url.includes('/patients/')) {
         // Do nothing
     } else if (url.includes('/patients')) {
         $('.patient-list-item').addClass('selected');
@@ -79,7 +78,7 @@ function changeSelectedItem(url) {
         $('.reminder-item').addClass('selected');
     } else if (url.includes('/users/settings')) {
         $('.settings-item').addClass('selected');
-    } 
+    }
 }
 /**
  * Function used to display real time on main menu

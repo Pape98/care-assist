@@ -79,10 +79,9 @@ router.delete('/:id', function (req, res, next) {
 
 /** GET patients listing. */
 router.get('/', function (req, res, next) {
-  Patient.find({}, function (err, patients) {
+  Patient.find({},{},{sort:{last_name:1}}, function (err, patients) {
     if (err) console.log(err);
     else {
-      console.log(PatientSeed.seedPatients())
       res.render('pages/patient/index', {
         patients: patients
       });

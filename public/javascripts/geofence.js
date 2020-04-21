@@ -149,6 +149,7 @@ class HereMap {
         });
     }
 }
+
 const start = async (lat, long) => {
     var PatientLocation = new Location(lat, long);
 
@@ -236,6 +237,8 @@ class PatientsMap {
 
         window.addEventListener('resize', () => this.map.getViewPort().resize());
         this.geofencing = this.platform.getGeofencingService();
+
+
         this.currentPosition = new H.map.Marker({
             lat: centerMap.lat,
             lng: centerMap.long
@@ -244,7 +247,29 @@ class PatientsMap {
     }
 }
 
+function getAllPatients(){
+    fetch('/api/patients')
+    .then(
+        function (response) {
+            if (response.status !== 200) {
+                console.log('Looks like there was a problem. Status Code: ' +
+                    response.status);
+                return;
+            }
+
+            // Examine the text in the response
+            response.json().then(function (data) {
+                console.log(data);
+            });
+        }
+    )
+    .catch(function (err) {
+        console.log('Fetch Error :-S', err);
+    });
+
+}
 const drawPatientsMap = () => {
     var map = new PatientsMap("xqbdoZAQ7svDzIG0eLzH", "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao",
         document.getElementById('allPatientsMap'));
+        getAllPatients();
 }
