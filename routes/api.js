@@ -4,7 +4,7 @@ var Patient = require('../models/Patient');
 var User = require('../models/Patient');
 var url = require('url');
 
-/** API route to search specific patients */
+/** GET specific patients */
 router.get('/patients/search', function (req, res, next) {
     const queryObject = url.parse(req.url, true).query;
     var name = queryObject['q'];
@@ -27,7 +27,7 @@ router.get('/patients/search', function (req, res, next) {
     });
 });
 
-/** API route to get specific data for all patients */
+/**  Get specific data for all patients */
 router.get('/patients', function (req, res, next) {
     Patient.find({}, function (err, patients) {
         if (err) console.log(err);
@@ -36,5 +36,17 @@ router.get('/patients', function (req, res, next) {
         }
     });
 });
+
+router.get('/patients/fence', function(req,res,next){
+    const queryObject = url.parse(req.url, true).query;
+    var id = queryObject['id'];
+    var fence = queryObject['result'];
+
+    Patient.findOneAndUpdate({_id: id},{isWithinFence:fence},function(err,patient){
+        console.log(patient)
+        patient.save()
+    })
+    res.json("Updated fence status for " + id)
+})
 
 module.exports = router;

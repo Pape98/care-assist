@@ -5,7 +5,7 @@ var PatientSeed = require('../seeds/patients')
 
 
 /** Utiliy functions */
-
+router.get('ap')
 router.get('/seed',function(req,res,next){
   PatientSeed.seedPatients();
   res.send("<h1>Patient collection SEEDED!</h1>")
