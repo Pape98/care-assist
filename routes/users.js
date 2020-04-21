@@ -187,8 +187,7 @@ router.post('/resetRequest', (req, res) => {
                                     if (error) {
                                         console.log(error);
                                         console.log(error.response.body);
-                                    } 
-                                    //res.status(200).json({message: 'A reset email has been sent to ' + user.email + '.'});
+                                    }
                                     console.log('Success. Email sent.');
                                 });
                             })
@@ -205,6 +204,7 @@ router.post('/resetRequest', (req, res) => {
 /* 
     Get reset password page
     Using ensureReset middleware to verify token access to route/page
+    TODO: Flash messages
 */
 router.get('/reset/:token' /* , ensureReset */ , function (req, res, next) {
     User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now()}})
@@ -213,7 +213,7 @@ router.get('/reset/:token' /* , ensureReset */ , function (req, res, next) {
                 console.log('Invalid token');
                 res.redirect('/login');
             }
-            res.render('pages/landing/reset');
+            res.render('pages/landing/reset', {user});
         })
         .catch(err => res.status(500).json({message: err.message}));
 });
@@ -222,8 +222,15 @@ router.get('/reset/:token' /* , ensureReset */ , function (req, res, next) {
     Reset Password Handle
     TODO: Flash messages
 */
-router.post('/reset/:token', (req, res) => {
-    User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now()}})
+router.post('/reset', (req, res) => {
+    // Get post params
+    const {
+        new_password,
+        confirm_new_password,
+        token
+    } = req.body;
+    // Find user with valid token
+    User.findOne({resetPasswordToken: token, resetPasswordExpires: {$gt: Date.now()}})
         .then((user) => {
             // Invalid token
             if (!user) {
@@ -232,33 +239,34 @@ router.post('/reset/:token', (req, res) => {
             }
             // Attempt password change
             // TODO: Ensure password fulfills prerequisites 
-            // Get post params
-            const {
-                new_password,
-                confirm_new_password
-            } = req.body;
-
-            if (new_password == confirm_new_password) {
-                // Hash password and update
-                bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(new_password, salt, (err, hash) => {
-                        if (err) throw err; 
-                        // Reassign user password
-                        User.findOneAndUpdate(
-                            {"email": user.email}, 
-                            {$set: {"password": hash}},
-                            function(err) {
-                                if (err) console.log(err);
-                            }
-                        );
-                    });
-                });
-                console.log("Password successfully changed");
-                res.redirect('/login');
-            }
             else {
-                console.log("Passwords do not match");
-                res.redirect('pages/landing/reset');
+                if (new_password == confirm_new_password) {
+                    // Hash password and update
+                    bcrypt.genSalt(10, (err, salt) => {
+                        bcrypt.hash(new_password, salt, (err, hash) => {
+                            if (err) throw err; 
+                            // Reassign user password
+                            const params = {
+                                "password": hash,
+                                "resetPasswordToken": undefined,
+                                "resetPasswordExpires": undefined
+                            };
+                            User.findOneAndUpdate(
+                                {"email": user.email}, 
+                                {$set: params},
+                                function(err) {
+                                    if (err) console.log(err);
+                                }
+                            );
+                        });
+                    });
+                    console.log("Password successfully changed");
+                    res.redirect('/login');
+                }
+                else {
+                    console.log("Passwords do not match");
+                    res.render('pages/landing/reset', {user});
+                }
             }
         })
         .catch(err => console.log(err));
@@ -276,8 +284,31 @@ router.post('/changeInfo', ensureAuthenticated, (req, res) => {
     // Update email
     if ((new_email != req.user.email) && (new_email.length > 0)) {
         // TODO
-        console.log(new_email);
-        req.flash('success', 'Confirmation email sent to: ', new_email);
+        req.flash('success', 'An email has been sent to the new address', new_email);
+        req.user.generateEmailUpdate();
+        req.user.updateEmail = new_email;
+        // Save the updated user object
+        req.user.save()
+        .then(user => {
+            // send email
+            let link = "http://" + req.headers.host + "/users/updateEmail/" + user.updateEmailToken;
+            const mailOptions = {
+                to: user.updateEmail,
+                from: {"email" : "CareAssistHelp@gmail.com"},
+                subject: "CareAssist email change",
+                text: `Hi ${user.first_name}, \n 
+            Please click on the following link ${link} to update your email. \n\n`,
+            };
+
+            sgMail.send(mailOptions, (error, result) => {
+                if (error) {
+                    console.log(error);
+                    console.log(error.response.body);
+                }
+                console.log('Success. Email sent.');
+            });
+        })
+        .catch(err => console.log(err));
     }
     // Ensure non-empty fields
     if (first_name.length == 0) {
@@ -301,6 +332,35 @@ router.post('/changeInfo', ensureAuthenticated, (req, res) => {
     );
     return res.redirect('/users/settings');
 });
+
+
+/* 
+    Get user email update page
+    TODO: Flash messages    
+*/
+router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next) {
+    User.findOne({updateEmailToken: req.params.token, updateEmailExpires: {$gt: Date.now()}})
+        .then((user) => {
+            if (!user) {
+                console.log('Invalid token');
+                res.redirect('/login');
+            }
+            else {
+                console.log('Valid token, updating user email');
+                user.email = user.updateEmail;
+                user.updateEmail = undefined;
+                user.updateEmailToken = undefined;
+                user.updateEmailExpires = undefined;
+                user.save()
+                    .then()
+                    .catch(err => console.log(err));
+                res.redirect('/login');
+            }
+            
+        })
+        .catch(err => res.status(500).json({message: err.message}));
+});
+
 
 
 

@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema({
         type: Date,
         required: false
     },
+    updateEmail:{
+        type: String,
+        required: false
+    },
     updateEmailToken:{
         type: String,
         required: false
@@ -55,6 +59,14 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.generatePasswordReset = function() {
     this.resetPasswordToken = crypto.randomBytes(20).toString('hex');
     this.resetPasswordExpires = Date.now() + 7200000;
+};
+
+
+// Generate random token & set validity time-frame
+// Valid for 2 hours (7200000ms)
+userSchema.methods.generateEmailUpdate = function() {
+    this.updateEmailToken = crypto.randomBytes(20).toString('hex');
+    this.updateEmailExpires = Date.now() + 7200000;
 };
 
 
