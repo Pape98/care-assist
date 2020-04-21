@@ -29,7 +29,7 @@ router.get('/patients/search', function (req, res, next) {
 
 /** API route to get specific data for all patients */
 router.get('/patients', function (req, res, next) {
-    Patient.find({},'first_name last_name latitude longitude _id', function (err, patients) {
+    Patient.find({}, function (err, patients) {
         if (err) console.log(err);
         else {
             res.json(patients)

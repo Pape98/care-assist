@@ -241,10 +241,10 @@ function addMarker(map, latitude,longitude,ui,first_name,last_name,ID){
         lat: latitude,
         lng: longitude
     });
-    
+
     map.addObject(currentPosition);
     var content = '<h4><a href="/patients/'+ID+'">'+ first_name + " " + last_name+'</a></h4>'
-    console.log(content);
+
     currentPosition.addEventListener('tap', function (evt) {
         var bubble =  new H.ui.InfoBubble({
             lng: longitude,
