@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Patient = require('../models/Patient');
+var PatientSeed = require('../seeds/patients')
 
 /** GET new patient form */
 
@@ -68,6 +69,7 @@ router.get('/', function (req, res, next) {
   Patient.find({}, function (err, patients) {
     if (err) console.log(err);
     else {
+      console.log(PatientSeed.seedPatients())
       res.render('pages/patient/index', {
         patients: patients
       });

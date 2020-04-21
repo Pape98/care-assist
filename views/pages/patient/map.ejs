@@ -1,0 +1,33 @@
+<% include ../../partials/head %>
+<% include ../../partials/topmenu %>
+
+<div class="ui basic segment " id="main-segment">
+    <div class="ui stackable centered grid ">
+        <div class="row">
+            <div class="sixteen wide column" style="padding:0 0 0 15vw;">
+                <div class="ui inverted large  breadcrumb" style="margin: 30px 0 ;">
+                    <a href='/users/home' class="section">Home</a>
+                    <i class="right chevron icon divider"></i>
+                    <div class="active  section">Patients Map</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="two wide column">
+                <% include ../../partials/sidebar %>
+            </div>
+            <div class="thirteen wide column">
+                <div class="ui segment" style="height: 100%;width: 100%;">
+                    <div id="allPatientsMap" style="height: 75vh;width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    drawPatientsMap();
+</script>
+
+<% include ../../partials/footer %>

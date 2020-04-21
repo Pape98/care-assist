@@ -33,9 +33,9 @@ require("./config/passport")(passport);
 const db = require("./config/keys").MongoURI;
 
 // MongoDB connection
-url = "mongodb://localhost/test";
+localDB = "mongodb://localhost/test";
 mongoose
-  .connect(db, {
+  .connect(localDB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
