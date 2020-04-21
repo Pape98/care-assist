@@ -365,4 +365,19 @@ router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next)
         .catch(err => res.status(500).json({message: err.message}));
 });
 
+
+/* 
+    Delete specified user
+    TODO: Flash messages    
+*/
+router.delete('/delete/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id, (error, data)=>{
+        if(error){
+            console.log(error);
+        } else {
+            console.log("User deleted");
+        }
+    });
+});
+
 module.exports = router;
