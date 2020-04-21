@@ -11,12 +11,13 @@ const zachry = new Location(30.621356, -96.340493)
 const centerMap = new Location(30.620635, -96.341027)
 
 class HereMap {
-    constructor(appId, apiKey, mapElement, PatientLocation) {
+    constructor(appId, apiKey, mapElement, PatientLocation, patientID) {
         this.appId = appId;
         this.apiKey = apiKey,
             this.platform = new H.service.Platform({
                 'apikey': apiKey
             });
+        this.patientID = patientID;
 
         var defaultLayers = this.platform.createDefaultLayers();
 
@@ -51,17 +52,6 @@ class HereMap {
         // console.log("Current Position:" + this.currentPosition.getGeometry())
         this.getAddress();
         this.isWithinFence();
-
-        // this.map.addEventListener("tap", (ev) => {
-        //     var target = ev.target;
-        //     this.map.removeObject(this.currentPosition);
-        //     this.currentPosition = new H.map.Marker(this.map.screenToGeo(ev.currentPointer.viewportX, ev.currentPointer.viewportY));
-        //     this.map.addObject(this.currentPosition);
-        //     this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
-        //             this.getAddress();
-        //             this.isWithinFence()
-        //     });
-        // }, false);
     }
     draw(mapObject) {
         this.map.addObject(mapObject);
@@ -125,22 +115,36 @@ class HereMap {
 
     isWithinFence() {
         this.fenceRequest(["zachry"], this.currentPosition.getGeometry()).then(result => {
+
             if (result.geometries.length > 0) {
                 $('.geofenceLabel + div').remove();
                 $('.geofenceLabel').after('<div class="ui green label">YES</div>')
+                updateFenceStatus(this.patientID,true)
             } else {
                 $('.geofenceLabel + div').remove();
                 $('.geofenceLabel').after('<div class="ui red label">NO</div>')
+                updateFenceStatus(this.patientID,false)
             }
         });
     }
 }
 
-const start = async (lat, long) => {
+
+async function updateFenceStatus(patientID, isWithinFence) {
+    fetch('/api/patients/fence?id=' + patientID + '&result=' + isWithinFence)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log(data);
+        });
+}
+
+const start = async (lat, long, patientID) => {
     var PatientLocation = new Location(lat, long);
 
     var map = new HereMap("xqbdoZAQ7svDzIG0eLzH", "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao",
-        document.getElementById('map'), PatientLocation);
+        document.getElementById('map'), PatientLocation, patientID);
     const lineStringZachry = new H.geo.LineString();
     lineStringZachry.pushPoint({
         lat: 30.621550,
@@ -203,7 +207,7 @@ class PatientsMap {
         var defaultLayers = this.platform.createDefaultLayers();
         var ui = H.ui.UI.createDefault(this.map, defaultLayers);
         this.patients.forEach(function (patient) {
-            addMarker(map, patient.latitude,patient.longitude,ui,patient.first_name,patient.last_name,patient._id);
+            addMarker(map, patient.latitude, patient.longitude, ui, patient.first_name, patient.last_name, patient._id);
         })
 
     }
@@ -236,24 +240,25 @@ class PatientsMap {
     }
 }
 
-function addMarker(map, latitude,longitude,ui,first_name,last_name,ID){
+function addMarker(map, latitude, longitude, ui, first_name, last_name, ID) {
     var currentPosition = new H.map.Marker({
         lat: latitude,
         lng: longitude
     });
 
     map.addObject(currentPosition);
-    var content = '<h4><a href="/patients/'+ID+'">'+ first_name + " " + last_name+'</a></h4>'
+    var content = '<h4><a href="/patients/' + ID + '">' + first_name + " " + last_name + '</a></h4>'
 
     currentPosition.addEventListener('tap', function (evt) {
-        var bubble =  new H.ui.InfoBubble({
+        var bubble = new H.ui.InfoBubble({
             lng: longitude,
-            lat: latitude}, {
-          content: content
+            lat: latitude
+        }, {
+            content: content
         });
         ui.addBubble(bubble);
-      }, false);
-    
+    }, false);
+
 }
 
 const getAllPatients = async () => {
@@ -264,32 +269,32 @@ const getAllPatients = async () => {
 }
 
 
-const drawPatientsMap =  () => {
+const drawPatientsMap = () => {
     var patientsLocation = Promise.resolve(getAllPatients());
     patientsLocation.then(async function (patients) {
         var map = new PatientsMap("xqbdoZAQ7svDzIG0eLzH", "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao",
             document.getElementById('allPatientsMap'), patients);
-            const lineStringZachry = new H.geo.LineString();
-            lineStringZachry.pushPoint({
-                lat: 30.621550,
-                lng: -96.341565
-            });
-            lineStringZachry.pushPoint({
-                lat: 30.622404,
-                lng: -96.340573
-            });
-            lineStringZachry.pushPoint({
-                lat: 30.621364,
-                lng: -96.338995
-            });
-            lineStringZachry.pushPoint({
-                lat: 30.620279,
-                lng: -96.340388
-            });
-            const zachry = new H.map.Polygon(lineStringZachry);
-            map.draw(zachry);
-            const geofenceResponseZachry = await map.uploadGeofence("zachry",
-                "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao", map.polygonToWKT(
-                    zachry))
+        const lineStringZachry = new H.geo.LineString();
+        lineStringZachry.pushPoint({
+            lat: 30.621550,
+            lng: -96.341565
+        });
+        lineStringZachry.pushPoint({
+            lat: 30.622404,
+            lng: -96.340573
+        });
+        lineStringZachry.pushPoint({
+            lat: 30.621364,
+            lng: -96.338995
+        });
+        lineStringZachry.pushPoint({
+            lat: 30.620279,
+            lng: -96.340388
+        });
+        const zachry = new H.map.Polygon(lineStringZachry);
+        map.draw(zachry);
+        const geofenceResponseZachry = await map.uploadGeofence("zachry",
+            "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao", map.polygonToWKT(
+                zachry))
     });
 }

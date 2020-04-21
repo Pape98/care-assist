@@ -1,3 +1,4 @@
+  
 # Created by https://www.gitignore.io/api/node,macos,angular,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=node,macos,angular,visualstudiocode
 
@@ -8,7 +9,7 @@ dist/
 tmp/
 app/**/*.js
 app/**/*.js.map
-/.vscode
+.vscode
 
 # dependencies
 node_modules/
@@ -175,4 +176,3 @@ temp/
 .history
 
 # End of https://www.gitignore.io/api/node,macos,angular,visualstudiocode
-
