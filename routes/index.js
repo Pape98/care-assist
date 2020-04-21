@@ -33,27 +33,4 @@ router.get('/:state/loader', function (req, res, next) {
   });
 });
 
-/** API route to search specific patients */
-router.get('/search', function (req, res, next) {
-  const queryObject = url.parse(req.url, true).query;
-  var name = queryObject['q'];
-  console.log(queryObject)
-  Patient.find({
-    first_name: name
-  }, 'first_name last_name', function (err, patients) {
-    var editedPatients = []
-    patients.forEach(function (patient) {
-      editedPatients.push({
-        title: patient.first_name,
-        description: patient.last_name,
-        url: "/patients/" + patient._id
-      });
-    });
-    var data = {
-      results: editedPatients
-    }
-    res.json(data);
-  });
-});
-
 module.exports = router;

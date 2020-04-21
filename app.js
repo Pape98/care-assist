@@ -33,9 +33,9 @@ require("./config/passport")(passport);
 const db = require("./config/keys").MongoURI;
 
 // MongoDB connection
-url = "mongodb://localhost/test";
+localDB = "mongodb://localhost/test";
 mongoose
-  .connect(db, {
+  .connect(localDB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -82,11 +82,13 @@ app.use(passport.session());
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var patientsRouter = require("./routes/patients");
+var apiRouter = require("./routes/api");
 
 // Pair Routes with subdirectories
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/patients", patientsRouter);
+app.use("/api", apiRouter);
 
 // Define server port
 const PORT = process.env.PORT || 5000;

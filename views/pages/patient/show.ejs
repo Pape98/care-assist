@@ -224,11 +224,11 @@
                                     <div class="row">
                                         <div class="three wide column">
                                             <div class="ui small grey header">Latitude</div>
-                                            <p>30.621356</p>
+                                            <p><%= patient.latitude%></p>
                                         </div>
                                         <div class="three wide column">
                                             <div class="ui small grey header">Longitude</div>
-                                            <p>-96.340493</p>
+                                            <p><%= patient.longitude%></p>
                                         </div>
                                         <div class="four wide center aligned  column">
                                             <div class="ui small grey header geofenceLabel">Is Inside Geofence?</div>
@@ -392,6 +392,6 @@
 
 
 <script>
-    start(30.621356, -96.340493)
+    start(<%=patient.latitude %>, <%=patient.longitude %>)
 </script>
 <% include ../../partials/footer %>

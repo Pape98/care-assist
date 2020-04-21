@@ -1,6 +1,20 @@
 var express = require('express');
 var router = express.Router();
 var Patient = require('../models/Patient');
+var PatientSeed = require('../seeds/patients')
+
+
+/** Utiliy functions */
+
+router.get('/seed',function(req,res,next){
+  PatientSeed.seedPatients();
+  res.send("<h1>Patient collection SEEDED!</h1>")
+})
+
+router.get('/drop',function(req,res,next){
+  Patient.collection.drop();
+  res.send("<h1>Patient collection DROPPED!</h1>")
+})
 
 /** GET new patient form */
 
@@ -65,7 +79,7 @@ router.delete('/:id', function (req, res, next) {
 
 /** GET patients listing. */
 router.get('/', function (req, res, next) {
-  Patient.find({}, function (err, patients) {
+  Patient.find({},{},{sort:{last_name:1}}, function (err, patients) {
     if (err) console.log(err);
     else {
       res.render('pages/patient/index', {
@@ -115,6 +129,5 @@ router.put('/:id', function (req, res, next) {
     }
   });
 });
-
 
 module.exports = router;
