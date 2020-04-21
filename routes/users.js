@@ -6,7 +6,6 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-//const password = require('../controllers/password');
 var moment = require('moment');
 const { ensureAuthenticated } = require('../config/auth');
 
@@ -180,7 +179,7 @@ router.post('/resetRequest', (req, res) => {
                                     to: user.email,
                                     from: {"email" : "CareAssistHelp@gmail.com"},
                                     subject: "CareAssist password reset",
-                                    text: `Hi ${user.username} \n 
+                                    text: `Hi ${user.first_name}, \n 
                                 Please click on the following link ${link} to reset your password. \n\n`,
                                 };
 
@@ -207,44 +206,63 @@ router.post('/resetRequest', (req, res) => {
     Get reset password page
     Using ensureReset middleware to verify token access to route/page
 */
-router.get('/reset' /* , ensureReset */ , function (req, res, next) {
-    return res.render('pages/landing/reset');
+router.get('/reset/:token' /* , ensureReset */ , function (req, res, next) {
+    User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now()}})
+        .then((user) => {
+            if (!user) {
+                console.log('Invalid token');
+                res.redirect('/login');
+            }
+            res.render('pages/landing/reset');
+        })
+        .catch(err => res.status(500).json({message: err.message}));
 });
-
 
 /* 
     Reset Password Handle
+    TODO: Flash messages
 */
-// router.post('/reset', (req, res) => {
-//     // TODO: Pass in user email
+router.post('/reset/:token', (req, res) => {
+    User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now()}})
+        .then((user) => {
+            // Invalid token
+            if (!user) {
+                console.log('Invalid token');
+                res.redirect('/login');
+            }
+            // Attempt password change
+            // TODO: Ensure password fulfills prerequisites 
+            // Get post params
+            const {
+                new_password,
+                confirm_new_password
+            } = req.body;
 
-//     // TODO: Ensure user has token permission to access route
-//     // Get post params
-//     const {
-//         new_password,
-//         confirm_new_password
-//     } = req.body;
-
-//     if (new_password == confirm_new_password) {
-//         // Hash password and update
-//         bcrypt.genSalt(10, (err, salt) => {
-//             bcrypt.hash(new_password, salt, (err, hash) => {
-//                 if (err) throw err; 
-//                 // Reassign user password
-//                 User.findOneAndUpdate(
-//                     {"email": /*EMAIL*/}, 
-//                     {$set: {"password": hash}},
-//                     function(err) {
-//                         if (err) console.log(err);
-//                         req.flash('success', 'Password successfully updated.')
-//                     }
-//                 );
-//                 console.log("Password successfully changed");
-//             });
-//         });
-//     }
-//     return res.redirect('/users/reset');
-// });
+            if (new_password == confirm_new_password) {
+                // Hash password and update
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(new_password, salt, (err, hash) => {
+                        if (err) throw err; 
+                        // Reassign user password
+                        User.findOneAndUpdate(
+                            {"email": user.email}, 
+                            {$set: {"password": hash}},
+                            function(err) {
+                                if (err) console.log(err);
+                            }
+                        );
+                    });
+                });
+                console.log("Password successfully changed");
+                res.redirect('/login');
+            }
+            else {
+                console.log("Passwords do not match");
+                res.redirect('pages/landing/reset');
+            }
+        })
+        .catch(err => console.log(err));
+});
 
 
 // Change Information Handle
