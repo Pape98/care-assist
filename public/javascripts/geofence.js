@@ -174,57 +174,26 @@ const start = async (lat, long) => {
     });
     const zachry = new H.map.Polygon(lineStringZachry);
     map.draw(zachry);
-    const geofenceResponseEvans = await map.uploadGeofence("zachry",
+    const geofenceResponseZachry = await map.uploadGeofence("zachry",
         "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao", map.polygonToWKT(
             zachry))
-    // TODO: Figure out why I can't have two layers
-    // const lineStringBlocker = new H.geo.LineString();
-    // lineStringBlocker.pushPoint({
-    //     lat: 30.619740,
-    //     lng: -96.342871
-    // });
-    // lineStringBlocker.pushPoint({
-    //     lat: 30.618971,
-    //     lng: -96.342085
-    // });
-    // lineStringBlocker.pushPoint({
-    //     lat: 30.619428,
-    //     lng: -96.341384
-    // });
-    // lineStringBlocker.pushPoint({
-    //     lat: 30.619834,
-    //     lng: -96.341888
-    // });
-    // lineStringBlocker.pushPoint({
-    //     lat: 30.619740,
-    //     lng: -96.342871
-    // });
-    // const blocker = new H.map.Polygon(lineStringBlocker);
-    // // var zachry = new H.map.Circle({
-    // //     lat: 30.621356,
-    // //     lng: -96.340493
-    // // }, 200);
-
-    // map.draw(blocker);
-    // const geofenceResponseBlocker = await map.uploadGeofence("blocker",
-    //     "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao", map.polygonToWKT(
-    //         blocker))
 };
 
 class PatientsMap {
-    constructor(appId, apiKey, mapElement) {
+    constructor(appId, apiKey, mapElement, patients) {
         this.appId = appId;
-        this.apiKey = apiKey,
-            this.platform = new H.service.Platform({
-                'apikey': apiKey
-            });
+        this.apiKey = apiKey;
+        this.platform = new H.service.Platform({
+            'apikey': apiKey
+        });
+        this.patients = patients;
 
         var defaultLayers = this.platform.createDefaultLayers();
 
         this.map = new H.Map(
             mapElement,
             defaultLayers.vector.normal.map, {
-                zoom: 15,
+                zoom: 17.5,
                 center: {
                     lat: centerMap.lat,
                     lng: centerMap.long
@@ -239,37 +208,82 @@ class PatientsMap {
         this.geofencing = this.platform.getGeofencingService();
 
 
-        this.currentPosition = new H.map.Marker({
-            lat: centerMap.lat,
-            lng: centerMap.long
+        this.addMarkers(this.map)
+    }
+
+    addMarkers(map) {
+        this.patients.forEach(function (patient) {
+            var currentPosition = new H.map.Marker({
+                lat: patient.latitude,
+                lng: patient.longitude
+            });
+            map.addObject(currentPosition);
+        })
+    }
+
+    polygonToWKT(polygon) {
+        const geometry = polygon.getGeometry();
+        return geometry.toString();
+    }
+    uploadGeofence(layerId, name, geometry) {
+        const zip = new JSZip();
+        zip.file("data.wkt", "NAME\tWKT\n" + name + "\t" + geometry);
+        return zip.generateAsync({
+            type: "blob"
+        }).then(content => {
+            var formData = new FormData();
+            formData.append("zipfile", content);
+            return axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                headers: {
+                    "content-type": "multipart/form-data"
+                },
+                params: {
+                    "apiKey": this.apiKey,
+                    "layer_id": layerId
+                }
+            });
         });
-        this.map.addObject(this.currentPosition);
+    }
+    draw(mapObject) {
+        this.map.addObject(mapObject);
     }
 }
 
-function getAllPatients(){
-    fetch('/api/patients')
-    .then(
-        function (response) {
-            if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: ' +
-                    response.status);
-                return;
-            }
 
-            // Examine the text in the response
-            response.json().then(function (data) {
-                console.log(data);
-            });
-        }
-    )
-    .catch(function (err) {
-        console.log('Fetch Error :-S', err);
-    });
+const getAllPatients = async () => {
 
+    const resp = await fetch('/api/patients')
+    const data = await resp.json()
+    return data
 }
-const drawPatientsMap = () => {
-    var map = new PatientsMap("xqbdoZAQ7svDzIG0eLzH", "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao",
-        document.getElementById('allPatientsMap'));
-        getAllPatients();
+
+
+const drawPatientsMap =  () => {
+    var patientsLocation = Promise.resolve(getAllPatients());
+    patientsLocation.then(async function (patients) {
+        var map = new PatientsMap("xqbdoZAQ7svDzIG0eLzH", "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao",
+            document.getElementById('allPatientsMap'), patients);
+            const lineStringZachry = new H.geo.LineString();
+            lineStringZachry.pushPoint({
+                lat: 30.621550,
+                lng: -96.341565
+            });
+            lineStringZachry.pushPoint({
+                lat: 30.622404,
+                lng: -96.340573
+            });
+            lineStringZachry.pushPoint({
+                lat: 30.621364,
+                lng: -96.338995
+            });
+            lineStringZachry.pushPoint({
+                lat: 30.620279,
+                lng: -96.340388
+            });
+            const zachry = new H.map.Polygon(lineStringZachry);
+            map.draw(zachry);
+            const geofenceResponseZachry = await map.uploadGeofence("zachry",
+                "oyfO4jfGOwSPdYhXdY6o7yJZlVezlB9cEa8IdQlalao", map.polygonToWKT(
+                    zachry))
+    });
 }

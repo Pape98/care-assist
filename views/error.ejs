@@ -1,3 +1,9 @@
-<h1 style="color:red"><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<% include ./partials/head %>
+
+<div class="ui center-content container" style="height: 100%;">
+    <h1 class="ui red header"><%= message %></h1>
+    <h2><%= error.status %></h2>
+    <pre><%= error.stack %></pre>
+</div>
+
+<% include ./partials/footer %>
