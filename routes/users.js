@@ -134,20 +134,22 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
                             },
                             function (err) {
                                 if (err) console.log(err);
-                                req.flash('success', 'Password successfully updated.')
+                                
                             }
                         );
-                        console.log("Password successfully changed");
+                        req.flash('success', 'Password successfully updated.')
+                        res.redirect('/users/settings');
                     });
                 });
             } else {
-                console.log("Password incorrect");
+                req.flash('error', 'Password incorrect')
+                res.redirect('/users/settings');
             }
         });
     } else {
-        console.log("Passwords don't match");
+        req.flash('error',"Passwords don't match");
+        res.redirect('/users/settings');
     }
-    return res.redirect('/users/settings');
 });
 
 
@@ -232,7 +234,7 @@ router.get('/reset/:token' /* , ensureReset */ , function (req, res, next) {
         })
         .then((user) => {
             if (!user) {
-                console.log('Invalid token');
+                req.flash('error', 'Invalid Token.')
                 res.redirect('/login');
             }
             res.render('pages/landing/reset', {
@@ -247,7 +249,6 @@ router.get('/reset/:token' /* , ensureReset */ , function (req, res, next) {
 
 /* 
     Reset Password Handle
-    TODO: Flash messages
 */
 router.post('/reset', (req, res) => {
     // Get post params
@@ -294,10 +295,10 @@ router.post('/reset', (req, res) => {
                             );
                         });
                     });
-                    console.log("Password successfully changed");
+                    req.flash('success', 'Password successfully changed.')
                     res.redirect('/login');
                 } else {
-                    console.log("Passwords do not match");
+                    req.flash('error', 'Passwords do not match.')
                     res.render('pages/landing/reset', {
                         user
                     });

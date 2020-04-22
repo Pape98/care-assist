@@ -25,6 +25,14 @@
                         </div>
                     </div>
                     <% } %>
+                    <% if(error.length != 0){ %>
+                        <div class="ui large red message ">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=error[0]%>
+                            </div>
+                        </div>
+                        <% } %>
                 <div class="ui top attached tabular menu">
                     <a class="active item" data-tab="first">Personal Information</a>
                     <a class="item" data-tab="second">Manage Users</a>
