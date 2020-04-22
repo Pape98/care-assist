@@ -19,6 +19,10 @@ const patientSchema = new Schema({
     weight: String,
     height:  String,
     blood_type: String,
+    latitude : String,
+    longitude: String,
+    heart_rate: [Number],
+    isWithinFence: {type:Boolean,default:false},
 
     emergency:{
         full_name:String,

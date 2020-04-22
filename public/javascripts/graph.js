@@ -28,7 +28,6 @@ function generateAxisLabel(start, end, increment) {
 
 function formatBirthDate() {
     var dateString = $('#birthdayDisplay').text()
-    console.log(dateString)
     dateString = new Date(dateString).toUTCString();
     dateString = dateString.split(' ').slice(0, 4).join(' ');
 
@@ -36,7 +35,8 @@ function formatBirthDate() {
 }
 
 
-function drawHeartRateChart(){
+function drawHeartRateChart() {
+    if (!($('#heartRateChart').length)) return;
     var ctx = $('#heartRateChart');
 
     var myChart = new Chart(ctx, {
@@ -84,7 +84,8 @@ function drawHeartRateChart(){
     });
 }
 
-function drawHinOutChart(){
+function drawHinOutChart() {
+    if (!($('#inOutChart').length)) return;
     var ctx1 = $('#inOutChart');
 
     var myChart2 = new Chart(ctx1, {
@@ -95,12 +96,11 @@ function drawHinOutChart(){
                 label: 'Outpatients',
                 backgroundColor: blue,
                 data: generateDataSet(7, 30),
-            },{
+            }, {
                 label: 'Inpatients',
                 backgroundColor: yellow,
                 data: generateDataSet(7, 30),
-            }
-        ],
+            }],
         },
         options: {
             responsive: true,
@@ -133,7 +133,8 @@ function drawHinOutChart(){
 
 }
 
-function drawGenderChart(){
+function drawGenderChart() {
+    if (!($('#genderChart').length)) return;
     var ctx3 = $('#genderChart');
 
     var myChart2 = new Chart(ctx3, {
@@ -141,8 +142,8 @@ function drawGenderChart(){
         data: {
             datasets: [{
                 label: 'Gender',
-                backgroundColor: [blue,yellow],
-                data: generateDataSet(1,40),
+                backgroundColor: [blue, yellow],
+                data: generateDataSet(1, 40),
             }],
             labels: [
                 'Male',

@@ -51,6 +51,7 @@ router.post('/register', (req, res) => {
         first_name,
         last_name,
         email,
+        confirm_email_address,
         password,
         password2
     } = req.body;
@@ -283,10 +284,11 @@ router.post('/changeInfo', ensureAuthenticated, (req, res) => {
     var {
         first_name,
         last_name,
-        new_email
+        new_email,
+        confirm_email_address
     } = req.body;
     // Update email
-    if ((new_email != req.user.email) && (new_email.length > 0)) {
+    if ((new_email != req.user.email) && (new_email.length > 0) && (new_email == confirm_email_address)) {
         // TODO
         req.flash('success', 'An email has been sent to the new address', new_email);
         req.user.generateEmailUpdate();

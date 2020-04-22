@@ -1,11 +1,30 @@
 var express = require('express');
 var router = express.Router();
+var url = require('url');
 var Patient = require('../models/Patient');
+var PatientSeed = require('../seeds/patients')
+
+
+/** Utiliy functions */
+router.get('ap')
+router.get('/seed', function (req, res, next) {
+  PatientSeed.seedPatients();
+  res.send("<h1>Patient collection SEEDED!</h1>")
+})
+
+router.get('/drop', function (req, res, next) {
+  Patient.collection.drop();
+  res.send("<h1>Patient collection DROPPED!</h1>")
+})
 
 /** GET new patient form */
 
 router.get('/new', function (req, res, next) {
   res.render('pages/patient/new')
+});
+
+router.get('/map', function (req, res, next) {
+  res.render('pages/patient/map')
 });
 
 /** POST new patient form */
@@ -61,14 +80,29 @@ router.delete('/:id', function (req, res, next) {
 
 /** GET patients listing. */
 router.get('/', function (req, res, next) {
-  Patient.find({}, function (err, patients) {
+  const queryObject = url.parse(req.url, true).query;
+  var query = queryObject['query'];
+  var filter = queryObject['filter'];
+
+  if (filter && query) {
+
+    Patient.find({}).where(filter, query).exec(function (err, patients) {
+      if (err) console.log(err);
+      else {
+        res.render('pages/patient/index', {
+          patients: patients
+        });
+      }
+    })
+  }
+  Patient.find({}).where().exec(function (err, patients) {
     if (err) console.log(err);
     else {
       res.render('pages/patient/index', {
         patients: patients
       });
     }
-  });
+  })
 });
 
 /** SHOW individual patient */
@@ -111,6 +145,5 @@ router.put('/:id', function (req, res, next) {
     }
   });
 });
-
 
 module.exports = router;

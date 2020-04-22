@@ -19,17 +19,17 @@
             <div class="fourteen wide centered column">
                 <div class="ui grid" id="main-grid">
                     <% if(success.length != 0){ %>
-                        <div class="one column row">
-                            <div class="column pd-0">
-                                <div class="ui floating large success message">
-                                    <i class="close icon"></i>
-                                    <div class="header">
-                                        <%=success[0]%>
-                                    </div>
+                    <div class="one column row">
+                        <div class="column pd-0">
+                            <div class="ui floating large success message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=success[0]%>
                                 </div>
                             </div>
                         </div>
-                        <% } %>
+                    </div>
+                    <% } %>
                     <div class="one row left aligned  column">
                         <div class="ui large header">Facicility Summary</div>
                     </div>
@@ -43,7 +43,7 @@
                                 <div class="ten wide column">
                                     <div class="ui statistic">
                                         <div class="value">
-                                           <%=patients.length%>
+                                            <%=patients.length%>
                                         </div>
                                         <div class="label">
                                             Total Patients
@@ -123,16 +123,33 @@
                     <div class="one row left aligned  column">
                         <div class="ui big header">Patients Summary</div>
                     </div>
+                    <div class="one row column">
+                        <div class="eight wide centered column">
+                            <form action="/patients" method="GET" class="ui fluid action input">
+                                <input name="query" type="text" placeholder="Search...">
+                                <select name="filter" class="ui compact selection dropdown">
+                                  <option value="first_name">First Name</option>
+                                  <option value="last_name">Last Name</option>
+                                  <option value="_id">ID</option>
+                                  <option value="isWithinFence">Geofence Status</option>
+                                </select>
+                                <button class="ui button">Search</button>
+                              </form>
+                        </div>
+                        
+                    </div>
                     <div class="one column row">
-                        <div class="centered column">
+                        <div class="centered column pd-0">
                             <div class="ui segment " style="width: 100%;">
                                 <table class="ui very basic striped table">
                                     <thead>
                                         <tr>
-                                            <th>Basic Info</th>
+                                            <th>Last Name</th>
+                                            <th>First Name</th>
                                             <th>ID Number</th>
                                             <th>Emergency Contact Name</th>
                                             <th>Emergency Contact Number</th>
+                                            <th>Within Fence ?</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -144,14 +161,16 @@
                                                     <img src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
                                                         class="ui big rounded image">
                                                     <div class="content">
-                                                        <%=patient.first_name%> <%=patient.last_name%>
+                                                        <%=patient.last_name%>
 
                                                     </div>
                                                 </h4>
                                             </td>
+                                            <td><%=patient.first_name%></td>
                                             <td><%=patient._id%></td>
                                             <td><%=patient.emergency['full_name']%></td>
                                             <td><%=patient.emergency['phone_number']%></td>
+                                            <td><%=patient.isWithinFence%></td>
                                             <td><a href="/patients/<%=patient._id%>">View</a></td>
                                         </tr>
                                         <%})%>
@@ -162,7 +181,7 @@
                         </div>
 
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -170,5 +189,6 @@
 </div>
 
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<script src="/javascripts/graph.js"></script>
 <% include ../../partials/footer %>
