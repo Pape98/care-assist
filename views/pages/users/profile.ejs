@@ -106,24 +106,28 @@
                     <div class="ui blue small header">Delete Caretakers</div>
                     
                     <div class="ui relaxed items">
-                        <div class="item">
-                          <div class="ui tiny image">
-                            <img src="/images/pic3.png">
-                          </div>
-                          <div class="middle aligned content">
-                            <div class="header">
-                              Bakary Traore
-                            </div>
-                            <div class="description">
-                              <p>bakary@traore.edu</p>
-                            </div>
-                            <div class="extra">
-                              <div class="ui right floated red button">
-                                Delete User
+                        <% users.forEach(function(user){ %>
+                            <div class="item">
+                                <div class="ui tiny image">
+                                  <img src="/images/pic3.png">
+                                </div>
+                                <div class="middle aligned content">
+                                  <div class="header">
+                                   <%=user.first_name %>  <%=user.last_name %> 
+                                  </div>
+                                  <div class="description">
+                                    <%=user.email %> 
+                                  </div>
+                                  <div class="extra">
+                                      <form action="/users/delete/<%=user._id%>?_method=DELETE" name="_name" method="POST">
+                                        <button class="ui right floated red small button">
+                                            Delete User
+                                        </button>
+                                      </form>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        </div>
+                        <% }) %>
                       </div>
 
                     

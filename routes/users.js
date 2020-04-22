@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 var moment = require('moment');
 var app = express();
+// var User = require('../models/User');
 
 const {
     ensureAuthenticated
@@ -34,10 +35,11 @@ router.get('/home', function (req, res, next) {
 // GET settings page
 router.get('/settings', function (req, res, next) {
     req.app.locals.user = req.user;
-    res.render('pages/users/profile', {
-        isAdmin: req.user.admin
+    User.find({_id: {$ne:req.user._id} },function(err,users){
+        res.render('pages/users/profile', {
+            isAdmin: req.user.admin, users:users
+        });
     })
-    // res.json(req.user)
 });
 
 
@@ -46,6 +48,19 @@ router.get('/reminders', function (req, res, next) {
     res.render('pages/users/reminder');
 });
 
+/* 
+    Delete specified user
+*/
+router.delete('/delete/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
+            console.log(error);
+        } else {
+            req.flash('success','User has been deleted.')
+            res.redirect('/users/settings')
+        }
+    });
+});
 
 // Register Handle
 router.post('/register', (req, res) => {
@@ -409,18 +424,5 @@ router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next)
 });
 
 
-/* 
-    Delete specified user
-    TODO: Flash messages    
-*/
-router.delete('/delete/:id', (req, res) => {
-    User.findByIdAndRemove(req.params.id, (error, data) => {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log("User deleted");
-        }
-    });
-});
 
 module.exports = router;
