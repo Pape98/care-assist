@@ -35,9 +35,10 @@ const db = require("./config/keys").MongoURI;
 
 // MongoDB connection 
 url = 'mongodb://localhost/test';
-mongoose.connect(db, {
+mongoose.connect(url, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false 
   })
   .then(() => console.log('MongoDB successfully connected...'))
   .catch(err => console.log(err));
@@ -66,13 +67,14 @@ app.use(
 app.use(flash());
 
 app.use(function (req, res, next) {
-  res.locals.user = req.user;
+
   res.locals.success = req.flash("success");
   res.locals.check = req.flash("check");
   res.locals.failure = req.flash("failure");
   res.locals.error = req.flash("error");
   next();
 });
+
 
 // Passport Middleware
 app.use(passport.initialize());

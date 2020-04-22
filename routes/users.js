@@ -7,7 +7,11 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 var moment = require('moment');
-const { ensureAuthenticated } = require('../config/auth');
+var app = express();
+
+const {
+    ensureAuthenticated
+} = require('../config/auth');
 
 // Mailer
 const sgMail = require('@sendgrid/mail');
@@ -18,7 +22,8 @@ const User = require('../models/User');
 
 
 // GET home page
-router.get('/home', ensureAuthenticated, function (req, res, next) {
+router.get('/home', function (req, res, next) {
+    req.app.locals.user  = req.user;
     var date = moment().format('MMMM Do YYYY');
     res.render('pages/users/home', {
         date: date
@@ -28,9 +33,11 @@ router.get('/home', ensureAuthenticated, function (req, res, next) {
 
 // GET settings page
 router.get('/settings', function (req, res, next) {
+    req.app.locals.user = req.user;
     res.render('pages/users/profile', {
         isAdmin: req.user.admin
     })
+    // res.json(req.user)
 });
 
 
@@ -43,7 +50,7 @@ router.get('/reminders', function (req, res, next) {
 // Register Handle
 router.post('/register', (req, res) => {
     // Information access
-    if(req.user.admin != true) {
+    if (req.user.admin != true) {
         console.log("Not admin");
         return;
     }
@@ -116,12 +123,16 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
                 // Hash password and update
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(new_password, salt, (err, hash) => {
-                        if (err) throw err; 
+                        if (err) throw err;
                         // Reassign user password
-                        User.findOneAndUpdate(
-                            {"email": req.user.email}, 
-                            {$set: {"password": hash}},
-                            function(err) {
+                        User.findOneAndUpdate({
+                                "email": req.user.email
+                            }, {
+                                $set: {
+                                    "password": hash
+                                }
+                            },
+                            function (err) {
                                 if (err) console.log(err);
                                 req.flash('success', 'Password successfully updated.')
                             }
@@ -129,15 +140,13 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
                         console.log("Password successfully changed");
                     });
                 });
-            }
-            else {
+            } else {
                 console.log("Password incorrect");
             }
         });
-    }
-    else {
+    } else {
         console.log("Passwords don't match");
-    } 
+    }
     return res.redirect('/users/settings');
 });
 
@@ -145,7 +154,7 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
 /* 
     Get reset password page
 */
-router.get('/resetRequest' /* , ensureReset */, function (req, res, next) {
+router.get('/resetRequest' /* , ensureReset */ , function (req, res, next) {
     res.render('pages/landing/resetRequest');
 });
 
@@ -160,47 +169,51 @@ router.post('/resetRequest', (req, res) => {
         email
     } = req.body;
     // Attempt to locate user
-    User.findOne({ email: email })
-                .then(user => {
-                    // If no match, return with no user param
-                    if (!user) {
-                        // TODO: Flash message with user notification
-                        console.log('No user associated with email');
-                        req.flash('failure', 'No user associated with email');
-                    }
-                    // Send email with reset instructions & notify user
-                    else {
-                        // TODO: Flash message with user notification
-                        req.flash('success', 'An email with instructions has been sent to the associated address');
-                        console.log('User matched; recovering');
-                        
-                        user.generatePasswordReset();
-                        console.log('Generated Password Token');
-                        // Save the updated user object
-                        user.save()
-                            .then(user => {
-                                // send email
-                                let link = "http://" + req.headers.host + "/users/reset/" + user.resetPasswordToken;
-                                const mailOptions = {
-                                    to: user.email,
-                                    from: {"email" : "CareAssistHelp@gmail.com"},
-                                    subject: "CareAssist password reset",
-                                    text: `Hi ${user.first_name}, \n 
-                                Please click on the following link ${link} to reset your password. \n\n`,
-                                };
+    User.findOne({
+            email: email
+        })
+        .then(user => {
+            // If no match, return with no user param
+            if (!user) {
+                // TODO: Flash message with user notification
+                console.log('No user associated with email');
+                req.flash('failure', 'No user associated with email');
+            }
+            // Send email with reset instructions & notify user
+            else {
+                // TODO: Flash message with user notification
+                req.flash('success', 'An email with instructions has been sent to the associated address');
+                console.log('User matched; recovering');
 
-                                sgMail.send(mailOptions, (error, result) => {
-                                    if (error) {
-                                        console.log(error);
-                                        console.log(error.response.body);
-                                    }
-                                    console.log('Success. Email sent.');
-                                });
-                            })
-                            .catch(err => console.log(err));
-                    }
-                })
-                .catch(err => console.log(err));
+                user.generatePasswordReset();
+                console.log('Generated Password Token');
+                // Save the updated user object
+                user.save()
+                    .then(user => {
+                        // send email
+                        let link = "http://" + req.headers.host + "/users/reset/" + user.resetPasswordToken;
+                        const mailOptions = {
+                            to: user.email,
+                            from: {
+                                "email": "CareAssistHelp@gmail.com"
+                            },
+                            subject: "CareAssist password reset",
+                            text: `Hi ${user.first_name}, \n 
+                                Please click on the following link ${link} to reset your password. \n\n`,
+                        };
+
+                        sgMail.send(mailOptions, (error, result) => {
+                            if (error) {
+                                console.log(error);
+                                console.log(error.response.body);
+                            }
+                            console.log('Success. Email sent.');
+                        });
+                    })
+                    .catch(err => console.log(err));
+            }
+        })
+        .catch(err => console.log(err));
     return res.render('pages/landing/resetRequest');
 });
 
@@ -211,15 +224,24 @@ router.post('/resetRequest', (req, res) => {
     TODO: Flash messages
 */
 router.get('/reset/:token' /* , ensureReset */ , function (req, res, next) {
-    User.findOne({resetPasswordToken: req.params.token, resetPasswordExpires: {$gt: Date.now()}})
+    User.findOne({
+            resetPasswordToken: req.params.token,
+            resetPasswordExpires: {
+                $gt: Date.now()
+            }
+        })
         .then((user) => {
             if (!user) {
                 console.log('Invalid token');
                 res.redirect('/login');
             }
-            res.render('pages/landing/reset', {user});
+            res.render('pages/landing/reset', {
+                user
+            });
         })
-        .catch(err => res.status(500).json({message: err.message}));
+        .catch(err => res.status(500).json({
+            message: err.message
+        }));
 });
 
 
@@ -235,7 +257,12 @@ router.post('/reset', (req, res) => {
         token
     } = req.body;
     // Find user with valid token
-    User.findOne({resetPasswordToken: token, resetPasswordExpires: {$gt: Date.now()}})
+    User.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: {
+                $gt: Date.now()
+            }
+        })
         .then((user) => {
             // Invalid token
             if (!user) {
@@ -249,17 +276,19 @@ router.post('/reset', (req, res) => {
                     // Hash password and update
                     bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(new_password, salt, (err, hash) => {
-                            if (err) throw err; 
+                            if (err) throw err;
                             // Reassign user password
                             const params = {
                                 "password": hash,
                                 "resetPasswordToken": undefined,
                                 "resetPasswordExpires": undefined
                             };
-                            User.findOneAndUpdate(
-                                {"email": user.email}, 
-                                {$set: params},
-                                function(err) {
+                            User.findOneAndUpdate({
+                                    "email": user.email
+                                }, {
+                                    $set: params
+                                },
+                                function (err) {
                                     if (err) console.log(err);
                                 }
                             );
@@ -267,10 +296,11 @@ router.post('/reset', (req, res) => {
                     });
                     console.log("Password successfully changed");
                     res.redirect('/login');
-                }
-                else {
+                } else {
                     console.log("Passwords do not match");
-                    res.render('pages/landing/reset', {user});
+                    res.render('pages/landing/reset', {
+                        user
+                    });
                 }
             }
         })
@@ -295,26 +325,28 @@ router.post('/changeInfo', ensureAuthenticated, (req, res) => {
         req.user.updateEmail = new_email;
         // Save the updated user object
         req.user.save()
-        .then(user => {
-            // send email
-            let link = "http://" + req.headers.host + "/users/updateEmail/" + user.updateEmailToken;
-            const mailOptions = {
-                to: user.updateEmail,
-                from: {"email" : "CareAssistHelp@gmail.com"},
-                subject: "CareAssist email change",
-                text: `Hi ${user.first_name}, \n 
+            .then(user => {
+                // send email
+                let link = "http://" + req.headers.host + "/users/updateEmail/" + user.updateEmailToken;
+                const mailOptions = {
+                    to: user.updateEmail,
+                    from: {
+                        "email": "CareAssistHelp@gmail.com"
+                    },
+                    subject: "CareAssist email change",
+                    text: `Hi ${user.first_name}, \n 
             Please click on the following link ${link} to update your email. \n\n`,
-            };
+                };
 
-            sgMail.send(mailOptions, (error, result) => {
-                if (error) {
-                    console.log(error);
-                    console.log(error.response.body);
-                }
-                console.log('Success. Email sent.');
-            });
-        })
-        .catch(err => console.log(err));
+                sgMail.send(mailOptions, (error, result) => {
+                    if (error) {
+                        console.log(error);
+                        console.log(error.response.body);
+                    }
+                    console.log('Success. Email sent.');
+                });
+            })
+            .catch(err => console.log(err));
     }
     // Ensure non-empty fields
     if (first_name.length == 0) {
@@ -328,15 +360,17 @@ router.post('/changeInfo', ensureAuthenticated, (req, res) => {
         "last_name": last_name
     }
     // Update name
-    User.findOneAndUpdate(
-        {"email": req.user.email}, 
-        {$set: info},
-        function(err) {
+    User.findOneAndUpdate({
+            "email": req.user.email
+        }, {
+            $set: info
+        },
+        function (err) {
             if (err) console.log(err);
-            req.flash('success', 'Information successfully updated.')
         }
     );
-    return res.redirect('/users/settings');
+    req.flash('success', 'Information successfully updated.')
+    res.redirect('/users/settings');
 });
 
 
@@ -345,13 +379,17 @@ router.post('/changeInfo', ensureAuthenticated, (req, res) => {
     TODO: Flash messages    
 */
 router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next) {
-    User.findOne({updateEmailToken: req.params.token, updateEmailExpires: {$gt: Date.now()}})
+    User.findOne({
+            updateEmailToken: req.params.token,
+            updateEmailExpires: {
+                $gt: Date.now()
+            }
+        })
         .then((user) => {
             if (!user) {
                 console.log('Invalid token');
                 res.redirect('/login');
-            }
-            else {
+            } else {
                 console.log('Valid token, updating user email');
                 user.email = user.updateEmail;
                 user.updateEmail = undefined;
@@ -362,9 +400,11 @@ router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next)
                     .catch(err => console.log(err));
                 res.redirect('/login');
             }
-            
+
         })
-        .catch(err => res.status(500).json({message: err.message}));
+        .catch(err => res.status(500).json({
+            message: err.message
+        }));
 });
 
 
@@ -373,8 +413,8 @@ router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next)
     TODO: Flash messages    
 */
 router.delete('/delete/:id', (req, res) => {
-    User.findByIdAndRemove(req.params.id, (error, data)=>{
-        if(error){
+    User.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
             console.log(error);
         } else {
             console.log("User deleted");

@@ -17,6 +17,14 @@
                 <% include ../../partials/sidebar %>
             </div>
             <div class="eleven wide column">
+                <% if(success.length != 0){ %>
+                    <div class="ui large success message ">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            <%=success[0]%>
+                        </div>
+                    </div>
+                    <% } %>
                 <div class="ui top attached tabular menu">
                     <a class="active item" data-tab="first">Personal Information</a>
                     <a class="item" data-tab="second">Manage Users</a>
@@ -29,9 +37,9 @@
                             <div class="three wide column" style="margin-left: 1.5vh;">
                                 <img class="ui small rounded image" src="/images/pic1.jpeg">
                             </div>
-                            <div class="three wide column">
+                            <div class=" ten wide column">
                                 <br>
-                                <div class="ui header">Pape Traore</div>
+                                <div class="ui header"><%=user.first_name%> <%=user.last_name%></div>
                                 <div class="ui small grey header" style="margin: 0px;">papisline2222@gmail.com</div>
                             </div>
                         </div>
