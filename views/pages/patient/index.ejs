@@ -130,7 +130,7 @@
                                 <select name="filter" class="ui compact selection dropdown">
                                   <option value="first_name">First Name</option>
                                   <option value="last_name">Last Name</option>
-                                  <option value="_id">ID</option>
+                                  <option value="UID">UID</option>
                                   <option value="isWithinFence">Geofence Status</option>
                                 </select>
                                 <button class="ui button">Search</button>
@@ -158,7 +158,7 @@
                                         <tr class="">
                                             <td>
                                                 <h4 class="ui image header">
-                                                    <img src="https://www.scripturaengage.com/wp-content/uploads/2017/03/Profile-Picture-Joke-Dehond-Circle.png"
+                                                    <img src="<%=patient.image%>"
                                                         class="ui big rounded image">
                                                     <div class="content">
                                                         <%=patient.last_name%>
