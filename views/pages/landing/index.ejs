@@ -9,9 +9,20 @@
             </i>
         </h1>
         <h1 class="ui yellow header" style="font-size: 7em;">CareAssist</h1>
-        <p>Better Understanding, Better Care, Better Health.</p>
+        <p></p>
+        <script>
+            window.onload = function () {
+                var options = {
+                    strings: ['Better Understanding, Better Care, Better Health.'],
+                    typeSpeed: 70,
+                    showCursor: true,
+                    cursorChar: '|',
+                };
+                var typed = new Typed('p', options);
+            }
+        </script>
         <a href="/login">
-            <div class='ui blue button'>
+            <div class='ui big blue button'>
                 Login To Your Account
             </div>
         </a>
