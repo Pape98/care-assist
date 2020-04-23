@@ -15,6 +15,7 @@ const patientSchema = new Schema({
     gender: String,
     physician: String,
     home_address: String,
+    image:String,
 
     weight: String,
     height:  String,

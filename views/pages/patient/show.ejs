@@ -21,12 +21,18 @@
                 </form>
             </div>
         </div>
+
         <div class="row">
             <div class="two wide column">
                 <% include ../../partials/sidebar %>
             </div>
-            <div class="fourteen wide column">
-                <div class="ui grid" style="margin:0 3vw">
+            <div class="one wide  column center-content ">
+                <a href="/patients/<%=otherPatients[0]._id%>" id="nextPatient" class="circular ui icon yellow huge button">
+                    <i class="left chevron icon"></i>
+                  </a>
+            </div>
+            <div class="twelve wide column">
+                <div class="ui centered grid">
 
                     <% if(success.length != 0){ %>
                     <div class="one column row">
@@ -41,10 +47,29 @@
                     </div>
                     <% } %>
 
+                    <!-- <div class="two column row">
+                        <div class="column">
+                            <a class="ui black animated button" tabindex="0">
+                                <div class="visible content">Previous Patient</div>
+                                <div class="hidden content"> 
+                                  <i class="right arrow icon"></i>
+                                </div>
+                              </a>
+                        </div>
+                        <a class="right aligned column">
+                            <div class="ui black animated button" tabindex="0">
+                                <div class="visible content">Next Patient</div>
+                                <div class="hidden content"> 
+                                  <i class="right arrow icon"></i>
+                                </div>
+                              </div>
+                        </a>
+                    </div> -->
+
                     <div class="row">
                         <div class=" three wide column">
                             <div class="ui center aligned container segment">
-                                <img class="ui centered small image" src="/images/pic1.jpeg" alt="">
+                                <img class="ui centered small image" src="<%=patient.image%>" alt="">
                                 <div class="ui header">
                                     <%= patient.first_name %> <%= patient.last_name %>
                                 </div>
@@ -385,6 +410,11 @@
 
                 </div>
 
+            </div>
+            <div class="one wide  column center-content ">
+                <a href="/patients/<%=otherPatients[1]._id%>" id="nextPatient" class="circular ui icon yellow huge button">
+                    <i class="right chevron icon"></i>
+                  </a>
             </div>
         </div>
     </div>

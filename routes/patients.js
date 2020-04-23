@@ -135,11 +135,13 @@ router.get('/:id', function (req, res, next) {
   Patient.findById(id, function (err, patient) {
     if (err) console.log(err);
     else {
-      res.render('pages/patient/show', {
-        patient: patient
+      Patient.find({_id:{$ne:patient._id}},'_id',function(err,otherPatients){
+        otherPatients = otherPatients.slice(0,2)
+        res.render('pages/patient/show', {
+          patient: patient, otherPatients:otherPatients
+        });
       });
     }
-
   });
 });
 

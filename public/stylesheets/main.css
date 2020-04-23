@@ -71,6 +71,12 @@
   height: 100vh;
   background: #2d3d4f !important; }
 
+#previousPatient:hover {
+  background: #3197e0 !important; }
+
+#nextPatient:hover {
+  background: #3197e0 !important; }
+
 #header-title {
   font-size: 40px; }
 
