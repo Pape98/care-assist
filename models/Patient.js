@@ -22,8 +22,10 @@ const patientSchema = new Schema({
     latitude : String,
     longitude: String,
     heart_rate: [Number],
-    isWithinFence: {type:Boolean,default:false},
+    latitude: String,
+    longitude: String,
 
+    isWithinFence: {type:Boolean,default:false},
     emergency:{
         full_name:String,
         relationship:String,

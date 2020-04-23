@@ -2,9 +2,29 @@ const express = require('express');
 const router = express.Router();
 const url = require('url');
 const Patient = require('../models/Patient');
+const Location = require('../models/Location');
 const PatientSeed = require('../seeds/patients')
-const { ensureAuthenticated }= require('../config/auth');
+const {
+  ensureAuthenticated
+} = require('../config/auth');
 
+/** Update patient location every 5 minutes */
+function updateLocations() {
+  Patient.find({},function(err,patients){
+    patients.forEach(function(patient){
+      Location.findOne({UID:patient.UID},function(err,location){
+        if(location != null){
+          patient.latitude = location.latitude;
+          patient.longitude = location.longitude;
+          patient.save();
+          console.log("Upated location for UID " + patient.UID)
+        }
+      });
+    })
+  })
+}
+
+setInterval(updateLocations, 2000);
 
 /** Utiliy functions */
 router.get('/seed', function (req, res, next) {
@@ -18,7 +38,7 @@ router.get('/drop', function (req, res, next) {
 })
 
 /** Require authentication for all the routes below */
-router.all('*',ensureAuthenticated);
+router.all('*', ensureAuthenticated);
 
 /** GET new patient form */
 
@@ -120,6 +140,7 @@ router.get('/:id', function (req, res, next) {
         patient: patient
       });
     }
+
   });
 });
 
@@ -135,7 +156,8 @@ router.put('/:id', function (req, res, next) {
     weight: req.body.weight,
     height: req.body.height,
     emergency: req.body.emergency,
-    blood_type: req.body.blood_type
+    blood_type: req.body.blood_type,
+    UID: req.body.UID
   }
 
   var id = req.params.id;

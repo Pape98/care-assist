@@ -55,6 +55,7 @@ router.post('/register', (req, res) => {
                 .save()
                 .then(user => {
                     // Redirect to login page
+                    req.flash('success','New user successfully added.')
                     res.redirect('back');
                 })
                 .catch(err => console.log(err));

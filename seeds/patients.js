@@ -1,6 +1,106 @@
 var Patient = require('../models/Patient');
 
-var patients = [{"UID":36,"first_name":"Ashley","last_name":"Lee","birthday":"2015-07-12T05:04:04","gender":"Male","physician":"Elise Gilliam","home_address":"204 Richardson Street, Lund, Utah, 6225","weight":66,"height":177,"blood_type":"O","latitude":30.619438,"longitude":-96.34137,"isWithinFence":false,"heart_rate":[62,64,62,70,63,72,75,56,72,72,57,64,60,58,55,58,74,68,56,61,75,64,64,58,64,55,59,59,69,69],"emergency":{"full_name":"Jasmine Mendez","relationship":"Aunt","home_address":"212 Prince Street, Whitewater, Vermont, 6229","phone_number":"+1 (966) 557-2833","email":"jasminemendez@venoflex.com"}},{"UID":61,"first_name":"Alana","last_name":"Jennings","birthday":"2018-01-07T06:05:42","gender":"Female","physician":"Angela Gill","home_address":"538 Brown Street, Sparkill, Montana, 5491","weight":83,"height":163,"blood_type":"A","latitude":30.619989,"longitude":-96.33867,"isWithinFence":false,"heart_rate":[61,67,55,66,59,62,65,69,60,62,67,74,75,55,59,64,73,74,72,69,68,72,64,66,64,74,67,63,71,74],"emergency":{"full_name":"Lelia Conrad","relationship":"Son","home_address":"148 Lincoln Avenue, Woodruff, Delaware, 7730","phone_number":"+1 (951) 418-3161","email":"leliaconrad@venoflex.com"}},{"UID":68,"first_name":"Dominique","last_name":"Rojas","birthday":"2016-04-20T05:58:06","gender":"Male","physician":"Therese Clarke","home_address":"226 Corbin Place, Epworth, Massachusetts, 153","weight":82,"height":184,"blood_type":"AB","latitude":30.621751,"longitude":-96.339687,"isWithinFence":false,"heart_rate":[70,61,62,61,67,61,65,59,73,62,71,56,62,75,56,75,74,58,68,65,62,73,70,64,65,70,72,72,74,61],"emergency":{"full_name":"Bradford Slater","relationship":"Daughter","home_address":"988 Jackson Street, Crucible, California, 9619","phone_number":"+1 (828) 483-2568","email":"bradfordslater@venoflex.com"}},{"UID":44,"first_name":"Ford","last_name":"Boyd","birthday":"2015-08-08T03:14:52","gender":"Male","physician":"Bauer Tyler","home_address":"227 Bainbridge Street, Eggertsville, Oregon, 3521","weight":50,"height":185,"blood_type":"B","latitude":30.622109,"longitude":-96.342376,"isWithinFence":false,"heart_rate":[68,67,68,60,72,73,71,66,71,75,70,60,71,66,74,55,62,55,58,68,68,72,62,57,59,61,70,66,72,63],"emergency":{"full_name":"Dillon Bernard","relationship":"Daughter","home_address":"365 Dewey Place, Marysville, Louisiana, 7843","phone_number":"+1 (902) 549-2645","email":"dillonbernard@venoflex.com"}},{"UID":56,"first_name":"Kristi","last_name":"Cardenas","birthday":"2017-06-14T04:01:02","gender":"Female","physician":"Roseann Alvarado","home_address":"403 Lafayette Walk, Kanauga, Alaska, 6545","weight":50,"height":177,"blood_type":"A-","latitude":30.619066,"longitude":-96.341024,"isWithinFence":false,"heart_rate":[61,61,69,65,55,59,66,70,60,64,64,67,57,67,65,62,55,73,58,74,72,66,72,62,61,66,75,62,70,65],"emergency":{"full_name":"Patsy Livingston","relationship":"Parent","home_address":"528 Kingsway Place, Gouglersville, Wyoming, 8900","phone_number":"+1 (915) 467-3491","email":"patsylivingston@venoflex.com"}},{"UID":56,"first_name":"Norris","last_name":"Hardin","birthday":"2016-12-15T02:39:14","gender":"Female","physician":"Porter Leonard","home_address":"410 Lancaster Avenue, Glenbrook, Mississippi, 4781","weight":92,"height":207,"blood_type":"A-","latitude":30.619827,"longitude":-96.338457,"isWithinFence":false,"heart_rate":[66,61,72,59,65,63,55,57,71,74,70,56,70,70,66,66,67,70,75,68,75,72,62,74,68,71,57,64,56,58],"emergency":{"full_name":"Lara Ferrell","relationship":"Son","home_address":"730 Navy Walk, Utting, North Carolina, 1112","phone_number":"+1 (822) 521-3266","email":"laraferrell@venoflex.com"}},{"UID":43,"first_name":"Kathie","last_name":"Carey","birthday":"2014-08-23T12:55:56","gender":"Female","physician":"Schneider Richmond","home_address":"686 Gem Street, Fostoria, Maryland, 548","weight":51,"height":197,"blood_type":"B+","latitude":30.618792,"longitude":-96.341038,"isWithinFence":false,"heart_rate":[65,75,58,62,63,61,63,67,69,68,64,69,64,64,73,61,66,67,63,67,69,56,59,58,64,68,71,75,55,63],"emergency":{"full_name":"Stanton Ramsey","relationship":"Sibling","home_address":"665 Village Court, Omar, Marshall Islands, 1529","phone_number":"+1 (978) 561-2003","email":"stantonramsey@venoflex.com"}},{"UID":93,"first_name":"Kelley","last_name":"Terry","birthday":"2014-07-22T12:14:22","gender":"Male","physician":"England Floyd","home_address":"379 Micieli Place, Roberts, Michigan, 6895","weight":58,"height":155,"blood_type":"A+","latitude":30.620143,"longitude":-96.338274,"isWithinFence":false,"heart_rate":[65,58,56,57,69,68,72,64,68,65,68,75,72,70,62,62,63,71,74,62,65,64,60,68,73,63,73,72,74,75],"emergency":{"full_name":"Noemi Carlson","relationship":"Parent","home_address":"879 Garfield Place, Rowe, District Of Columbia, 9797","phone_number":"+1 (901) 506-2669","email":"noemicarlson@venoflex.com"}},{"UID":54,"first_name":"Aurora","last_name":"Baldwin","birthday":"2019-01-23T11:51:04","gender":"Male","physician":"Delacruz Stark","home_address":"583 Virginia Place, Allentown, Nevada, 2549","weight":80,"height":159,"blood_type":"A-","latitude":30.620015,"longitude":-96.339785,"isWithinFence":false,"heart_rate":[57,62,75,62,73,55,67,63,57,55,69,72,60,71,68,65,62,74,68,63,67,64,60,63,61,69,72,75,60,73],"emergency":{"full_name":"Vonda Bean","relationship":"Parent","home_address":"331 Montague Terrace, Mulberry, Maine, 1823","phone_number":"+1 (971) 521-2741","email":"vondabean@venoflex.com"}},{"UID":90,"first_name":"Delaney","last_name":"Lopez","birthday":"2014-08-07T12:01:23","gender":"Male","physician":"English Walter","home_address":"798 Lincoln Place, Campo, Alabama, 9019","weight":90,"height":154,"blood_type":"AB+","latitude":30.619282,"longitude":-96.338963,"isWithinFence":false,"heart_rate":[60,56,64,72,56,69,69,69,64,65,70,73,63,70,64,62,55,60,70,65,56,71,63,62,61,69,70,75,74,56],"emergency":{"full_name":"Carey Dyer","relationship":"Uncle","home_address":"638 Wyckoff Avenue, Windsor, Arkansas, 5316","phone_number":"+1 (803) 442-3599","email":"careydyer@venoflex.com"}}];
+var patients = [{
+    "owner_id": 1,
+    "first_name": "Esperanza",
+    "last_name": "Mendoza",
+    "birthday": "2020-02-04T12:23:53",
+    "gender": "Male",
+    "physician": "Jacobs Wise",
+    "home_address": "678 Miller Place, Stockwell, Arizona, 3155",
+    "weight": 66,
+    "height": 197,
+    "blood_type": "AB+",
+    "isWithinFence": false,
+    "heart_rate": [66, 62, 55, 64, 70, 63, 62, 66, 68, 57, 64, 59, 75, 67, 68, 74, 55, 70, 66, 57, 73, 67, 64, 59, 56, 72, 75, 57, 60, 57],
+    "emergency": {
+        "full_name": "Krystal Velazquez",
+        "relationship": "Uncle",
+        "home_address": "213 Florence Avenue, Spelter, Alaska, 9916",
+        "phone_number": "+1 (963) 410-3563",
+        "email": "krystalvelazquez@sportan.com"
+    }
+}, {
+    "owner_id": 2,
+    "first_name": "Candace",
+    "last_name": "Spence",
+    "birthday": "2015-06-16T12:28:44",
+    "gender": "Male",
+    "physician": "May Stephens",
+    "home_address": "353 Fairview Place, Topaz, Wyoming, 742",
+    "weight": 83,
+    "height": 204,
+    "blood_type": "AB+",
+    "isWithinFence": false,
+    "heart_rate": [65, 73, 62, 69, 67, 71, 75, 69, 56, 58, 68, 59, 66, 68, 65, 70, 74, 62, 60, 71, 65, 65, 68, 62, 74, 64, 62, 72, 65, 63],
+    "emergency": {
+        "full_name": "Gwendolyn Dudley",
+        "relationship": "Daughter",
+        "home_address": "283 Hewes Street, Calverton, Maryland, 2933",
+        "phone_number": "+1 (973) 457-3477",
+        "email": "gwendolyndudley@sportan.com"
+    }
+}, {
+    "owner_id": 3,
+    "first_name": "Cardenas",
+    "last_name": "Hancock",
+    "birthday": "2015-04-01T06:19:51",
+    "gender": "Female",
+    "physician": "Salazar Stanton",
+    "home_address": "952 Calder Place, Tecolotito, Hawaii, 4167",
+    "weight": 87,
+    "height": 165,
+    "blood_type": "B",
+    "latitude": 30.62254,
+    "heart_rate": [70, 63, 68, 73, 73, 66, 57, 62, 71, 60, 62, 61, 68, 56, 55, 64, 73, 60, 70, 73, 71, 67, 64, 64, 57, 56, 68, 72, 72, 59],
+    "emergency": {
+        "full_name": "Sears Holcomb",
+        "relationship": "Son",
+        "home_address": "605 Tillary Street, Sterling, Indiana, 2486",
+        "phone_number": "+1 (979) 522-3102",
+        "email": "searsholcomb@sportan.com"
+    }
+}, {
+    "owner_id": 4,
+    "first_name": "Holmes",
+    "last_name": "Yates",
+    "birthday": "2017-01-09T09:06:28",
+    "gender": "Male",
+    "physician": "Letitia Trevino",
+    "home_address": "562 Hope Street, Malo, Michigan, 3608",
+    "weight": 60,
+    "height": 164,
+    "blood_type": "A",
+    "isWithinFence": false,
+    "heart_rate": [65, 75, 68, 72, 65, 61, 58, 57, 65, 56, 55, 55, 64, 70, 72, 67, 65, 61, 70, 55, 63, 56, 55, 59, 74, 57, 73, 74, 68, 60],
+    "emergency": {
+        "full_name": "Lewis Bird",
+        "relationship": "Daughter",
+        "home_address": "668 Irvington Place, Edenburg, Rhode Island, 2829",
+        "phone_number": "+1 (967) 588-3134",
+        "email": "lewisbird@sportan.com"
+    }
+}, {
+    "owner_id": 5,
+    "first_name": "Tammy",
+    "last_name": "Reilly",
+    "birthday": "2014-02-18T11:30:39",
+    "gender": "Male",
+    "physician": "Ericka Price",
+    "home_address": "554 Elm Avenue, Wikieup, Virgin Islands, 3616",
+    "weight": 93,
+    "height": 198,
+    "blood_type": "A-",
+    "isWithinFence": false,
+    "heart_rate": [62, 68, 71, 66, 66, 73, 59, 61, 57, 69, 72, 58, 74, 58, 71, 75, 65, 71, 64, 59, 62, 67, 60, 58, 75, 57, 66, 57, 72, 65],
+    "emergency": {
+        "full_name": "Bryant Hebert",
+        "relationship": "Aunt",
+        "home_address": "584 Poplar Avenue, Jennings, Connecticut, 2470",
+        "phone_number": "+1 (877) 524-2791",
+        "email": "bryanthebert@sportan.com"
+    }
+}];
 
 function seedPatients() {
     for (patient of patients) {
