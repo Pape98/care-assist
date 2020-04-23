@@ -26,55 +26,6 @@ router.get('/register', function (req, res, next) {
     res.render('pages/users/register');
 });
 
-// GET home page
-router.get('/home', function (req, res, next) {
-    req.app.locals.user = req.user;
-    var date = moment().format('MMMM Do YYYY');
-    Patient.find({},'first_name last_name isWithinFence',function(err,patients){
-        res.render('pages/users/home', {
-        date: date, patients:patients
-    });
-
-    });
-});
-
-
-
-// GET settings page
-router.get('/settings', function (req, res, next) {
-    req.app.locals.user = req.user;
-    User.find({
-        _id: {
-            $ne: req.user._id
-        }
-    }, function (err, users) {
-        res.render('pages/users/profile', {
-            isAdmin: req.user.admin,
-            users: users
-        });
-    })
-});
-
-
-// GET reminder page
-router.get('/reminders', function (req, res, next) {
-    res.render('pages/users/reminder');
-});
-
-/* 
-    Delete specified user
-*/
-router.delete('/delete/:id', (req, res) => {
-    User.findByIdAndRemove(req.params.id, (error, data) => {
-        if (error) {
-            console.log(error);
-        } else {
-            req.flash('success', 'User has been deleted.')
-            res.redirect('/users/settings')
-        }
-    });
-});
-
 // Register Handle
 router.post('/register', (req, res) => {
     const {
@@ -243,7 +194,6 @@ router.post('/reset-request', (req, res) => {
 /* 
     Get reset password page
     Using ensureReset middleware to verify token access to route/page
-    TODO: Flash messages
 */
 router.get('/reset/:token' /* , ensureReset */ , function (req, res, next) {
     User.findOne({
@@ -323,8 +273,93 @@ router.post('/reset', (req, res) => {
 });
 
 
+/* 
+    Get user email update page
+*/
+router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next) {
+    User.findOne({
+            updateEmailToken: req.params.token,
+            updateEmailExpires: {
+                $gt: Date.now()
+            }
+        })
+        .then((user) => {
+            if (!user) {
+                console.log('Invalid token');
+                res.redirect('/login');
+            } else {
+                console.log('Valid token, updating user email');
+                user.email = user.updateEmail;
+                user.updateEmail = undefined;
+                user.updateEmailToken = undefined;
+                user.updateEmailExpires = undefined;
+                user.save()
+                    .then()
+                    .catch(err => console.log(err));
+                res.redirect('/login');
+            }
+
+        })
+        .catch(err => res.status(500).json({
+            message: err.message
+        }));
+});
+
+/**  Require authentication for all the routes below */
+router.all('*',ensureAuthenticated);
+
+
+// GET home page
+router.get('/home', function (req, res, next) {
+    req.app.locals.user = req.user;
+    var date = moment().format('MMMM Do YYYY');
+    Patient.find({},'first_name last_name isWithinFence',function(err,patients){
+        res.render('pages/users/home', {
+        date: date, patients:patients
+    });
+
+    });
+});
+
+
+
+// GET settings page
+router.get('/settings', function (req, res, next) {
+    req.app.locals.user = req.user;
+    User.find({
+        _id: {
+            $ne: req.user._id
+        }
+    }, function (err, users) {
+        res.render('pages/users/profile', {
+            isAdmin: req.user.admin,
+            users: users
+        });
+    })
+});
+
+
+// GET reminder page
+router.get('/reminders', function (req, res, next) {
+    res.render('pages/users/reminder');
+});
+
+/* 
+    Delete specified user
+*/
+router.delete('/delete/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
+            console.log(error);
+        } else {
+            req.flash('success', 'User has been deleted.')
+            res.redirect('/users/settings')
+        }
+    });
+});
+
 // Change Information Handle
-router.post('/changeInfo', ensureAuthenticated, (req, res) => {
+router.post('/changeInfo', (req, res) => {
     // Get params
     var {
         first_name,
@@ -387,41 +422,5 @@ router.post('/changeInfo', ensureAuthenticated, (req, res) => {
     req.flash('success', 'Information successfully updated.')
     res.redirect('/users/settings');
 });
-
-
-/* 
-    Get user email update page
-    TODO: Flash messages    
-*/
-router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next) {
-    User.findOne({
-            updateEmailToken: req.params.token,
-            updateEmailExpires: {
-                $gt: Date.now()
-            }
-        })
-        .then((user) => {
-            if (!user) {
-                console.log('Invalid token');
-                res.redirect('/login');
-            } else {
-                console.log('Valid token, updating user email');
-                user.email = user.updateEmail;
-                user.updateEmail = undefined;
-                user.updateEmailToken = undefined;
-                user.updateEmailExpires = undefined;
-                user.save()
-                    .then()
-                    .catch(err => console.log(err));
-                res.redirect('/login');
-            }
-
-        })
-        .catch(err => res.status(500).json({
-            message: err.message
-        }));
-});
-
-
 
 module.exports = router;

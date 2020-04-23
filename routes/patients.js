@@ -44,6 +44,7 @@ router.post('/', function (req, res, next) {
     height,
     emergency,
     blood_type,
+    UID,
   } = req.body
 
   var newPatient = new Patient({
@@ -56,7 +57,8 @@ router.post('/', function (req, res, next) {
     weight,
     height,
     blood_type,
-    emergency
+    emergency,
+    UID
   });
 
   newPatient.save(function (err, newPatient) {
@@ -98,7 +100,7 @@ router.get('/', function (req, res, next) {
       }
     })
   }
-  Patient.find({}).where().exec(function (err, patients) {
+  Patient.find({}).where().sort('last_name').exec(function (err, patients) {
     if (err) console.log(err);
     else {
       res.render('pages/patient/index', {
