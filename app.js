@@ -94,7 +94,7 @@ app.use("/patients", patientsRouter);
 app.use("/api", apiRouter);
 
 // Define server port
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 // USING `
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
