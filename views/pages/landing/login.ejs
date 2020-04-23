@@ -12,27 +12,20 @@
         <div class="ui grid" id="login-grid">
             <div class="row">
                 <div class=" twelve wide centered column" id="login-right">
+
                     <h1 class="ui inverted header" style="margin-top:0px">
                         Welcome
                     </h1>
                     <% if(success.length != 0){ %>
-                        <div class="ui large success message ">
+                        <div class="ui tiny success message ">
                             <i class="close icon"></i>
                             <div class="header">
                                 <%=success[0]%>
                             </div>
                         </div>
                         <% } %>
-                        <% if(error.length != 0){ %>
-                            <div class="ui large red message ">
-                                <i class="close icon"></i>
-                                <div class="header">
-                                    <%=error[0]%>
-                                </div>
-                            </div>
-                            <% } %>
                     <% if(error.length !=0){ %>
-                        <div class="ui small red message">
+                        <div class="ui tiny error message">
                             <i class="close icon"></i>
                             <ul class="list">
                               <li>Make sure you enter the correct email address</li>
@@ -40,7 +33,15 @@
                             </ul>
                           </div>
                     <% } %>
-                    <form class="ui large inverted form" id="loginForm" action="/users/login" method="POST">
+                    <% if(failure.length != 0){ %>
+                        <div class="ui tiny error message ">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=failure[0]%>
+                            </div>
+                        </div>
+                        <% } %>
+                    <form class="ui large inverted  form" id="loginForm" action="/users/login" method="POST" >
                         <div class="field">
                             <label>Email Address</label>
                             <input type="email" name="email" placeholder="Enter Your Email">
@@ -49,12 +50,14 @@
                             <label>Password</label>
                             <input type="password" name="password" placeholder="Enter Your Password">
                         </div>
-                        <button style="margin: 0;" class="ui big fluid blue button" type="submit">Submit</button>
-                        <div class="ui small error message"></div>
-                 
-                    </form>
+                        <button style="margin: 0;" class="ui fluid blue button" type="submit">Submit</button>
+                        <div class="ui tiny error message"></div>
+                    </form> 
+                    <div class="ui segment">Forgot Password? <a href="/users/reset-request">Click here.</a></div>
                 </div>
-            </div>
+                </div>
+               
+        
         </div>
     </div>
 </div>

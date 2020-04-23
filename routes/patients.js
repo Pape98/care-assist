@@ -1,12 +1,31 @@
-var express = require('express');
-var router = express.Router();
-var url = require('url');
-var Patient = require('../models/Patient');
-var PatientSeed = require('../seeds/patients')
+const express = require('express');
+const router = express.Router();
+const url = require('url');
+const Patient = require('../models/Patient');
+const Location = require('../models/Location');
+const Data = require('../models/Data');
+const PatientSeed = require('../seeds/patients')
+const { ensureAuthenticated } = require('../config/auth');
 
+/** Update patient location every 5 minutes */
+function updateLocations() {
+  Patient.find({},function(err,patients){
+    patients.forEach(function(patient){
+      Location.findOne({UID:patient.UID},function(err,location){
+        if(location != null){
+          patient.latitude = location.latitude;
+          patient.longitude = location.longitude;
+          patient.save();
+          console.log("Upated location for UID " + patient.UID)
+        }
+      });
+    })
+  })
+}
+
+setInterval(updateLocations, 2000);
 
 /** Utiliy functions */
-router.get('ap')
 router.get('/seed', function (req, res, next) {
   PatientSeed.seedPatients();
   res.send("<h1>Patient collection SEEDED!</h1>")
@@ -16,6 +35,9 @@ router.get('/drop', function (req, res, next) {
   Patient.collection.drop();
   res.send("<h1>Patient collection DROPPED!</h1>")
 })
+
+/** Require authentication for all the routes below */
+router.all('*', ensureAuthenticated);
 
 /** GET new patient form */
 
@@ -41,6 +63,7 @@ router.post('/', function (req, res, next) {
     height,
     emergency,
     blood_type,
+    UID,
   } = req.body
 
   var newPatient = new Patient({
@@ -53,7 +76,8 @@ router.post('/', function (req, res, next) {
     weight,
     height,
     blood_type,
-    emergency
+    emergency,
+    UID
   });
 
   newPatient.save(function (err, newPatient) {
@@ -95,7 +119,7 @@ router.get('/', function (req, res, next) {
       }
     })
   }
-  Patient.find({}).where().exec(function (err, patients) {
+  Patient.find({}).where().sort('last_name').exec(function (err, patients) {
     if (err) console.log(err);
     else {
       res.render('pages/patient/index', {
@@ -115,6 +139,7 @@ router.get('/:id', function (req, res, next) {
         patient: patient
       });
     }
+
   });
 });
 
@@ -130,7 +155,8 @@ router.put('/:id', function (req, res, next) {
     weight: req.body.weight,
     height: req.body.height,
     emergency: req.body.emergency,
-    blood_type: req.body.blood_type
+    blood_type: req.body.blood_type,
+    UID: req.body.UID
   }
 
   var id = req.params.id;

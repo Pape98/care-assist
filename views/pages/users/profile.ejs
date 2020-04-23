@@ -26,7 +26,7 @@
                     </div>
                     <% } %>
                     <% if(error.length != 0){ %>
-                        <div class="ui large red message ">
+                        <div class="ui large error message ">
                             <i class="close icon"></i>
                             <div class="header">
                                 <%=error[0]%>
@@ -35,7 +35,9 @@
                         <% } %>
                 <div class="ui top attached tabular menu">
                     <a class="active item" data-tab="first">Personal Information</a>
-                    <a class="item" data-tab="second">Manage Users</a>
+                    <% if(user.admin){%>
+                        <a class="item" data-tab="second">Manage Users</a>
+                    <% }%> 
                 </div>
 
                 <div class="ui bottom attached tab segment active" data-tab="first">
@@ -101,77 +103,79 @@
                         </form>
                     </div>
                 </div>
-
-                <div class="ui bottom attached tab segment" data-tab="second">
-                    <div class="ui blue small header">Delete Caretakers</div>
-                    
-                    <div class="ui relaxed items">
-                        <% users.forEach(function(user){ %>
-                            <div class="item">
-                                <div class="ui tiny image">
-                                  <img src="/images/pic3.png">
-                                </div>
-                                <div class="middle aligned content">
-                                  <div class="header">
-                                   <%=user.first_name %>  <%=user.last_name %> 
+                <% if(user.admin){%>
+                    <div class="ui bottom attached tab segment" data-tab="second">
+                        <div class="ui blue small header">Delete Caretakers</div>
+                        
+                        <div class="ui relaxed items">
+                            <% users.forEach(function(user){ %>
+                                <div class="item">
+                                    <div class="ui tiny image">
+                                      <img src="/images/pic3.png">
+                                    </div>
+                                    <div class="middle aligned content">
+                                      <div class="header">
+                                       <%=user.first_name %>  <%=user.last_name %> 
+                                      </div>
+                                      <div class="description">
+                                        <%=user.email %> 
+                                      </div>
+                                      <div class="extra">
+                                          <form action="/users/delete/<%=user._id%>?_method=DELETE" name="_name" method="POST">
+                                            <button class="ui right floated red small button">
+                                                Delete User
+                                            </button>
+                                          </form>
+                                      </div>
+                                    </div>
                                   </div>
-                                  <div class="description">
-                                    <%=user.email %> 
-                                  </div>
-                                  <div class="extra">
-                                      <form action="/users/delete/<%=user._id%>?_method=DELETE" name="_name" method="POST">
-                                        <button class="ui right floated red small button">
-                                            Delete User
-                                        </button>
-                                      </form>
-                                  </div>
+                            <% }) %>
+                          </div>
+    
+                        
+                        <div class="ui divider"></div>
+                        <div class="ui blue small header">Add New Caretaker</div>
+                        <div class="content">
+                            <form action="/users/register" method="post" class="ui form">
+                                <div class="ui error message"> </div>
+                                <div class="two fields">
+                                    <div class="five wide field">
+                                        <label>First Name</label>
+                                        <input type="text" name="first_name" placeholder="First Name">
+                                    </div>
+                                    <div class="five wide field">
+                                        <label>Last Name</label>
+                                        <input type="text" name="last_name" placeholder="Last Name">
+                                    </div>
                                 </div>
-                              </div>
-                        <% }) %>
-                      </div>
-
-                    
-                    <div class="ui divider"></div>
-                    <div class="ui blue small header">Add New Caretaker</div>
-                    <div class="content">
-                        <form action="/users/register" method="post" class="ui form">
-                            <div class="ui error message"> </div>
-                            <div class="two fields">
-                                <div class="five wide field">
-                                    <label>First Name</label>
-                                    <input type="text" name="first_name" placeholder="First Name">
+                                <div class="two fields">
+                                    <div class="four wide field">
+                                        <label>Email Address</label>
+                                        <input type="email" name="email" placeholder="Email">
+                                    </div>
+                                    <div class="four wide field">
+                                        <label>Confirm Email Address</label>
+                                        <input type="email" name="confirm_email_address" placeholder="Confirm Email">
+                                    </div>
                                 </div>
-                                <div class="five wide field">
-                                    <label>Last Name</label>
-                                    <input type="text" name="last_name" placeholder="Last Name">
+                                <div class="two fields">
+                                    <div class="four wide field">
+                                        <label>New Password</label>
+                                        <input type="password" name="password" placeholder="New Password"
+                                            id="new_password">
+                                    </div>
+                                    <div class="four wide field">
+                                        <label>Confirm New Password</label>
+                                        <input type="password" name="password2" placeholder="Confirm Password">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="two fields">
-                                <div class="four wide field">
-                                    <label>Email Address</label>
-                                    <input type="email" name="email" placeholder="Email">
-                                </div>
-                                <div class="four wide field">
-                                    <label>Confirm Email Address</label>
-                                    <input type="email" name="confirm_email_address" placeholder="Confirm Email">
-                                </div>
-                            </div>
-                            <div class="two fields">
-                                <div class="four wide field">
-                                    <label>New Password</label>
-                                    <input type="password" name="password" placeholder="New Password"
-                                        id="new_password">
-                                </div>
-                                <div class="four wide field">
-                                    <label>Confirm New Password</label>
-                                    <input type="password" name="password2" placeholder="Confirm Password">
-                                </div>
-                            </div>
-                            <button class="ui green button" type="submit">Save Changes</button>
-                            <button class="ui red deny centered icon button" type="reset"> Reset Fields </button>
-                        </form>
+                                <button class="ui green button" type="submit">Save Changes</button>
+                                <button class="ui red deny centered icon button" type="reset"> Reset Fields </button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                <% }%> 
+                
 
             </div>
         </div>

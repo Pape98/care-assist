@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 
 // Define user attributes
 const patientSchema = new Schema({
-
+    UID:Number,
     first_name : {type:String , required:true},
     last_name: {type:String , required: true},
     birthday: Date,
@@ -22,8 +22,10 @@ const patientSchema = new Schema({
     latitude : String,
     longitude: String,
     heart_rate: [Number],
-    isWithinFence: {type:Boolean,default:false},
+    latitude: String,
+    longitude: String,
 
+    isWithinFence: {type:Boolean,default:false},
     emergency:{
         full_name:String,
         relationship:String,

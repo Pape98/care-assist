@@ -6,8 +6,9 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-var moment = require('moment');
-var app = express();
+const moment = require('moment');
+const app = express();
+const Patient = require('../models/Patient');
 // var User = require('../models/User');
 
 const {
@@ -21,54 +22,12 @@ sgMail.setApiKey('SG.cpg8jTCCQ9il-qdew6Idog.WNBfnelObbp1ahCPilkQt9kqjrwG7xkCKWjx
 // User model
 const User = require('../models/User');
 
-
-// GET home page
-router.get('/home', function (req, res, next) {
-    req.app.locals.user  = req.user;
-    var date = moment().format('MMMM Do YYYY');
-    res.render('pages/users/home', {
-        date: date
-    });
-});
-
-
-// GET settings page
-router.get('/settings', function (req, res, next) {
-    req.app.locals.user = req.user;
-    User.find({_id: {$ne:req.user._id} },function(err,users){
-        res.render('pages/users/profile', {
-            isAdmin: req.user.admin, users:users
-        });
-    })
-});
-
-
-// GET reminder page
-router.get('/reminders', function (req, res, next) {
-    res.render('pages/users/reminder');
-});
-
-/* 
-    Delete specified user
-*/
-router.delete('/delete/:id', (req, res) => {
-    User.findByIdAndRemove(req.params.id, (error, data) => {
-        if (error) {
-            console.log(error);
-        } else {
-            req.flash('success','User has been deleted.')
-            res.redirect('/users/settings')
-        }
-    });
+router.get('/register', function (req, res, next) {
+    res.render('pages/users/register');
 });
 
 // Register Handle
 router.post('/register', (req, res) => {
-    // Information access
-    if (req.user.admin != true) {
-        console.log("Not admin");
-        return;
-    }
     const {
         first_name,
         last_name,
@@ -96,7 +55,8 @@ router.post('/register', (req, res) => {
                 .save()
                 .then(user => {
                     // Redirect to login page
-                    res.redirect('/login');
+                    req.flash('success','New user successfully added.')
+                    res.redirect('back');
                 })
                 .catch(err => console.log(err));
         });
@@ -149,7 +109,7 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
                             },
                             function (err) {
                                 if (err) console.log(err);
-                                
+
                             }
                         );
                         req.flash('success', 'Password successfully updated.')
@@ -162,7 +122,7 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
             }
         });
     } else {
-        req.flash('error',"Passwords don't match");
+        req.flash('error', "Passwords don't match");
         res.redirect('/users/settings');
     }
 });
@@ -171,7 +131,7 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
 /* 
     Get reset password page
 */
-router.get('/resetRequest' /* , ensureReset */ , function (req, res, next) {
+router.get('/reset-request' /* , ensureReset */ , function (req, res, next) {
     res.render('pages/landing/resetRequest');
 });
 
@@ -180,7 +140,7 @@ router.get('/resetRequest' /* , ensureReset */ , function (req, res, next) {
     Reset Password Handle
     TODO
 */
-router.post('/resetRequest', (req, res) => {
+router.post('/reset-request', (req, res) => {
     // Get post params
     const {
         email
@@ -192,16 +152,14 @@ router.post('/resetRequest', (req, res) => {
         .then(user => {
             // If no match, return with no user param
             if (!user) {
-                // TODO: Flash message with user notification
                 console.log('No user associated with email');
-                req.flash('failure', 'No user associated with email');
+                req.flash('failure', 'No user associated with this email');
+                res.redirect('/users/reset-request');
             }
             // Send email with reset instructions & notify user
             else {
-                // TODO: Flash message with user notification
                 req.flash('success', 'An email with instructions has been sent to the associated address');
-                console.log('User matched; recovering');
-
+                res.redirect('/users/reset-request');
                 user.generatePasswordReset();
                 console.log('Generated Password Token');
                 // Save the updated user object
@@ -215,7 +173,7 @@ router.post('/resetRequest', (req, res) => {
                                 "email": "CareAssistHelp@gmail.com"
                             },
                             subject: "CareAssist password reset",
-                            text: `Hi ${user.first_name}, \n 
+                            text: `Hi ${user.first_name},
                                 Please click on the following link ${link} to reset your password. \n\n`,
                         };
 
@@ -231,14 +189,12 @@ router.post('/resetRequest', (req, res) => {
             }
         })
         .catch(err => console.log(err));
-    return res.render('pages/landing/resetRequest');
 });
 
 
 /* 
     Get reset password page
     Using ensureReset middleware to verify token access to route/page
-    TODO: Flash messages
 */
 router.get('/reset/:token' /* , ensureReset */ , function (req, res, next) {
     User.findOne({
@@ -286,46 +242,125 @@ router.post('/reset', (req, res) => {
                 res.redirect('/login');
             }
             // Attempt password change
-            // TODO: Ensure password fulfills prerequisites 
             else {
-                if (new_password == confirm_new_password) {
-                    // Hash password and update
-                    bcrypt.genSalt(10, (err, salt) => {
-                        bcrypt.hash(new_password, salt, (err, hash) => {
-                            if (err) throw err;
-                            // Reassign user password
-                            const params = {
-                                "password": hash,
-                                "resetPasswordToken": undefined,
-                                "resetPasswordExpires": undefined
-                            };
-                            User.findOneAndUpdate({
-                                    "email": user.email
-                                }, {
-                                    $set: params
-                                },
-                                function (err) {
-                                    if (err) console.log(err);
-                                }
-                            );
-                        });
+
+                // Hash password and update
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(new_password, salt, (err, hash) => {
+                        if (err) throw err;
+                        // Reassign user password
+                        const params = {
+                            "password": hash,
+                            "resetPasswordToken": undefined,
+                            "resetPasswordExpires": undefined
+                        };
+                        User.findOneAndUpdate({
+                                "email": user.email
+                            }, {
+                                $set: params
+                            },
+                            function (err) {
+                                if (err) console.log(err);
+                            }
+                        );
                     });
-                    req.flash('success', 'Password successfully changed.')
-                    res.redirect('/login');
-                } else {
-                    req.flash('error', 'Passwords do not match.')
-                    res.render('pages/landing/reset', {
-                        user
-                    });
-                }
+                });
+                req.flash('success', 'Password successfully changed.');
+                res.redirect('/login');
+
             }
         })
         .catch(err => console.log(err));
 });
 
 
+/* 
+    Get user email update page
+*/
+router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next) {
+    User.findOne({
+            updateEmailToken: req.params.token,
+            updateEmailExpires: {
+                $gt: Date.now()
+            }
+        })
+        .then((user) => {
+            if (!user) {
+                console.log('Invalid token');
+                res.redirect('/login');
+            } else {
+                console.log('Valid token, updating user email');
+                user.email = user.updateEmail;
+                user.updateEmail = undefined;
+                user.updateEmailToken = undefined;
+                user.updateEmailExpires = undefined;
+                user.save()
+                    .then()
+                    .catch(err => console.log(err));
+                res.redirect('/login');
+            }
+
+        })
+        .catch(err => res.status(500).json({
+            message: err.message
+        }));
+});
+
+/**  Require authentication for all the routes below */
+router.all('*',ensureAuthenticated);
+
+
+// GET home page
+router.get('/home', function (req, res, next) {
+    req.app.locals.user = req.user;
+    var date = moment().format('MMMM Do YYYY');
+    Patient.find({},'first_name last_name isWithinFence',function(err,patients){
+        res.render('pages/users/home', {
+        date: date, patients:patients
+    });
+
+    });
+});
+
+
+
+// GET settings page
+router.get('/settings', function (req, res, next) {
+    req.app.locals.user = req.user;
+    User.find({
+        _id: {
+            $ne: req.user._id
+        }
+    }, function (err, users) {
+        res.render('pages/users/profile', {
+            isAdmin: req.user.admin,
+            users: users
+        });
+    })
+});
+
+
+// GET reminder page
+router.get('/reminders', function (req, res, next) {
+    res.render('pages/users/reminder');
+});
+
+/* 
+    Delete specified user
+*/
+router.delete('/delete/:id', (req, res) => {
+    User.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
+            console.log(error);
+        } else {
+            req.flash('success', 'User has been deleted.')
+            res.redirect('/users/settings')
+        }
+    });
+});
+
 // Change Information Handle
-router.post('/changeInfo', ensureAuthenticated, (req, res) => {
+router.post('/changeInfo', (req, res) => {
     // Get params
     var {
         first_name,
@@ -388,41 +423,5 @@ router.post('/changeInfo', ensureAuthenticated, (req, res) => {
     req.flash('success', 'Information successfully updated.')
     res.redirect('/users/settings');
 });
-
-
-/* 
-    Get user email update page
-    TODO: Flash messages    
-*/
-router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next) {
-    User.findOne({
-            updateEmailToken: req.params.token,
-            updateEmailExpires: {
-                $gt: Date.now()
-            }
-        })
-        .then((user) => {
-            if (!user) {
-                console.log('Invalid token');
-                res.redirect('/login');
-            } else {
-                console.log('Valid token, updating user email');
-                user.email = user.updateEmail;
-                user.updateEmail = undefined;
-                user.updateEmailToken = undefined;
-                user.updateEmailExpires = undefined;
-                user.save()
-                    .then()
-                    .catch(err => console.log(err));
-                res.redirect('/login');
-            }
-
-        })
-        .catch(err => res.status(500).json({
-            message: err.message
-        }));
-});
-
-
 
 module.exports = router;

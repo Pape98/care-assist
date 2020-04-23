@@ -91,6 +91,13 @@ html, body {
 .height-inherit {
   height: inherit !important; }
 
+.home-stats {
+  overflow: scroll;
+  height: 22vh; }
+
+.home-stats::-webkit-scrollbar {
+  display: none; }
+
 .item {
   font-family: Verdana, Geneva, sans-serif !important; }
 

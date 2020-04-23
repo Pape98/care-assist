@@ -26,7 +26,7 @@ class HereMap {
         this.map = new H.Map(
             mapElement,
             defaultLayers.vector.normal.map, {
-                zoom: 16.5,
+                zoom: 13.5,
                 pixelRatio: window.devicePixelRatio || 1,
                 center: {
                     lat: centerMap.lat,
@@ -186,7 +186,7 @@ class PatientsMap {
         this.map = new H.Map(
             mapElement,
             defaultLayers.vector.normal.map, {
-                zoom: 17.5,
+                zoom: 13.5,
                 center: {
                     lat: centerMap.lat,
                     lng: centerMap.long
