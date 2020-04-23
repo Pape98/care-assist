@@ -17,22 +17,6 @@
                 <% include ../../partials/sidebar %>
             </div>
             <div class="eleven wide column">
-                <% if(success.length != 0){ %>
-                    <div class="ui large success message ">
-                        <i class="close icon"></i>
-                        <div class="header">
-                            <%=success[0]%>
-                        </div>
-                    </div>
-                    <% } %>
-                    <% if(error.length != 0){ %>
-                        <div class="ui large red message ">
-                            <i class="close icon"></i>
-                            <div class="header">
-                                <%=error[0]%>
-                            </div>
-                        </div>
-                        <% } %>
                 <div class="ui top attached tabular menu">
                     <a class="active item" data-tab="first">Personal Information</a>
                     <a class="item" data-tab="second">Manage Users</a>
@@ -45,9 +29,9 @@
                             <div class="three wide column" style="margin-left: 1.5vh;">
                                 <img class="ui small rounded image" src="/images/pic1.jpeg">
                             </div>
-                            <div class=" ten wide column">
+                            <div class="three wide column">
                                 <br>
-                                <div class="ui header"><%=user.first_name%> <%=user.last_name%></div>
+                                <div class="ui header">Pape Traore</div>
                                 <div class="ui small grey header" style="margin: 0px;">papisline2222@gmail.com</div>
                             </div>
                         </div>
@@ -106,28 +90,24 @@
                     <div class="ui blue small header">Delete Caretakers</div>
                     
                     <div class="ui relaxed items">
-                        <% users.forEach(function(user){ %>
-                            <div class="item">
-                                <div class="ui tiny image">
-                                  <img src="/images/pic3.png">
-                                </div>
-                                <div class="middle aligned content">
-                                  <div class="header">
-                                   <%=user.first_name %>  <%=user.last_name %> 
-                                  </div>
-                                  <div class="description">
-                                    <%=user.email %> 
-                                  </div>
-                                  <div class="extra">
-                                      <form action="/users/delete/<%=user._id%>?_method=DELETE" name="_name" method="POST">
-                                        <button class="ui right floated red small button">
-                                            Delete User
-                                        </button>
-                                      </form>
-                                  </div>
-                                </div>
+                        <div class="item">
+                          <div class="ui tiny image">
+                            <img src="/images/pic3.png">
+                          </div>
+                          <div class="middle aligned content">
+                            <div class="header">
+                              Bakary Traore
+                            </div>
+                            <div class="description">
+                              <p>bakary@traore.edu</p>
+                            </div>
+                            <div class="extra">
+                              <div class="ui right floated red button">
+                                Delete User
                               </div>
-                        <% }) %>
+                            </div>
+                          </div>
+                        </div>
                       </div>
 
                     

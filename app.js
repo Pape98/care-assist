@@ -1,15 +1,16 @@
-var createError = require("http-errors");
-const express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-var sassMiddleware = require("node-sass-middleware");
-const mongoose = require("mongoose");
-const session = require("express-session");
-const passport = require("passport");
-var bodyParser = require("body-parser");
-var flash = require("connect-flash");
-const methodOverride = require("method-override");
+var createError = require('http-errors');
+const express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var sassMiddleware = require('node-sass-middleware');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
+var bodyParser = require('body-parser');
+var flash = require('connect-flash');
+const methodOverride = require('method-override');
+const sgMail = require('@sendgrid/mail');
 
 const app = express();
 
@@ -32,15 +33,15 @@ require("./config/passport")(passport);
 // DB Config
 const db = require("./config/keys").MongoURI;
 
-// MongoDB connection
-localDB = "mongodb://localhost/test";
-mongoose
-  .connect(localDB, {
+// MongoDB connection 
+url = 'mongodb://localhost/test';
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false 
   })
-  .then(() => console.log("MongoDB successfully connected..."))
-  .catch((err) => console.log(err));
+  .then(() => console.log('MongoDB successfully connected...'))
+  .catch(err => console.log(err));
 
 // EJS
 app.set("view engine", "ejs");
@@ -66,13 +67,14 @@ app.use(
 app.use(flash());
 
 app.use(function (req, res, next) {
-  res.locals.user = req.user;
+
   res.locals.success = req.flash("success");
   res.locals.check = req.flash("check");
   res.locals.failure = req.flash("failure");
   res.locals.error = req.flash("error");
   next();
 });
+
 
 // Passport Middleware
 app.use(passport.initialize());

@@ -15,15 +15,28 @@
                     <h1 class="ui inverted header" style="margin-top:0px">
                         Welcome
                     </h1>
+                    <% if(success.length != 0){ %>
+                        <div class="ui large success message ">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=success[0]%>
+                            </div>
+                        </div>
+                        <% } %>
+                        <% if(error.length != 0){ %>
+                            <div class="ui large red message ">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    <%=error[0]%>
+                                </div>
+                            </div>
+                            <% } %>
                     <% if(error.length !=0){ %>
                         <div class="ui small red message">
                             <i class="close icon"></i>
-                            <div class="header">
-                              Login Error
-                            </div>
                             <ul class="list">
-                              <li>You must include both a upper and lower case letters in your password.</li>
-                              <li>You need to select your home country.</li>
+                              <li>Make sure you enter the correct email address</li>
+                              <li>All passwords are at least six character long.</li>
                             </ul>
                           </div>
                     <% } %>

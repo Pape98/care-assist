@@ -1,0 +1,50 @@
+<% include ../../partials/head %>
+<div class="ui basic segment" id="main-segment">
+    <div class="ui stackable grid height-inherit">
+        
+        <div class="row">
+           
+            <div class="fourteen wide column">
+                <div class="ui centered container" id="">
+
+                    <div class="ui stackable grid">
+                        
+                        <div class="row">
+                            <div class="ui fluid styled accordion" style="margin: 40px 0">
+                                <div class="title">
+                                    <h2 class="ui header">
+                                        <i class="edit icon"></i>
+                                        <div class="content">
+                                            Enter Account Email Address
+                                        </div>
+                                    </h2>
+                                </div>
+                                <div class="content">
+                                    <form action="/users/resetRequest" method="post" class="ui form">
+                                       
+                                        <div class="field">
+                                            <label> Email</label>
+                                            <input type="email" name="email" placeholder="Email">
+                                        </div>
+
+                                        <button class="ui yellow button" type="submit">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/login">
+                            <div class='ui blue big button'>
+                                Login To Your Account
+                            </div>
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include ../../partials/footer %>

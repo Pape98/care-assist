@@ -1,0 +1,52 @@
+<% include ../../partials/head %>
+<div class="ui basic segment" id="main-segment">
+    <div class="ui stackable grid height-inherit">
+        
+        <div class="row">
+           
+            <div class="fourteen wide column">
+                <div class="ui centered container" id="">
+
+                    <div class="ui stackable grid">
+                        
+                        <div class="row">
+                            <div class="ui fluid styled accordion" style="margin: 40px 0">
+                                <div class="title">
+                                    <h2 class="ui header">
+                                        <i class="edit icon"></i>
+                                        <div class="content">
+                                            Enter & Confirm New Password
+                                        </div>
+                                    </h2>
+                                </div>
+                                <div class="content">
+                                    <form action="/users/reset" method="post" class="ui form">
+                                        <div class="ui error message"> </div>
+                                        <div class="field">
+                                            <label>New Password</label>
+                                            <input type="password" name="new_password" placeholder="New Password"
+                                                id="new_password">
+                                        </div>
+                                        <div class="field">
+                                            <label>Confirm New Password</label>
+                                            <input type="password" name="confirm_new_password"
+                                                placeholder="Confirm Password">
+                                        </div>
+                                        <input type="hidden" name="token" value="<%= user.resetPasswordToken %>">
+
+                                        <button class="ui yellow button" type="submit">Save</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include ../../partials/footer %>
