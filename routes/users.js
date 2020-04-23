@@ -6,13 +6,11 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-var moment = require('moment');
-var app = express();
+const moment = require('moment');
+const app = express();
 // var User = require('../models/User');
 
-const {
-    ensureAuthenticated
-} = require('../config/auth');
+const { ensureAuthenticated } = require('../config/auth');
 
 // Mailer
 const sgMail = require('@sendgrid/mail');
@@ -171,7 +169,7 @@ router.post('/changePassword', ensureAuthenticated, (req, res) => {
 /* 
     Get reset password page
 */
-router.get('/resetRequest' /* , ensureReset */ , function (req, res, next) {
+router.get('/reset-request' /* , ensureReset */ , function (req, res, next) {
     res.render('pages/landing/resetRequest');
 });
 
@@ -180,7 +178,7 @@ router.get('/resetRequest' /* , ensureReset */ , function (req, res, next) {
     Reset Password Handle
     TODO
 */
-router.post('/resetRequest', (req, res) => {
+router.post('/reset-request', (req, res) => {
     // Get post params
     const {
         email
@@ -192,16 +190,14 @@ router.post('/resetRequest', (req, res) => {
         .then(user => {
             // If no match, return with no user param
             if (!user) {
-                // TODO: Flash message with user notification
                 console.log('No user associated with email');
-                req.flash('failure', 'No user associated with email');
+                req.flash('failure', 'No user associated with this email');
+                res.redirect('/users/reset-request');
             }
             // Send email with reset instructions & notify user
             else {
-                // TODO: Flash message with user notification
                 req.flash('success', 'An email with instructions has been sent to the associated address');
-                console.log('User matched; recovering');
-
+                res.redirect('/users/reset-request');
                 user.generatePasswordReset();
                 console.log('Generated Password Token');
                 // Save the updated user object
@@ -215,7 +211,7 @@ router.post('/resetRequest', (req, res) => {
                                 "email": "CareAssistHelp@gmail.com"
                             },
                             subject: "CareAssist password reset",
-                            text: `Hi ${user.first_name}, \n 
+                            text: `Hi ${user.first_name},
                                 Please click on the following link ${link} to reset your password. \n\n`,
                         };
 
@@ -231,7 +227,6 @@ router.post('/resetRequest', (req, res) => {
             }
         })
         .catch(err => console.log(err));
-    return res.render('pages/landing/resetRequest');
 });
 
 
@@ -286,9 +281,8 @@ router.post('/reset', (req, res) => {
                 res.redirect('/login');
             }
             // Attempt password change
-            // TODO: Ensure password fulfills prerequisites 
             else {
-                if (new_password == confirm_new_password) {
+               
                     // Hash password and update
                     bcrypt.genSalt(10, (err, salt) => {
                         bcrypt.hash(new_password, salt, (err, hash) => {
@@ -310,14 +304,9 @@ router.post('/reset', (req, res) => {
                             );
                         });
                     });
-                    req.flash('success', 'Password successfully changed.')
+                    req.flash('success', 'Password successfully changed.');
                     res.redirect('/login');
-                } else {
-                    req.flash('error', 'Passwords do not match.')
-                    res.render('pages/landing/reset', {
-                        user
-                    });
-                }
+                
             }
         })
         .catch(err => console.log(err));

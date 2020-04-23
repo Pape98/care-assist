@@ -1,52 +1,94 @@
+
+
+
 <% include ../../partials/head %>
-<div class="ui basic segment" id="main-segment">
-    <div class="ui stackable grid height-inherit">
-        
-        <div class="row">
-           
-            <div class="fourteen wide column">
-                <div class="ui centered container" id="">
 
-                    <div class="ui stackable grid">
-                        
-                        <div class="row">
-                            <div class="ui fluid styled accordion" style="margin: 40px 0">
-                                <div class="title">
-                                    <h2 class="ui header">
-                                        <i class="edit icon"></i>
-                                        <div class="content">
-                                            Enter & Confirm New Password
-                                        </div>
-                                    </h2>
-                                </div>
-                                <div class="content">
-                                    <form action="/users/reset" method="post" class="ui form">
-                                        <div class="ui error message"> </div>
-                                        <div class="field">
-                                            <label>New Password</label>
-                                            <input type="password" name="new_password" placeholder="New Password"
-                                                id="new_password">
-                                        </div>
-                                        <div class="field">
-                                            <label>Confirm New Password</label>
-                                            <input type="password" name="confirm_new_password"
-                                                placeholder="Confirm Password">
-                                        </div>
-                                        <input type="hidden" name="token" value="<%= user.resetPasswordToken %>">
-
-                                        <button class="ui yellow button" type="submit">Save</button>
-                                    </form>
-                                </div>
+<div class="center-content bg-img">
+    <h1 class="ui centered header">
+        <i class="huge icons">
+            <i class="heartbeat blue icon"></i>
+            <i class="corner wheelchair yellow icon"></i>
+        </i>
+    </h1>
+    <h1 class="ui">CareAssist</h1>
+    <div class="ui text container ">
+        <div class="ui grid" id="login-grid">
+            <div class="row">
+                <div class=" twelve wide centered column" id="login-right">
+                    <h3 class="ui inverted header">Enter & Confirm New Password</h3>
+                    <% if(success.length != 0){ %>
+                        <div class="ui tiny success message ">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=success[0]%>
                             </div>
                         </div>
-                    </div>
+                        <% } %>
+                    <% if(error.length !=0){ %>
+                        <div class="ui tiny error message">
+                            <i class="close icon"></i>
+                            <ul class="list">
+                              <li>Make sure you enter the correct email address</li>
+                              <li>All passwords are at least six character long.</li>
+                            </ul>
+                          </div>
+                    <% } %>
+                    <% if(failure.length != 0){ %>
+                        <div class="ui tiny error message ">
+                            <i class="close icon"></i>
+                            <div class="header">
+                                <%=failure[0]%>
+                            </div>
+                        </div>
+                        <% } %>
+                      
+                        <form action="/users/reset" method="post" class="ui inverted form">
+                            <div class="ui error message"> </div>
+                            <div class="field">
+                                <label>New Password</label>
+                                <input type="password" name="new_password" placeholder="New Password"
+                                    id="new_password">
+                            </div>
+                            <div class="field">
+                                <label>Confirm New Password</label>
+                                <input type="password" name="confirm_new_password"
+                                    placeholder="Confirm Password">
+                            </div>
+                            <input type="hidden" name="token" value="<%= user.resetPasswordToken %>">
 
-
+                            <button class="ui blue fluid button" type="submit">Save</button>
+                        </form>
+                        <div class="ui segment"><a href="/login">Go to login page.</a></div>
                 </div>
-            </div>
+                </div>
+               
         </div>
     </div>
 </div>
 
+<script>
+    form();
+    function form() {
+    $('form').form({
+        fields: {
+            email: {
+                identifier: 'new_password',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please enter your new password'
+                }]
+            },
+            password: {
+                identifier: 'confirm_new_password',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please confirm your new password'
+                }]
+            }
+        }
+    });
+}
+
+</script>
 
 <% include ../../partials/footer %>

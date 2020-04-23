@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var url = require('url');
-var Patient = require('../models/Patient');
-var PatientSeed = require('../seeds/patients')
+const express = require('express');
+const router = express.Router();
+const url = require('url');
+const Patient = require('../models/Patient');
+const PatientSeed = require('../seeds/patients')
+const { ensureAuthenticated }= require('../config/auth');
 
 
 /** Utiliy functions */
-router.get('ap')
 router.get('/seed', function (req, res, next) {
   PatientSeed.seedPatients();
   res.send("<h1>Patient collection SEEDED!</h1>")
@@ -16,6 +16,9 @@ router.get('/drop', function (req, res, next) {
   Patient.collection.drop();
   res.send("<h1>Patient collection DROPPED!</h1>")
 })
+
+/** Require authentication for all the routes below */
+// router.all('*',ensureAuthenticated);
 
 /** GET new patient form */
 
