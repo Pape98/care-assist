@@ -40,12 +40,11 @@
                         <% } %>
                       
                         <form action="/users/reset-request" method="post" class="ui inverted  form">
-                                       
+                            <div class="ui error message"></div>
                             <div class="field">
                                 <label> Email Address</label>
                                 <input type="email" name="email" placeholder="Email">
                             </div>
-                            <div class="ui error message"></div>
                             <button class="ui fluid blue button" type="submit">Submit</button>
                         </form>
                         <div class="ui segment"><a href="/login">Go to login page.</a></div>
@@ -58,7 +57,10 @@
 </div>
 
 <script>
+    
 form();
+
+
 function form() {
     $('form').form({
         fields: {
