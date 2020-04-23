@@ -19,6 +19,10 @@ sgMail.setApiKey('SG.cpg8jTCCQ9il-qdew6Idog.WNBfnelObbp1ahCPilkQt9kqjrwG7xkCKWjx
 // User model
 const User = require('../models/User');
 
+router.get('/register',function(req,res,next){
+    
+    res.render('pages/users/register');
+});
 
 // GET home page
 router.get('/home', function (req, res, next) {
@@ -28,6 +32,7 @@ router.get('/home', function (req, res, next) {
         date: date
     });
 });
+
 
 
 // GET settings page
@@ -62,11 +67,6 @@ router.delete('/delete/:id', (req, res) => {
 
 // Register Handle
 router.post('/register', (req, res) => {
-    // Information access
-    if (req.user.admin != true) {
-        console.log("Not admin");
-        return;
-    }
     const {
         first_name,
         last_name,
@@ -94,7 +94,7 @@ router.post('/register', (req, res) => {
                 .save()
                 .then(user => {
                     // Redirect to login page
-                    res.redirect('/login');
+                    res.redirect('back');
                 })
                 .catch(err => console.log(err));
         });
