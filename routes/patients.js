@@ -3,10 +3,9 @@ const router = express.Router();
 const url = require('url');
 const Patient = require('../models/Patient');
 const Location = require('../models/Location');
+const Data = require('../models/Data');
 const PatientSeed = require('../seeds/patients')
-const {
-  ensureAuthenticated
-} = require('../config/auth');
+const { ensureAuthenticated } = require('../config/auth');
 
 /** Update patient location every 5 minutes */
 function updateLocations() {
