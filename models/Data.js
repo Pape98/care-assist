@@ -9,7 +9,7 @@ var Schema = mongoose.Schema;
 const dataSchema = new Schema({
 
     owner_id: String,
-    UID: Number,
+    UID: String,
     time: String,
     heartrate: String,
     accelerometerX: String,

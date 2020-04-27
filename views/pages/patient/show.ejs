@@ -27,9 +27,10 @@
                 <% include ../../partials/sidebar %>
             </div>
             <div class="one wide  column center-content ">
-                <a href="/patients/<%=otherPatients[0]._id%>" id="nextPatient" class="circular ui icon yellow huge button">
+                <a href="/patients/<%=otherPatients[0]._id%>" id="nextPatient"
+                    class="circular ui icon yellow huge button">
                     <i class="left chevron icon"></i>
-                  </a>
+                </a>
             </div>
             <div class="twelve wide column">
                 <div class="ui centered grid">
@@ -159,7 +160,8 @@
                         <div class="ten wide column">
                             <div class="ui top attached tabular menu">
                                 <a class="item" data-tab="first">General</a>
-                                <a class="item" data-tab="second">Health Graphs</a>
+                                <a class="item" data-tab="second">Heart Rate</a>
+                                <a class="item" data-tab="fourth">Accelerometer</a>
                                 <a class="item active" data-tab="third">Location</a>
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="first">
@@ -237,8 +239,13 @@
 
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="second">
-                                <div class="ui text container">
-                                    <canvas id="heartRateChart" onload="drawHeartRateChart()"></canvas>
+                                <div class="ui container">
+                                    <canvas id="heartRateChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="ui bottom attached tab segment" data-tab="fourth">
+                                <div class="ui container">
+                                    <canvas id="acceleroChart"></canvas>
                                 </div>
                             </div>
                             <div class="ui bottom attached tab segment active" data-tab="third">
@@ -268,7 +275,14 @@
                                     </div>
                                 </div>
                                 <div class="ui small blue header">Location of <%=patient.first_name%> on map</div>
-                                <div id="map" style="height: 50vh; width: inherit"></div>
+
+                                <div class="ui basic segment" style="height: 50vh;" id="mapSegment">
+                                    <div id="map" style="height: inherit; width: inherit"></div>
+                                    <div class="ui dimmer">
+                                      <div class="ui text large loader">Updating <%=patient.first_name%>'s Location</div>
+                                    </div>
+                                    <p></p>
+                                  </div>
                             </div>
                         </div>
 
@@ -412,9 +426,10 @@
 
             </div>
             <div class="one wide  column center-content ">
-                <a href="/patients/<%=otherPatients[1]._id%>" id="nextPatient" class="circular ui icon yellow huge button">
+                <a href="/patients/<%=otherPatients[1]._id%>" id="nextPatient"
+                    class="circular ui icon yellow huge button">
                     <i class="right chevron icon"></i>
-                  </a>
+                </a>
             </div>
         </div>
     </div>
@@ -422,6 +437,23 @@
 
 
 <script>
-    start(<%=patient.latitude %>, <%=patient.longitude %>,"<%=patient._id%>")
+    function updateMap(){
+    // $('#map').click(function(){
+    //     $(this).hide();
+    //     startLoader()
+    //     setTimeout(stopLoader, 5000)
+    //     $('#mapsegment').after('<div id="map" style="height: inherit; width: inherit"></div>')
+    //     start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>");
+    //     $('#map').show();
+       
+    // })
+}
+    window.onload = function () {
+        drawHeartRateChart(<%=patient.UID%>);
+        drawAccelerometerChart(<%=patient.UID%>);
+        start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>");
+        // updateMap();
+    }
 </script>
 <% include ../../partials/footer %>
+
