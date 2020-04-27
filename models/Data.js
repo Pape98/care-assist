@@ -8,13 +8,13 @@ var Schema = mongoose.Schema;
 // Define user attributes
 const dataSchema = new Schema({
 
-    owner_id: Number,
-    patient_id: Number,
+    owner_id: String,
+    UID: Number,
     time: String,
-    heartrate: mongoose.Decimal128,
-    accelerometerX: mongoose.Decimal128,
-    accelerometerY: mongoose.Decimal128,
-    accelerometerZ: mongoose.Decimal128,
+    heartrate: String,
+    accelerometerX: String,
+    accelerometerY: String,
+    accelerometerZ: String,
     activity_type: String
 });
 

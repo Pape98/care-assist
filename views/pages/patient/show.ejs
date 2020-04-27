@@ -85,10 +85,10 @@
                                         </div>
                                     </div>
                                     <div class="column">
-                                        <div class="ui tiny blue header">Weight</div>
+                                        <div class="ui tiny blue header">Height</div>
                                         <div class="ui tiny statistic">
                                             <div class="value">
-                                                <%= patient.weight %>
+                                                <%= patient.height %>
                                             </div>
                                             <div class="label">
                                                 cm
@@ -97,10 +97,10 @@
 
                                     </div>
                                     <div class="column">
-                                        <div class="ui tiny blue header">Height</div>
+                                        <div class="ui tiny blue header">Weight</div>
                                         <div class="ui tiny statistic">
                                             <div class="value">
-                                                <%= patient.height %>
+                                                <%= patient.weight %>
                                             </div>
                                             <div class="label">
                                                 kg
@@ -110,8 +110,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ui dividing header">Quick Summary</div>
-                            <div class="ui segment fluid form">
+                            <!-- <div class="ui dividing header">Quick Summary</div> -->
+                            <!-- <div class="ui segment container form">
                                 <div class="field">
                                     <label>Bed</label>
                                     <div class="ui selection dropdown">
@@ -153,7 +153,7 @@
                                     </div>
                                 </div>
 
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="ten wide column">
@@ -267,7 +267,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="ui small blue header">Location of Pape on map</div>
+                                <div class="ui small blue header">Location of <%=patient.first_name%> on map</div>
                                 <div id="map" style="height: 50vh; width: inherit"></div>
                             </div>
                         </div>
@@ -326,7 +326,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="ui segment" style="height: 10vw;">
+                            <div class="ui container segment" style="height: 10vw;">
                                 <div class="ui grid">
                                     <div class="two column row">
                                         <div class=" column">

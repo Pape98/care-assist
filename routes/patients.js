@@ -141,6 +141,10 @@ router.get('/:id', function (req, res, next) {
           patient: patient, otherPatients:otherPatients
         });
       });
+      // var data = new Data({UID:2});
+      // Data.find({},function(err,data){
+      //   res.send(data);
+      // });
     }
   });
 });
