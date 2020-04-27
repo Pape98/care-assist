@@ -5,14 +5,18 @@ const Patient = require('../models/Patient');
 const Location = require('../models/Location');
 const Data = require('../models/Data');
 const PatientSeed = require('../seeds/patients')
-const { ensureAuthenticated } = require('../config/auth');
+const {
+  ensureAuthenticated
+} = require('../config/auth');
 
 /** Update patient location every 5 minutes */
 function updateLocations() {
-  Patient.find({},function(err,patients){
-    patients.forEach(function(patient){
-      Location.findOne({UID:patient.UID},function(err,location){
-        if(location != null){
+  Patient.find({}, function (err, patients) {
+    patients.forEach(function (patient) {
+      Location.findOne({
+        UID: patient.UID
+      }, function (err, location) {
+        if (location != null) {
           patient.latitude = location.latitude;
           patient.longitude = location.longitude;
           patient.save();
@@ -24,6 +28,44 @@ function updateLocations() {
 }
 
 setInterval(updateLocations, 2000);
+
+
+function updateHealthData() {
+  Patient.find({}, function (err, patients) {
+    patients.forEach(function (patient) {
+      Data.find({
+        UID: patient.UID
+      }, null, {sort: {time: 1}},function (err, data) {
+        dataheartRate = [];
+        dataaccelerometerX = [];
+        dataaccelerometerY = [];
+        dataaccelerometerZ = [];
+        data.forEach(function (d){
+          dataheartRate.push(parseInt(d.heartrate));
+          dataaccelerometerX.push(parseFloat(d.accelerometerX));
+          dataaccelerometerY.push(parseFloat(d.accelerometerY));
+          dataaccelerometerZ.push(parseFloat(d.accelerometerZ));
+        })
+        dataheartRate = dataheartRate.slice(dataheartRate.length-30,dataheartRate.length);
+        dataaccelerometerX = dataaccelerometerX.slice(dataheartRate.length-30,dataaccelerometerX.length);
+        dataaccelerometerY = dataaccelerometerY.slice(dataheartRate.length-30,dataaccelerometerY.length);
+        dataaccelerometerZ = dataaccelerometerZ.slice(dataheartRate.length-30,dataaccelerometerZ.length);
+
+        patient.heart_rate = dataheartRate;
+        patient.accelerometerX = dataaccelerometerX;
+        patient.accelerometerY = dataaccelerometerY;
+        patient.accelerometerZ = dataaccelerometerZ;
+
+        patient.save();
+        
+        console.log("Upated data for UID " + patient.UID)
+
+      });
+    })
+  })
+}
+
+setInterval(updateHealthData, 2000);
 
 /** Utiliy functions */
 router.get('/seed', function (req, res, next) {
@@ -135,10 +177,15 @@ router.get('/:id', function (req, res, next) {
   Patient.findById(id, function (err, patient) {
     if (err) console.log(err);
     else {
-      Patient.find({_id:{$ne:patient._id}},'_id',function(err,otherPatients){
-        otherPatients = otherPatients.slice(0,2)
+      Patient.find({
+        _id: {
+          $ne: patient._id
+        }
+      }, '_id', function (err, otherPatients) {
+        otherPatients = otherPatients.slice(0, 2)
         res.render('pages/patient/show', {
-          patient: patient, otherPatients:otherPatients
+          patient: patient,
+          otherPatients: otherPatients
         });
       });
       // var data = new Data({UID:2});

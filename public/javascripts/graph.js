@@ -5,9 +5,11 @@ var blue = '#0E6EB8';
 
 // Function Definitions
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+function getRandomInt(max,min) {
+    return Math.round(Math.random() * (max - min) + min);
 }
+
+
 
 function generateDataSet(size, max) {
     var data = [];
@@ -48,15 +50,14 @@ function drawHeartRateChart(UID) {
         var data = HeartRateData[0].heart_rate;
         if (!($('#heartRateChart').length)) return;
         var ctx = $('#heartRateChart');
-    
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: generateAxisLabel(0, 100, 1),
+                labels: generateAxisLabel(60, 80, 1),
                 datasets: [{
-                    label: 'Data 1',
+                    label: 'Heart Rate in BPM',
                     borderColor: yellow,
-                    data: generateDataSet(10, 100),
+                    data: data,
                     fill: false,
                 }],
             },
@@ -76,7 +77,7 @@ function drawHeartRateChart(UID) {
                 },
                 scales: {
                     xAxes: [{
-                        display: true,
+                        display: false,
                         scaleLabel: {
                             display: true,
                             labelString: 'Month'
@@ -86,12 +87,34 @@ function drawHeartRateChart(UID) {
                         display: true,
                         scaleLabel: {
                             display: true,
-                            labelString: 'Value'
+                            labelString: 'Beats Per minutes'
                         }
                     }]
                 }
             }
         });
+    });
+}
+
+function drawAccelerometerChart(){
+    var ctx = document.getElementById('accelereoChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+    
+        // The data for our dataset
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45]
+            }]
+        },
+    
+        // Configuration options go here
+        options: {}
     });
 }
 
@@ -179,8 +202,5 @@ $(document).ready(function () {
     formatBirthDate();
     drawHinOutChart();
     drawGenderChart();
+    drawAccelerometerChart();
 });
-
-function hello(){
-    console.log("hello")
-}
