@@ -9,7 +9,7 @@ var Schema = mongoose.Schema;
 // Define user attributes
 const locationSchema = new Schema({
     UID:{
-        type:Number,
+        type:String,
         unique:true
     },
     owner_id: String,

@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 
 // Define user attributes
 const patientSchema = new Schema({
-    UID:Number,
+    UID:String,
     first_name : {type:String , required:true},
     last_name: {type:String , required: true},
     birthday: Date,

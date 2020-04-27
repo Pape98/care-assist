@@ -34,53 +34,64 @@ function formatBirthDate() {
     $('#birthdayDisplay').text(dateString);
 }
 
+async function getHeartRateArray(UID){
+    const resp = await fetch('/api/patients/'+UID)
+    const data = await resp.json()
+    return data;
+}
 
-function drawHeartRateChart() {
-    if (!($('#heartRateChart').length)) return;
-    var ctx = $('#heartRateChart');
 
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: generateAxisLabel(0, 10, 1),
-            datasets: [{
-                label: 'Data 1',
-                borderColor: yellow,
-                data: generateDataSet(10, 100),
-                fill: false,
-            }],
-        },
-        options: {
-            responsive: true,
-            title: {
-                display: true,
-                text: 'Heart Rate'
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Month'
-                    }
+
+function drawHeartRateChart(UID) {
+    var heartRate = Promise.resolve(getHeartRateArray(UID));
+    heartRate.then(async function (HeartRateData){
+        var data = HeartRateData[0].heart_rate;
+        if (!($('#heartRateChart').length)) return;
+        var ctx = $('#heartRateChart');
+    
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: generateAxisLabel(0, 100, 1),
+                datasets: [{
+                    label: 'Data 1',
+                    borderColor: yellow,
+                    data: generateDataSet(10, 100),
+                    fill: false,
                 }],
-                yAxes: [{
+            },
+            options: {
+                responsive: true,
+                title: {
                     display: true,
-                    scaleLabel: {
+                    text: 'Heart Rate'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
                         display: true,
-                        labelString: 'Value'
-                    }
-                }]
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        }
+                    }]
+                }
             }
-        }
+        });
     });
 }
 
@@ -166,7 +177,10 @@ function drawGenderChart() {
 
 $(document).ready(function () {
     formatBirthDate();
-    drawHeartRateChart();
     drawHinOutChart();
     drawGenderChart();
 });
+
+function hello(){
+    console.log("hello")
+}

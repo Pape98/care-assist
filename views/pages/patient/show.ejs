@@ -27,9 +27,10 @@
                 <% include ../../partials/sidebar %>
             </div>
             <div class="one wide  column center-content ">
-                <a href="/patients/<%=otherPatients[0]._id%>" id="nextPatient" class="circular ui icon yellow huge button">
+                <a href="/patients/<%=otherPatients[0]._id%>" id="nextPatient"
+                    class="circular ui icon yellow huge button">
                     <i class="left chevron icon"></i>
-                  </a>
+                </a>
             </div>
             <div class="twelve wide column">
                 <div class="ui centered grid">
@@ -159,8 +160,8 @@
                         <div class="ten wide column">
                             <div class="ui top attached tabular menu">
                                 <a class="item" data-tab="first">General</a>
-                                <a class="item" data-tab="second">Health Graphs</a>
-                                <a class="item active" data-tab="third">Location</a>
+                                <a class="item active" data-tab="second">Health Graphs</a>
+                                <a class="item" data-tab="third">Location</a>
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="first">
                                 <div class="ui blue small header"> Personal Information</div>
@@ -236,12 +237,12 @@
 
 
                             </div>
-                            <div class="ui bottom attached tab segment" data-tab="second">
+                            <div class="ui bottom attached tab active segment" data-tab="second">
                                 <div class="ui text container">
-                                    <canvas id="heartRateChart" onload="drawHeartRateChart()"></canvas>
+                                    <canvas id="heartRateChart"></canvas>
                                 </div>
                             </div>
-                            <div class="ui bottom attached tab segment active" data-tab="third">
+                            <div class="ui bottom attached tab segment" data-tab="third">
                                 <div class="ui container grid">
                                     <div class="one column row">
                                         <div class="ui tiny blue header">Current Location</div>
@@ -412,9 +413,10 @@
 
             </div>
             <div class="one wide  column center-content ">
-                <a href="/patients/<%=otherPatients[1]._id%>" id="nextPatient" class="circular ui icon yellow huge button">
+                <a href="/patients/<%=otherPatients[1]._id%>" id="nextPatient"
+                    class="circular ui icon yellow huge button">
                     <i class="right chevron icon"></i>
-                  </a>
+                </a>
             </div>
         </div>
     </div>
@@ -422,6 +424,9 @@
 
 
 <script>
-    start(<%=patient.latitude %>, <%=patient.longitude %>,"<%=patient._id%>")
+    window.onload = function () {
+        drawHeartRateChart(1);
+        start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>")
+    }
 </script>
 <% include ../../partials/footer %>
