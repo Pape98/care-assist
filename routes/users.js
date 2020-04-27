@@ -22,6 +22,7 @@ sgMail.setApiKey('SG.cpg8jTCCQ9il-qdew6Idog.WNBfnelObbp1ahCPilkQt9kqjrwG7xkCKWjx
 // User model
 const User = require('../models/User');
 
+
 router.get('/register', function (req, res, next) {
     res.render('pages/users/register');
 });
@@ -306,20 +307,27 @@ router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next)
         }));
 });
 
+
 /**  Require authentication for all the routes below */
 router.all('*',ensureAuthenticated);
 
 
 // GET home page
-router.get('/home', function (req, res, next) {
+router.get('/home', async function (req, res, next) {
     req.app.locals.user = req.user;
     var date = moment().format('MMMM Do YYYY');
-    Patient.find({},'first_name last_name isWithinFence',function(err,patients){
-        res.render('pages/users/home', {
-        date: date, patients:patients
-    });
+    var numInFence;
 
+    Patient.find({isWithinFence:true},function(err,inFence){
+        Patient.find({isWithinFence:false},function(err,outFence){
+            res.render('pages/users/home', {
+                date: date,
+                inFence: inFence.length,
+                outFence: outFence.length
+            });
+        });
     });
+   
 });
 
 
