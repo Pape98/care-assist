@@ -5,7 +5,7 @@ var blue = '#0E6EB8';
 
 // Function Definitions
 
-function getRandomInt(max,min) {
+function getRandomInt(max, min) {
     return Math.round(Math.random() * (max - min) + min);
 }
 
@@ -36,8 +36,8 @@ function formatBirthDate() {
     $('#birthdayDisplay').text(dateString);
 }
 
-async function getHeartRateArray(UID){
-    const resp = await fetch('/api/patients/'+UID)
+async function getHeartRateArray(UID) {
+    const resp = await fetch('/api/patients/' + UID)
     const data = await resp.json()
     return data;
 }
@@ -46,7 +46,7 @@ async function getHeartRateArray(UID){
 
 function drawHeartRateChart(UID) {
     var heartRate = Promise.resolve(getHeartRateArray(UID));
-    heartRate.then(async function (HeartRateData){
+    heartRate.then(async function (HeartRateData) {
         var data = HeartRateData[0].heart_rate;
         if (!($('#heartRateChart').length)) return;
         var ctx = $('#heartRateChart');
@@ -96,25 +96,77 @@ function drawHeartRateChart(UID) {
     });
 }
 
-function drawAccelerometerChart(){
-    var ctx = document.getElementById('accelereoChart').getContext('2d');
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
-    
-        // The data for our dataset
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45]
-            }]
-        },
-    
-        // Configuration options go here
-        options: {}
+function stringToFloat(data) {
+    temp = []
+    data.forEach(function (d) {
+        temp.push(parseFloat(d));
+    });
+    return temp;
+}
+
+function drawAccelerometerChart(UID) {
+    var accelerometer = Promise.resolve(getHeartRateArray(UID));
+    accelerometer.then(async function (accelerometerData) {
+        var dataX = accelerometerData[0].accelerometerX;
+        var dataY = accelerometerData[0].accelerometerY;
+        var dataZ = accelerometerData[0].accelerometerZ;
+        if (!($('#acceleroChart').length)) return;
+        var ctx = $('#acceleroChart');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: generateAxisLabel(-30, 100, 1),
+                datasets: [{
+                        label: 'X' ,
+                        borderColor: blue,
+                        data: dataX,
+                        fill: false,
+                    },{
+                        label: 'Y',
+                        borderColor: yellow,
+                        data: dataY,
+                        fill: false,
+                    },{
+                        label: 'Z',
+                        borderColor: 'red',
+                        data: dataZ,
+                        fill: false,
+                    },
+
+                ],
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Heart Rate'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: false,
+                        scaleLabel: {
+                            display: true,
+                            labelString: ''
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: ''
+                        }
+                    }]
+                }
+            }
+        });
     });
 }
 
@@ -197,10 +249,16 @@ function drawGenderChart() {
     });
 }
 
+function updateMap(){
+    $('#map').click(function(){
+        $(this).hide();
+    })
+}
+
 
 $(document).ready(function () {
     formatBirthDate();
     drawHinOutChart();
     drawGenderChart();
-    drawAccelerometerChart();
+    updateMap();
 });

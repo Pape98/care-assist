@@ -25,9 +25,9 @@ const patientSchema = new Schema({
     heart_rate: [Number],
     latitude: String,
     longitude: String,
-    accelerometerX: [mongoose.Decimal128],
-    accelerometerY: [mongoose.Decimal128],
-    accelerometerZ: [mongoose.Decimal128],
+    accelerometerX: [String],
+    accelerometerY: [String],
+    accelerometerZ: [String],
 
     isWithinFence: {type:Boolean,default:false},
     emergency:{

@@ -160,7 +160,8 @@
                         <div class="ten wide column">
                             <div class="ui top attached tabular menu">
                                 <a class="item" data-tab="first">General</a>
-                                <a class="item" data-tab="second">Health Graphs</a>
+                                <a class="item" data-tab="second">Heart Rate</a>
+                                <a class="item" data-tab="fourth">Accelerometer</a>
                                 <a class="item active" data-tab="third">Location</a>
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="first">
@@ -238,11 +239,13 @@
 
                             </div>
                             <div class="ui bottom attached tab segment" data-tab="second">
-                                <div class="ui text container">
+                                <div class="ui container">
                                     <canvas id="heartRateChart"></canvas>
                                 </div>
-                                <div class="ui text container" style="margin-top: 30px;">
-                                    <canvas id="accelereoChart"></canvas>
+                            </div>
+                            <div class="ui bottom attached tab segment" data-tab="fourth">
+                                <div class="ui container">
+                                    <canvas id="acceleroChart"></canvas>
                                 </div>
                             </div>
                             <div class="ui bottom attached tab segment active" data-tab="third">
@@ -273,6 +276,7 @@
                                 </div>
                                 <div class="ui small blue header">Location of <%=patient.first_name%> on map</div>
                                 <div id="map" style="height: 50vh; width: inherit"></div>
+                                <div class="ui loader"></div>
                             </div>
                         </div>
 
@@ -429,6 +433,7 @@
 <script>
     window.onload = function () {
         drawHeartRateChart(<%=patient.UID%>);
+        drawAccelerometerChart(<%=patient.UID%>);
         start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>")
     }
 </script>

@@ -38,7 +38,7 @@ router.get('/patients', function (req, res, next) {
 
 /**  Get data for a patient */
 router.get('/patients/:uid', function (req, res, next) {
-    Patient.find({UID:req.params.uid},'heart_rate', function (err, patients) {
+    Patient.find({UID:req.params.uid}, function (err, patients) {
         if (err) console.log(err);
         else {
             res.json(patients)

@@ -42,9 +42,9 @@ function updateHealthData() {
         dataaccelerometerZ = [];
         data.forEach(function (d){
           dataheartRate.push(parseInt(d.heartrate));
-          dataaccelerometerX.push(parseFloat(d.accelerometerX));
-          dataaccelerometerY.push(parseFloat(d.accelerometerY));
-          dataaccelerometerZ.push(parseFloat(d.accelerometerZ));
+          dataaccelerometerX.push(d.accelerometerX);
+          dataaccelerometerY.push(d.accelerometerY);
+          dataaccelerometerZ.push(d.accelerometerZ);
         })
         dataheartRate = dataheartRate.slice(dataheartRate.length-30,dataheartRate.length);
         dataaccelerometerX = dataaccelerometerX.slice(dataheartRate.length-30,dataaccelerometerX.length);
@@ -57,7 +57,7 @@ function updateHealthData() {
         patient.accelerometerZ = dataaccelerometerZ;
 
         patient.save();
-        
+      
         console.log("Upated data for UID " + patient.UID)
 
       });
