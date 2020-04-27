@@ -275,8 +275,14 @@
                                     </div>
                                 </div>
                                 <div class="ui small blue header">Location of <%=patient.first_name%> on map</div>
-                                <div id="map" style="height: 50vh; width: inherit"></div>
-                                <div class="ui loader"></div>
+
+                                <div class="ui basic segment" style="height: 50vh;" id="mapSegment">
+                                    <div id="map" style="height: inherit; width: inherit"></div>
+                                    <div class="ui dimmer">
+                                      <div class="ui text large loader">Updating <%=patient.first_name%>'s Location</div>
+                                    </div>
+                                    <p></p>
+                                  </div>
                             </div>
                         </div>
 
@@ -431,10 +437,22 @@
 
 
 <script>
+    function updateMap(){
+    $('#map').click(function(){
+        $(this).hide();
+        startLoader()
+        setTimeout(stopLoader, 5000)
+        $('#mapsegment').after('<div id="map" style="height: inherit; width: inherit"></div>')
+        start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>");
+        $('#map').show();
+       
+    })
+}
     window.onload = function () {
         drawHeartRateChart(<%=patient.UID%>);
         drawAccelerometerChart(<%=patient.UID%>);
-        start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>")
+        start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>");
+        updateMap();
     }
 </script>
 <% include ../../partials/footer %>

@@ -249,9 +249,22 @@ function drawGenderChart() {
     });
 }
 
-function updateMap(){
+
+function startLoader(){
+    $('.ui .text .loader').addClass('active');
+    $('.ui .dimmer').addClass('active');
+}
+
+function stopLoader(){
+    $('.ui .text .loader').removeClass('active');
+    $('.ui .dimmer').removeClass('active');
+}
+function update(){
     $('#map').click(function(){
         $(this).hide();
+        startLoader()
+        setTimeout(stopLoader, 5000)
+       
     })
 }
 
@@ -260,5 +273,5 @@ $(document).ready(function () {
     formatBirthDate();
     drawHinOutChart();
     drawGenderChart();
-    updateMap();
+    update();
 });
