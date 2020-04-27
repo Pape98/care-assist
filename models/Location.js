@@ -10,7 +10,6 @@ var Schema = mongoose.Schema;
 const locationSchema = new Schema({
     UID:{
         type:String,
-        unique:true
     },
     owner_id: String,
     latitude : String,

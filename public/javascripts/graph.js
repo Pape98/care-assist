@@ -14,7 +14,7 @@ function getRandomInt(max, min) {
 function generateDataSet(size, max) {
     var data = [];
     for (let i = 0; i < size + 1; i++) {
-        data.push(getRandomInt(max));
+        data.push(getRandomInt(10,50));
     }
     return data;
 }
@@ -259,19 +259,11 @@ function stopLoader(){
     $('.ui .text .loader').removeClass('active');
     $('.ui .dimmer').removeClass('active');
 }
-function update(){
-    $('#map').click(function(){
-        $(this).hide();
-        startLoader()
-        setTimeout(stopLoader, 5000)
-       
-    })
-}
+
 
 
 $(document).ready(function () {
     formatBirthDate();
     drawHinOutChart();
     drawGenderChart();
-    update();
 });

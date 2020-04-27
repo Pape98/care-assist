@@ -27,10 +27,12 @@
                 <% include ../../partials/sidebar %>
             </div>
             <div class="one wide  column center-content ">
-                <a href="/patients/<%=otherPatients[0]._id%>" id="nextPatient"
-                    class="circular ui icon yellow huge button">
-                    <i class="left chevron icon"></i>
-                </a>
+                <%if (otherPatients[0] != undefined){ %>
+                    <a href="/patients/<%=otherPatients[0]._id%>" id="nextPatient"
+                        class="circular ui icon yellow huge button">
+                        <i class="left chevron icon"></i>
+                    </a>
+                    <%}%>
             </div>
             <div class="twelve wide column">
                 <div class="ui centered grid">
@@ -47,25 +49,6 @@
                         </div>
                     </div>
                     <% } %>
-
-                    <!-- <div class="two column row">
-                        <div class="column">
-                            <a class="ui black animated button" tabindex="0">
-                                <div class="visible content">Previous Patient</div>
-                                <div class="hidden content"> 
-                                  <i class="right arrow icon"></i>
-                                </div>
-                              </a>
-                        </div>
-                        <a class="right aligned column">
-                            <div class="ui black animated button" tabindex="0">
-                                <div class="visible content">Next Patient</div>
-                                <div class="hidden content"> 
-                                  <i class="right arrow icon"></i>
-                                </div>
-                              </div>
-                        </a>
-                    </div> -->
 
                     <div class="row">
                         <div class=" three wide column">
@@ -426,10 +409,12 @@
 
             </div>
             <div class="one wide  column center-content ">
-                <a href="/patients/<%=otherPatients[1]._id%>" id="nextPatient"
-                    class="circular ui icon yellow huge button">
-                    <i class="right chevron icon"></i>
-                </a>
+                <%if (otherPatients[1] != undefined){ %>
+                    <a href="/patients/<%=otherPatients[1]._id%>" id="nextPatient"
+                        class="circular ui icon yellow huge button">
+                        <i class="right chevron icon"></i>
+                    </a>
+                <%}%>
             </div>
         </div>
     </div>
@@ -437,22 +422,11 @@
 
 
 <script>
-    function updateMap(){
-    // $('#map').click(function(){
-    //     $(this).hide();
-    //     startLoader()
-    //     setTimeout(stopLoader, 5000)
-    //     $('#mapsegment').after('<div id="map" style="height: inherit; width: inherit"></div>')
-    //     start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>");
-    //     $('#map').show();
-       
-    // })
-}
     window.onload = function () {
         drawHeartRateChart(<%=patient.UID%>);
         drawAccelerometerChart(<%=patient.UID%>);
         start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>");
-        // updateMap();
+       
     }
 </script>
 <% include ../../partials/footer %>
