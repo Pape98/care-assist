@@ -79,7 +79,7 @@ router.get('/drop', function (req, res, next) {
 })
 
 /** Require authentication for all the routes below */
-// router.all('*', ensureAuthenticated);
+router.all('*', ensureAuthenticated);
 
 /** GET new patient form */
 

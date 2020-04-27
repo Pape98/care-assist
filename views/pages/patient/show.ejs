@@ -438,21 +438,21 @@
 
 <script>
     function updateMap(){
-    $('#map').click(function(){
-        $(this).hide();
-        startLoader()
-        setTimeout(stopLoader, 5000)
-        $('#mapsegment').after('<div id="map" style="height: inherit; width: inherit"></div>')
-        start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>");
-        $('#map').show();
+    // $('#map').click(function(){
+    //     $(this).hide();
+    //     startLoader()
+    //     setTimeout(stopLoader, 5000)
+    //     $('#mapsegment').after('<div id="map" style="height: inherit; width: inherit"></div>')
+    //     start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>");
+    //     $('#map').show();
        
-    })
+    // })
 }
     window.onload = function () {
         drawHeartRateChart(<%=patient.UID%>);
         drawAccelerometerChart(<%=patient.UID%>);
         start( <%= patient.latitude %> , <%= patient.longitude %> , "<%=patient._id%>");
-        updateMap();
+        // updateMap();
     }
 </script>
 <% include ../../partials/footer %>

@@ -309,7 +309,7 @@ router.get('/updateEmail/:token' /* , ensureReset */ , function (req, res, next)
 
 
 /**  Require authentication for all the routes below */
-// router.all('*',ensureAuthenticated);
+router.all('*',ensureAuthenticated);
 
 
 // GET home page
