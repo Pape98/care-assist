@@ -161,7 +161,7 @@ router.get('/', function (req, res, next) {
       }
     })
   }
-  Patient.find({}).where().sort('last_name').exec(function (err, patients) {
+  Patient.find({}).where().sort('UID').exec(function (err, patients) {
     if (err) console.log(err);
     else {
       res.render('pages/patient/index', {
@@ -181,7 +181,7 @@ router.get('/:id', function (req, res, next) {
         _id: {
           $ne: patient._id
         }
-      }, '_id', function (err, otherPatients) {
+      }, '_id',{sort:{UID:1}}, function (err, otherPatients) {
         otherPatients = otherPatients.slice(0, 2)
         res.render('pages/patient/show', {
           patient: patient,
