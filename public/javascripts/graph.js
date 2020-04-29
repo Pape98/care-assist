@@ -139,7 +139,7 @@ function drawAccelerometerChart(UID) {
                 responsive: true,
                 title: {
                     display: true,
-                    text: 'Heart Rate'
+                    text: 'Acceleration'
                 },
                 tooltips: {
                     mode: 'index',

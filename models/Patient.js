@@ -28,6 +28,7 @@ const patientSchema = new Schema({
     accelerometerX: [String],
     accelerometerY: [String],
     accelerometerZ: [String],
+    image:{type:String, default:"https://www.indwes.edu/undergraduate/school-of-theology-and-ministry/phl-180-online/scott-burson-web-round.png"},
 
     isWithinFence: {type:Boolean,default:false},
     emergency:{
