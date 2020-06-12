@@ -1,7 +1,5 @@
 # CareAssist: An Assistive Tool for Caretakers
 
-# Project Title
-
 One Paragraph of project description goes here
 
 ## Getting Started
