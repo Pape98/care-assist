@@ -5,7 +5,7 @@ The future of the healthcare industry will heavily depend on technological advan
 ## Demo Video
 
   - ***username: test@test.com***
-  - ***password:test***
+  - ***password: test***
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=9dHLl9CzP8c
 " target="_blank"><img src="http://img.youtube.com/vi/9dHLl9CzP8c/0.jpg" 
