@@ -20,7 +20,7 @@
     "http-errors": "~1.6.3",
     "jade": "^1.11.0",
     "method-override": "^3.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongodb": "^3.5.6",
     "mongoose": "^5.9.9",
     "morgan": "~1.9.1",
