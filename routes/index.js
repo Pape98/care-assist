@@ -3,10 +3,6 @@ var router = express.Router();
 var Patient = require('../models/Patient');
 var url = require('url');
 
-router.get('/trial', function (req, res) {
-  res.render('pages/landing/trial');
-});
-
 /* GET landing page. */
 router.get('/', function (req, res, next) {
   res.render('pages/landing/index');
@@ -15,7 +11,7 @@ router.get('/', function (req, res, next) {
 /* GET login page */
 router.get('/login', function (req, res, next) {
   res.render('pages/landing/login', {
-    message: req.flash('error')
+    message: req.flash('error'),
   });
 });
 
@@ -23,13 +19,13 @@ router.get('/login', function (req, res, next) {
 router.get('/:state/loader', function (req, res, next) {
   var state = '';
   if (req.params.state == 'login') {
-    state = "Setting things up for you!";
+    state = 'Setting things up for you!';
   } else if (req.params.state == 'logout') {
-    state = "Logging you out!"
+    state = 'Logging you out!';
   }
 
   res.render('pages/landing/loader', {
-    state: state
+    state: state,
   });
 });
 
